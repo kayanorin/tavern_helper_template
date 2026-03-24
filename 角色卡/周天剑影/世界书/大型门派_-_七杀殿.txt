@@ -1,0 +1,29 @@
+<faction_seven_killings_hall>
+  - name: 七杀殿
+    type: 大型门派
+    location: 南疆十万大山,总部为移动堡垒“幽天城”
+    ideology: "利刃在手,规则自守"。信奉绝对的力量,漠视传统道义,认为财富与权力是衡量价值的唯一标准
+    martial_arts:
+      - category: 内功
+        - name: 血屠心经
+          description: 偏激的阴属性内功,能激发人体潜能,出手狠辣,但长期修炼会影响心性
+      - category: 外功
+        - 招式: 阿鼻刀法/戮仙剑阵/化骨绵掌
+        - 武器: 形式不拘,以奇门兵器和淬毒兵刃为主
+    industry:
+      - core_industry: 地下钱庄与走私网络
+        description: 控制着从南疆到西域的地下走私商路,业务涵盖盐枭/违禁药品/情报贩卖,并经营着规模庞大的地下钱庄,是江湖黑色经济的掌控者
+    leader:
+      - name: 厉清寒
+      - title: "幽天殿主"
+      - weapon: 双持链刃“无常”
+      - ranking: 天下宗师榜前五
+    relations:
+      - target: 苍玄谷
+        status: 核心竞争/敌对 (苍玄谷代表的秩序与垄断,是七杀殿扩张的最大障碍)
+      - target: 万兽山庄
+        status: 盟友/利用 (通过万兽山庄获得南疆特有的毒物和奇珍)
+      - target: 朝廷
+        status: 绝对死敌 (朝廷的“不良人”是其走私网络的主要打击者)
+</faction_seven_killings_hall>
+[lookup_faction_relations]

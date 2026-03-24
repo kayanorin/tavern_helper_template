@@ -1,0 +1,241 @@
+输出模板
+```
+<output_template_instruction>
+instruction_text: |
+  当{{user}}遭遇新角色或角色状态更新时，请严格按照以下 [YAML格式] 输出信息块。
+  请遵循以下逻辑：
+  1. 数值(Score)仅输出 0-100 的纯数字。
+  2. [Special_Stat_Name] 根据性别决定：女性填写 "Dominance" (支配力)，男性填写 "Allure" (诱惑值)。
+  3. [Portrait] 字段内填写入符合角色的生图提示词。
+
+  输出格式模板：
+  Student_ID_Card:
+    Name: ${Name}
+    Gender: ${Gender}
+    Grade: ${Grade} (e.g. Senior '24)
+    Personality: ${Personality_Tag}
+    Clique: ${Clique_Name}
+    Popularity_Score: ${0-100}
+    Special_Stat_Name: ${Dominance_or_Allure}
+    Special_Stat_Score: ${0-100}
+    Relationship_Status: ${Status}
+    Rumor: ${Rumor_Text}
+    Portrait: <image>image###此处填写提示词###</image>
+</output_template_instruction>
+```
+正则：
+```
+Name:\s*(.*?)\s*Gender:\s*(.*?)\s*Grade:\s*(.*?)\s*Personality:\s*(.*?)\s*Clique:\s*(.*?)\s*Popularity_Score:\s*(\d+)\s*Special_Stat_Name:\s*(.*?)\s*Special_Stat_Score:\s*(\d+)\s*Relationship_Status:\s*(.*?)\s*Rumor:\s*(.*?)\s*Portrait:\s*(<image>.*?</image>)
+```
+
+
+```横版
+<div style="font-family: 'Georgia', 'Times New Roman', serif; max-width: 450px; background-color: #f4f1ea; border: 1px solid #c0c0c0; border-radius: 8px; box-shadow: 2px 4px 12px rgba(0,0,0,0.3); overflow: hidden; margin: 10px auto; color: #333;">
+    
+    <!-- 顶部红蓝配色横幅 -->
+    <div style="background-color: #8B0000; color: #fff; padding: 12px; text-align: center; border-bottom: 4px solid #FFD700; position: relative;">
+        <div style="font-family: 'Impact', sans-serif; letter-spacing: 2px; font-size: 20px; text-transform: uppercase;">LIBERTY HIGH</div>
+        <div style="font-size: 10px; letter-spacing: 1px; opacity: 0.8;">STUDENT IDENTIFICATION</div>
+    </div>
+
+    <div style="padding: 15px; display: flex; flex-direction: row; gap: 15px;">
+        
+        <!-- 左侧：照片与基础身份 -->
+        <div style="flex: 0 0 110px; display: flex; flex-direction: column; align-items: center;">
+            <!-- 头像框 -->
+            <div style="width: 100px; height: 120px; background: #ddd; border: 3px solid #2c3e50; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;">
+                <!-- 这里的$11是图片代码 -->
+                <div style="width: 100%; height: 100%; object-fit: cover;">$11</div>
+                
+                <!-- 活跃印章 -->
+                <div style="position: absolute; bottom: 5px; right: 2px; border: 2px solid rgba(200,0,0,0.6); color: rgba(200,0,0,0.6); font-weight: bold; font-size: 10px; padding: 2px; transform: rotate(-15deg); border-radius: 4px;">ACTIVE</div>
+            </div>
+            
+            <!-- 年级标签 -->
+            <div style="background: #2c3e50; color: #fff; padding: 4px 0; width: 100%; text-align: center; font-size: 10px; font-weight: bold; margin-top: 8px; text-transform: uppercase;">
+                $3
+            </div>
+        </div>
+
+        <!-- 右侧：详细数据 -->
+        <div style="flex: 1; display: flex; flex-direction: column;">
+            
+            <!-- 姓名与性格标签 -->
+            <div style="border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-bottom: 8px;">
+                <div style="font-size: 22px; font-weight: 900; line-height: 1.1; color: #1a1a1a;">$1</div>
+                <div style="font-size: 12px; color: #666; font-style: italic; display: flex; justify-content: space-between;">
+                    <span>$2</span>
+                    <span style="background: rgba(255, 215, 0, 0.3); padding: 0 6px; transform: rotate(-2deg); color: #000; font-weight: bold;">"$4"</span>
+                </div>
+            </div>
+
+            <!-- 阵营/社团 -->
+            <div style="font-size: 11px; color: #8B0000; font-weight: bold; text-transform: uppercase; margin-bottom: 10px;">
+                CLIQUE: <span style="color: #333;">$5</span>
+            </div>
+
+            <!-- 进度条区域 -->
+            <div style="display: flex; flex-direction: column; gap: 6px; font-family: 'Arial', sans-serif;">
+                
+                <!-- 校园声望 -->
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: bold;">
+                    <span>POPULARITY</span>
+                    <div style="width: 60%; background: #e0e0e0; height: 8px; border-radius: 4px; border: 1px solid #ccc; overflow: hidden;">
+                        <div style="width: $6%; height: 100%; background: #f1c40f;"></div>
+                    </div>
+                </div>
+
+                <!-- 动态属性 (支配/诱惑) -->
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: bold;">
+                    <span style="text-transform: uppercase;">$7</span>
+                    <div style="width: 60%; background: #e0e0e0; height: 8px; border-radius: 4px; border: 1px solid #ccc; overflow: hidden;">
+                        <div style="width: $8%; height: 100%; background: #8B0000;"></div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- 恋爱状态 -->
+            <div style="margin-top: 10px; font-size: 11px; background: #fff; padding: 4px; border: 1px dashed #aaa;">
+                ❤️ <b>Status:</b> $9
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 底部：传闻板块 -->
+    <div style="background: #e8e8e8; padding: 10px; font-size: 11px; color: #444; border-top: 1px solid #ccc;">
+        <span style="font-weight: bold; background: #000; color: #fff; padding: 1px 4px; margin-right: 5px;">RUMOR</span>
+        <span style="font-style: italic; font-family: 'Courier New', monospace;">"$10"</span>
+    </div>
+
+    <!-- 底部ID条 -->
+    <div style="padding: 5px 10px; background: #fff; display: flex; justify-content: space-between; align-items: center;">
+        <div style="height: 15px; width: 100px; background: repeating-linear-gradient(to right, #000, #000 2px, #fff 2px, #fff 4px);"></div>
+        <div style="font-family: 'Courier New', monospace; font-size: 10px; font-weight: bold;">ID: 894-X</div>
+    </div>
+</div>
+```
+
+```竖版
+<div style="
+    width: 300px; 
+    background-color: #f7f7f7; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    overflow: hidden; 
+    margin: 10px auto; 
+    position: relative;
+    color: #333;
+">
+    <!-- 顶部挂绳穿孔模拟 -->
+    <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 40px; height: 12px; background: #333; border-radius: 6px; z-index: 10;"></div>
+
+    <!-- 顶部学校区域 -->
+    <div style="
+        background-color: #003366; /* 深海军蓝 */
+        color: #fff; 
+        padding: 25px 0 10px 0; 
+        text-align: center; 
+        border-bottom: 4px solid #C5B358; /* 金色边框 */
+    ">
+        <div style="font-weight: 900; letter-spacing: 2px; font-size: 18px;">LIBERTY HIGH</div>
+        <div style="font-size: 10px; opacity: 0.8; letter-spacing: 1px;">STUDENT PASS 2024-2025</div>
+    </div>
+
+    <!-- 核心内容区 -->
+    <div style="padding: 20px; text-align: center;">
+        
+        <!-- 头像区域 -->
+        <div style="
+            width: 140px; 
+            height: 140px; 
+            margin: 0 auto 15px auto; 
+            border-radius: 50%; 
+            border: 4px solid #fff; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
+            overflow: hidden; 
+            background: #ddd;
+        ">
+            <!-- 图片占位符 $11 -->
+            <div style="width: 100%; height: 100%; object-fit: cover; display: flex; align-items: center; justify-content: center;">
+                $11
+            </div>
+        </div>
+
+        <!-- 姓名与身份 -->
+        <div style="font-size: 24px; font-weight: 800; color: #003366; line-height: 1.2; margin-bottom: 5px;">
+            $1
+        </div>
+        <div style="font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px;">
+            $3  •  <span style="font-weight: bold; color: #b00;">$5</span>
+        </div>
+
+        <!-- 标签胶带 -->
+        <div style="
+            display: inline-block; 
+            background: #fff8dc; 
+            border: 1px solid #e0d0a0; 
+            padding: 2px 10px; 
+            font-size: 12px; 
+            font-family: 'Courier New', monospace; 
+            transform: rotate(-2deg); 
+            margin-bottom: 20px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        ">
+            "$4"
+        </div>
+
+        <!-- 属性条 (左对齐) -->
+        <div style="text-align: left; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+            
+            <!-- 声望 -->
+            <div style="margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; margin-bottom: 3px;">
+                    <span>POPULARITY</span>
+                    <span>$6%</span>
+                </div>
+                <div style="height: 6px; background: #eee; border-radius: 3px; overflow: hidden;">
+                    <div style="width: $6%; height: 100%; background: #C5B358;"></div>
+                </div>
+            </div>
+
+            <!-- 特殊属性 (动态) -->
+            <div style="margin-bottom: 5px;">
+                <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; margin-bottom: 3px;">
+                    <span style="text-transform: uppercase;">$7</span>
+                    <span>$8%</span>
+                </div>
+                <div style="height: 6px; background: #eee; border-radius: 3px; overflow: hidden;">
+                    <div style="width: $8%; height: 100%; background: #b00;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 状态与传闻 -->
+        <div style="margin-top: 15px; font-size: 11px; text-align: left;">
+            <div style="margin-bottom: 6px;">
+                ❤️ <strong>Relationship:</strong> <span style="color: #444;">$9</span>
+            </div>
+            <div style="
+                background: #fdf5e6; 
+                padding: 8px; 
+                border-left: 3px solid #003366; 
+                font-style: italic; 
+                color: #555;
+            ">
+                "Wait, did you hear? $10"
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 底部条码 -->
+    <div style="background: #fff; padding: 10px; border-top: 1px dashed #ccc; text-align: center;">
+        <div style="height: 20px; width: 80%; margin: 0 auto; background: repeating-linear-gradient(to right, #333, #333 2px, #fff 2px, #fff 4px);"></div>
+        <div style="font-family: monospace; font-size: 10px; margin-top: 4px;">ID: 894-202-X</div>
+    </div>
+</div>
+```

@@ -1,0 +1,21 @@
+<foreign_customs_supplement_complete>
+  - section: 苍狼诸部 (Can Lang Tribes - North)
+    - custom: “夺婿”仪式
+      description: 当部落女子成年时, 她会举办一场摔跤或射箭比赛, 最终的胜者有权从其他部落中挑选一名最俊美的男子作为自己的丈夫。这被视为展示自身武力与部落实力的重要活动
+    - diet: 以烤肉和奶制品(马奶酒/奶酪)为主, 极少食用蔬菜
+
+  - section: 百越雨林 (Bai Yue Jungles - South)
+    - custom: “蛊灵共生”
+      description: 百越的巫祝在继承仪式上, 会将一种本命蛊虫植入体内。她们相信这能让她们获得与自然沟通的力量, 蛊虫的强弱直接决定了巫祝的地位
+    - diet: 食材来源驳杂, 包括各类昆虫/蛇蚁和奇异植物, 外人难以接受
+
+  - section: 雪域神国 (Xue Yu Theocracy - West)
+    - custom: “转山”
+      description: 每年特定时期, 雪域的信徒们会围绕着被视为神山的主峰进行长途跋涉的朝圣之旅。她们认为这种肉体上的苦修能够洗涤心灵, 更接近其信仰中的神明
+    - diet: 以青稞制成的糌粑和酥油茶为核心, 这是适应高寒环境的能量来源
+
+  - section: 东海鲛人诸岛 (Jiao Ren Isles - East)
+    - custom: “启航礼”
+      description: 鲛人商贾家族的女子成年时必须经历的试炼。她会获得一艘船/少量启动资金和基础船员, 独立规划航线并完成首次远洋贸易。最终的利润率和签订的贸易合同质量, 将直接决定她未来在家族内部的初始地位和话语权
+    - diet: 以各类海产和经过海盐腌渍的食物为主, 辅以通过贸易从大陆换来的谷物与酒
+</foreign_customs_supplement_complete>

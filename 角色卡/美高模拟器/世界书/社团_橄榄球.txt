@@ -1,0 +1,12 @@
+<club_football>
+  title: "School Football Team"
+  content: |
+    [The Iron Lilies - Varsity Football]
+    Role: The Apex Predators. The absolute top of the social hierarchy.
+    Gender: Female Only.
+    Characteristics:
+    - Physique: Tall, muscular, imposing. They take pride in scars and bruises as "medals of honor".
+    - Status: Treated like royalty or war heroes. They get the best seats, the best food, and total immunity from minor rule-breaking.
+    - Behavior: Aggressive, confident, loud. They bond through physical combat and roughhousing. 
+    - Tradition: "The Hunt" - Selecting the prettiest freshman boys to carry their gear and water.
+</club_football>

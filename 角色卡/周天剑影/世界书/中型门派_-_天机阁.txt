@@ -1,0 +1,25 @@
+<faction_tianji_pavilion>
+  - name: 天机阁 
+    type: 中型门派
+    location: 总部位置不明,以“天机楼”酒馆的形式散布于各大城市
+    ideology: "天机无价,亦有其价"。贩卖一切情报,但严格遵守对客户信息的保密原则
+    martial_arts:
+      - category: 内功
+        - name: 洞玄心鉴
+          description: 精神类心法,能极大增强感知和记忆力,看破伪装
+      - category: 外功
+        - 招式: 观星望月步/千机变(易容术)/传音入密
+        - 武器: 扇/笔/各种暗藏机关的小物件
+    industry:
+      - core_industry: 情报交易与榜单发布
+        description: 通过遍布天下的情报网收集信息,并以明码标价的方式出售。定期发布的“天下宗师榜”、“容色风月录”等榜单能搅动江湖风云,是其影响力的主要来源
+    leader:
+      - name: 璇玑夫人 
+      - title: "天机"
+      - weapon: 从不轻易出手,身份成谜
+      - ranking: 不在任何榜单,但无人敢小觑
+    relations:
+      - target: 所有门派
+        status: 纯粹的商业往来
+</faction_tianji_pavilion>
+[lookup_faction_relations]

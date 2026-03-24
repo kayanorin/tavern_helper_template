@@ -1,0 +1,11 @@
+<world_setting>
+world_name: "输入世界名字（如剑与魔法/赛博朋克/星际科幻等）"
+era: "输入所处时代特征"
+geography: "输入环境和地理位置"
+society: "输入社会生态、科技/魔法水平、种族等设定"
+npc_types:
+  - "输入常见的NPC类型1"
+  - "输入常见的NPC类型2"
+  - "输入常见的NPC类型3"
+special_rules: "输入特殊的规则限制或剧情核心基调"
+</world_setting>

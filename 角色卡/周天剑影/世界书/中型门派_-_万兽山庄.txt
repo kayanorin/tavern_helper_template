@@ -1,0 +1,27 @@
+<faction_wanshou_manor>
+  - name: 万兽山庄
+    type: 中型门派
+    location: 云贵高原
+    ideology: "万物有灵,皆可为用"。擅长驯养和驱使各类珍禽异兽,包括毒虫
+    martial_arts:
+      - category: 内功
+        - name: 百兽同心诀
+          description: 独特的精神类内功,能与兽类建立精神链接,协同作战
+      - category: 外功
+        - 招式: 灵蛇鞭法/猛虎爪/百毒噬心掌
+        - 武器: 鞭/爪
+    industry:
+      - core_industry: "异珍阁"珍稀坐骑与药引贸易
+        description: 垄断了高阶异兽坐骑(如追风豹/踏雪乌骓)的驯养与贩卖,同时也是各大药堂所需珍稀动物药引(如千年蛇胆/虎骨)的唯一来源
+    leader:
+      - name: 赫连牡丹
+      - title: "兽王"
+      - weapon: 灵兽伙伴“赤瞳金雕”
+      - ranking: 宗师级(驱兽),实战(一流高手)
+    relations:
+      - target: 七杀殿
+        status: 秘密盟友 (为其提供独特的毒物与战斗野兽)
+      - target: 药王谷
+        status: 主要供应商/相互提防 (药王谷需要其药引,但对其用毒手段十分警惕)
+</faction_wanshou_manor>
+[lookup_faction_relations]

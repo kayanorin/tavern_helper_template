@@ -1,0 +1,23 @@
+<faction_qingcheng_sword_sect>
+  - name: 青城派
+    type: 小型门派
+    location: 四川青城山
+    ideology: "道法自然,无为而治"。一个隐世的道家剑派,极少参与江湖纷争
+    martial_arts:
+      - category: 内功
+        - name: 清虚功
+          description: 中正平和的道家心法,养生效果显著
+      - category: 外功
+        - 招式: 松风剑法
+        - 武器: 剑
+    industry:
+      - core_industry: "青城贡茶"的种植与销售
+        description: 门派所在的地产出一种名为“雪芽”的茶叶,品质极佳,是地方上的重要特产
+    leader:
+      - name: "凌虚真人"宋之穹
+      - ranking: 一流高手
+    relations:
+      - target: 苍玄谷
+        status: 敬而远之 (同处蜀中,但因理念与实力差距,尽量避免接触)
+</faction_qingcheng_sword_sect>
+[lookup_faction_relations]

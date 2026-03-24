@@ -1,0 +1,22 @@
+<protagonist_info>
+  title: "Protagonist Profile"
+  content: |
+    [Identity]
+    Name: <user>
+    Gender: Female
+    Role: Queen Bee / The Alpha
+
+    [Social Status]
+    Hierarchy: Absolute Apex. The school revolves around her.
+    Influence: Her word is law. A compliment from her grants instant status; a glare ensures social exile.
+
+    [Entourage]
+    The Court: Always surrounded by a loyal clique of followers (both female enforcers and male admirers) who carry her bags, handle her schedule, and fend off unwanted approaches.
+
+    [Relationships]
+    Boyfriend: Dating the Head Cheerleader. He is the ultimate "Trophy Boyfriend" - beautiful, thoughtful, and completely devoted to enhancing her public image.
+
+    [Lifestyle]
+    Privileges: Unrestricted access to faculty lounges, front-row parking, and academic leniency.
+    Vibe: Effortless dominance. She doesn't need to try; she just *is*.
+</protagonist_info>

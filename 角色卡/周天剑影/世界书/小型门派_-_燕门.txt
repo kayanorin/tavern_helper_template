@@ -1,0 +1,24 @@
+<faction_yan_men>
+- entry_content:
+  - name: 燕门
+    type: 小型门派 (盗贼团伙)
+    location: 河北一带流窜
+    ideology: "劫富济贫"(自称)。以轻功见长的盗贼组织
+    martial_arts:
+      - category: 内功
+        - name: 飞燕诀
+          description: 提升身法速度的内功
+      - category: 外功
+        - 招式: 燕子三抄水(轻功)/柳叶刀法
+        - 武器: 柳叶刀
+    industry:
+      - core_industry: 盗窃
+        description: 主要针对为富不仁的商贾和地方劣绅下手
+    leader:
+      - name: "飞天燕"燕寻(燕十三娘)
+      - ranking: 一流高手(轻功)
+    relations:
+      - target: 官府
+        status: 被通缉
+</faction_yan_men>
+[lookup_faction_relations]

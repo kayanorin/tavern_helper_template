@@ -1,0 +1,20 @@
+<world_internal_geography>
+  - section: 关内道
+    - description: 京畿之地,大周皇朝的政治心脏。此地坐落着东都洛阳与西京长安,是权贵汇集/制度最森严的区域
+    - major_factions: 六扇门与镇抚司总部所在地,震天镖局(洛阳)
+  - section: 河南河北道
+    - description: 广阔的黄河流域平原,大周的粮仓与人口中心。此地民风淳朴,但也是“尘泥众”势力最庞大的区域
+    - major_factions: 燕门(河北)
+  - section: 江南道
+    - description: 长江下游,气候湿润,河网密布。此地商业繁荣,文化昌盛,是大运河的终点,风雅与财富并存
+    - major_factions: 天合商会(扬州)/栖凤阁(杭州)/烟雨楼(姑苏)/湘雪小筑(金陵)
+  - section: 剑南道
+    - alias: 川蜀
+    - description: 四面环山,地形险峻,易守难攻。此地物产丰饶,但与外界交通不便,形成了相对独立的文化与经济圈
+    - major_factions: 苍玄谷(天柱山)/青城派(青城山)/药王谷(药王山)
+  - section: 岭南道
+    - description: 大周最南端的区域,靠近南疆百越。此地山岭众多,气候炎热,是与南部异族贸易和冲突的前线
+    - major_factions: 金兰派(福建沿海)
+  - section: 其余地区
+    - description: 大周行政区划参考唐朝特别是武周时期,自行根据剧情引入发挥
+</world_internal_geography>

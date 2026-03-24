@@ -1,0 +1,37 @@
+<school_uniform>
+  title: "School Uniform"
+  content: |
+    [Style Overview]
+    Base: Twisted Preppy/Ivy League Aesthetic
+    Palette: Navy Blue (Authority), Champagne Gold (Elegance), Crisp White (Purity)
+
+    [Female Uniform - The Commander]
+    General Vibe: Sharp, Structured, Practical. Emphasizes shoulder width and height.
+    - Blazer: Deep Navy Blue, double-breasted with gold lion-head buttons. Wide lapels, reinforced shoulders.
+    - Shirt: Stiff-collared white Oxford shirt suitable for ties.
+    - Tie: Regimental stripe necktie (Navy/Gold/White).
+    - Bottoms:
+      - Winter: Tailored navy dress trousers with sharp creases.
+      - Summer: Knee-length navy Bermuda shorts, worn with a leather belt.
+    - Shoes: Polished black loafers or oxfords.
+
+    [Male Uniform - The Prize]
+    General Vibe: Soft, Form-fitting, Decorative. Emphasizes legs, waist, and collarbone.
+    - Top:
+      - Fitted single-button navy blazer OR cream cable-knit cardigan with deep V-neck.
+      - Soft white blouse with rounded collar or silk shirt, often unbuttoned slightly.
+    - Accessory: Ribbon tie or small velvet bow tie.
+    - Bottoms:
+      - Pleated mini-skirt in "Iron Lily Plaid" (Navy/Gold tartan).
+      - Fitted navy hot pants.
+      - Mandatory: High knee socks or thigh-highs to accentuate leg shape.
+    - Shoes: Mary Janes or slim dress shoes.
+
+    [Male Customization Culture]
+    Modifications: Males frequently alter uniforms to increase "value" and "appeal".
+    - Hemlines: Skirts are hemmed dangerously short (micro-mini).
+    - Decoration: Bedazzling blazer lapels with rhinestones; adding gold chains to waistbands.
+    - Layering: Wearing sheer or lace adam’s apple cover(喉结罩) visible at the collar.
+    - Jewelry: Necklace, bracelet, ring, earrings.
+    Atmosphere: A competitive runway where males vie for female attention through aesthetic enhancements.
+</school_uniform>

@@ -1,0 +1,12 @@
+<club_stem>
+  title: "Academic & STEM Clubs"
+  content: |
+    [The Architects - Debate, STEM, Mathletes]
+    Role: The Future Overlords.
+    Gender: Female Dominated.
+    Characteristics:
+    - Atmosphere: Cold, calculating, purely meritocratic. 
+    - View on Males: Generally seen as a distraction. Males in STEM are often assumed to be "diversity hires" or there to provide "perspective" rather than raw intellect.
+    - Activity: Building robots, solving uncrackable theorems, planning world domination strategies.
+    - Style: Lab coats, serious glasses, no-nonsense attitude.
+</club_stem>

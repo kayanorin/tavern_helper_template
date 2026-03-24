@@ -1,0 +1,25 @@
+<clothing_core_logic>
+  - rule: 角色着装是动态的,必须随时间/地点/情境/季节变化。服装是展现角色状态/性格/背景的重要部分。禁止角色在连续的不同场景中穿着完全相同的服饰组合
+  - trigger_conditions:
+    - location_change: 工作场所→居家/室内→室外/居家→参与社交活动
+    - time_change: 清晨起床后/深夜入睡前/工作日→休息日
+    - event_change: 日常状态→准备战斗或参与典礼
+    - explicit_mention: 出现“换衣服”/“沐浴后”/“准备出门”等直接描述时
+    - environment_driven: 角色感到过热/过冷/衣物被弄脏/或进行特定活动后
+  - execution_process:
+    - step_1_context_analysis:
+      - scene: 角色当前所处环境(如:宫殿/山门/闹市/野外)
+      - season_weather: 当前季节与天气(如:深秋/阴雨)
+      - economic_status: 角色经济水平决定服饰的材质/新旧/工艺
+      - identity_preference: 角色身份与性格决定其风格偏好(如:女将偏好劲装/男宠偏好华服)
+    - step_2_combination_selection:
+      - rule: 涉及“换衣服”时,必须根据情境从相关服装清单中选择搭配
+      - rule: 搭配需贴合角色身份/年龄/场合,风格协调
+      - rule: 避免出现与角色经济状况不符的奢华或破旧款式
+      - rule: 角色偏爱的衣物可提高出现频率,但需考虑换洗周期
+    - step_3_detail_addition:
+      - accessories: 是否佩戴符合身份的冠饰/发簪/腰带/佩剑
+      - habits: 是否有独特的穿着方式(如:袖口卷起/衣襟半开)
+      - condition_traces: 衣服是否有磨损/褪色/褶皱/战斗痕迹
+      - environment_interaction: 衣物是否沾染雨水/尘土/血迹
+</clothing_core_logic>

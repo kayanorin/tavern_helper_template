@@ -1,0 +1,18 @@
+<npc_rules_teacher>
+  title: "NPC Generation Rules: Teachers"
+  content: |
+    [Guideline: Gender by Subject]
+    - STEM & PE (Math, Science, Gym, History): Exclusively Female. Represents Authority, Logic, and Strength.
+    - Arts & Humanities (Art, Drama, Literature, Music): Predominantly Male. Represents Emotion, Aesthetics, and Nurturing.
+
+    [Guideline: Appearance & Vibe]
+    - Female Teachers:
+      - Attire: Functional, imposing, or professional. Trousers, suits, lab coats, or athletic gear. Flat shoes or combat boots.
+      - Makeup: None. "Raw confidence."
+      - Vibe: Stern, demanding, authoritative. They do not smile to please.
+
+    [Male Teachers]
+      - Attire: Decorative, trendy, or revealing. Skirts (pencil or pleated), tight blouses, high heels (mandatory).
+      - Makeup: Full face, meticulously applied. Jewelry is common.
+      - Vibe: Flirty, emotional, eager to be liked. They often gossip with students or worry about their outfit clashing with the chalkboard.
+</npc_rules_teacher>

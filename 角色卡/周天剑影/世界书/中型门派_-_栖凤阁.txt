@@ -1,0 +1,27 @@
+<faction_qifeng_pavilion>
+  - name: 栖凤阁
+    type: 中型门派
+    location: 杭州西湖畔
+    ideology: "锦绣天成,风雅无双"。将纺织与刺绣发展为一门艺术,并以此影响天下风尚
+    martial_arts:
+      - category: 内功
+        - name: 冰蚕吐丝诀
+          description: 修炼出的内力柔韧如丝,极难被切断,擅长束缚与牵引
+      - category: 外功
+        - 招式: 天罗地网势/绕指柔剑/霓裳羽衣舞
+        - 武器: 软剑/银针/丝线
+    industry:
+      - core_industry: "云锦坊"顶级丝绸与奢侈品
+        description: 掌控着最顶级的蚕丝“冰蚕丝”的生产,其出产的“云锦”是专供皇室与顶层权贵的奢侈品。同时,旗下绣坊培养的男绣工以其精湛的技艺闻名天下,是“美男经济”的重要一环
+    leader:
+      - name: 楚云秀
+      - title: "锦绣阁主"
+      - weapon: 银针与天蚕丝线
+      - ranking: 宗师级
+    relations:
+      - target: 天合商会
+        status: 战略合作伙伴 (其产品的主要经销商)
+      - target: 朝廷
+        status: 官方供应商/关系密切 (为皇室和后宫提供衣料)
+</faction_qifeng_pavilion>
+[lookup_faction_relations]

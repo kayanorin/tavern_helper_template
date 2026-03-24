@@ -1,0 +1,24 @@
+<faction_xiangxue_manor>
+  - name: 湘雪小筑
+    type: 小型门派 (风雅场所)
+    location: 金陵秦淮河畔
+    ideology: "以色悦人,以才动人"。专门培养男性艺者的“兰坊”,在社会中是重要的社交与娱乐中心
+    martial_arts:
+      - category: 内功
+        - name: 魅骨功
+          description: 一种独特的辅助性心法,不具备战斗能力,但长期修炼可显著改善男性的容貌/体态/气质,使其更符合当代审美
+      - category: 外功
+        - 招式: 无
+        - 武器: 无
+    industry:
+      - core_industry: 高端男性艺人经纪
+        description: 旗下培养的男性琴师/舞者/画师在金陵极受欢迎,是权贵女子一掷千金的销金窟。此地不仅是娱乐场所,更是上流社会交换信息/建立关系的重要节点
+    leader:
+      - name: "怜香"郎君 
+      - description: 此为男性掌门的罕见特例,其权力由背后真正的主人赋予,他更像是一位才华出众的总经理或艺术总监,负责小筑的日常运营与艺人培养
+      - ranking: 无武学排名
+    relations:
+      - target: 栖凤阁
+        status: 依附与模仿 (在审美风尚/经营模式上深度模仿栖凤阁,并可能向其输送顶尖的男性绣工或设计师,形成产业上下游关系)
+</faction_xiangxue_manor>
+[lookup_faction_relations]

@@ -1,0 +1,11 @@
+<dynamic_faction_generator>
+- entry_content:
+  - rule: 当剧情需要一个未定义的小型势力时, 必须遵循以下思考框架进行构建, 以确保其符合世界观的基本逻辑
+  - thinking_framework:
+    - step_1_core_interest: 必须首先定义该势力的核心“产业”或“利益来源”。这是其存在的根本。例如, 控制某个渡口/垄断某种地方特产的销售/经营一个地区的废品回收
+    - step_2_name_and_type: 基于其核心利益,为其命名并确定类型。例如, 控制渡口的可能叫“分水堂”(帮派), 销售特产的可能叫“xx商行”(商会)
+    - step_3_location_and_scale: 明确其活动范围(通常局限于一城一地),并思考其地理位置如何为其核心利益服务
+    - step_4_relations: 思考它与周边大势力(如天合商会的地方分舵/尘泥众的据点)的关系。是依附, 是竞争, 还是被忽视
+    - step_5_martial_arts: 设计的武功风格应与其产业或环境有逻辑关联。例如, 船员帮派的武功可能擅长在摇晃中保持平衡, 或是使用船桨作为武器
+</dynamic_faction_generator>
+[lookup_faction_relations]

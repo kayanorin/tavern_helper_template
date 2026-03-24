@@ -1,0 +1,13 @@
+<club_cheer>
+  title: "Cheerleading Squad"
+  content: |
+    [The Dazzlers - Cheer Squad]
+    Role: The School's Jewels. The most coveted position for a male student.
+    Gender: Male Only.
+    Characteristics:
+    - Physique: Slim, flexible, impeccably groomed. Focus on flexibility and aesthetics over raw power.
+    - Status: High social value, but dependent on their association with the Football Team. Every cheerleader acts as a "trophy" for a player.
+    - Uniform: Skimpy, glittering outfits designed to show off legs and midriffs.
+    - Behavior: Bitchy, competitive, gossipy. They constantly compete for the "Center" position and the attention of the Quarterback.
+    - Motto: "Smile until it hurts, then smile prettier."
+</club_cheer>

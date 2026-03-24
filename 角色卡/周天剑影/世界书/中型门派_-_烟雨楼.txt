@@ -1,0 +1,27 @@
+<faction_yanyu_tower>
+  - name: 烟雨楼
+    type: 中型门派
+    location: 江南姑苏城
+    ideology: "器有魂,工有道"。追求兵器铸造的极致技艺与美学
+    martial_arts:
+      - category: 内功
+        - name: 离火诀
+          description: 火系内功,催动时能提升体温,用于辅助锻造时控制火候
+      - category: 外功
+        - 招式: 惊鸿照影剑/百兵演武(能模拟各种兵器的招式)
+        - 武器: 剑/各类精巧的暗器
+    industry:
+      - core_industry: "玲珑坊"高端兵器定制
+        description: 江湖最负盛名的神兵铸造工坊,以精湛的镶嵌和工艺闻名,专门为江湖顶尖高手定制专属兵器
+    leader:
+      - name: 苏暮遮
+      - title: "玲珑楼主"
+      - weapon: 任何她刚铸成的兵器
+      - ranking: 宗师级(铸造),实战(一流高手)
+    relations:
+      - target: 苍玄谷
+        status: 深度捆绑 (苍玄谷是其独家稀有金属供应商,关系紧密)
+      - target: 七杀殿
+        status: 拒绝来往 (因理念不合,从不接受七杀殿的订单)
+</faction_yanyu_tower>
+[lookup_faction_relations]

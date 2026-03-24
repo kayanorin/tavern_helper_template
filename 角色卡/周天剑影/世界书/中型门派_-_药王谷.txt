@@ -1,0 +1,27 @@
+<faction_medicine_king_valley>
+  - name: 药王谷
+    type: 中型门派
+    location: 川蜀药王山深处
+    ideology: "悬壶济世,亦可杀人"。医术没有善恶,只取决于使用者的目的
+    martial_arts:
+      - category: 内功
+        - name: 长春功
+          description: 木系疗伤心法,生机勃勃,能快速恢复伤势,延年益寿
+      - category: 外功
+        - 招式: 枯木针法/神农百草掌(掌含药性,可疗伤亦可致幻)
+        - 武器: 银针/手术刀
+    industry:
+      - core_industry: "回春堂"高端丹药与医疗服务
+        description: 唯一能炼制“续命丹”、“驻颜丹”等高阶丹药的势力,其开设的“回春堂”医馆遍布大城市,为权贵提供医疗服务,价格高昂
+    leader:
+      - name: 柳非烟
+      - title: "药君"
+      - weapon: 一套薄如蝉翼的手术刀
+      - ranking: 宗师级(医毒),实战(一流高手)
+    relations:
+      - target: 所有门派
+        status: 中立/交易 (几乎所有人都需要丹药和医疗,因此无人轻易得罪)
+      - target: 万兽山庄
+        status: 竞争/提防 (在毒药领域存在竞争,且不齿其滥用生灵)
+</faction_medicine_king_valley>
+[lookup_faction_relations]

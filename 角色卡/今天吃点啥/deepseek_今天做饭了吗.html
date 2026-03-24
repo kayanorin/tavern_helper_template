@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🍳 神奇厨房 - 食材组合小游戏</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9e7b3 0%, #f5cda0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 游戏主面板 */
+        .game-container {
+            max-width: 1300px;
+            width: 100%;
+            background: #fff9ef;
+            border-radius: 72px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            padding: 20px 25px 35px;
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.3rem;
+            margin: 0 0 8px 0;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c94f2b, #e68a2e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #b45f2b;
+            font-weight: 500;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed #ffcd94;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        /* 主要区域: 食材库 + 操作区 + 成品区 */
+        .kitchen-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 20px 0 20px;
+        }
+
+        /* 食材库 (可点击) */
+        .ingredients-panel {
+            flex: 2;
+            min-width: 220px;
+            background: #fdf3e0;
+            border-radius: 48px;
+            padding: 20px 18px;
+            box-shadow: inset 0 0 0 1px #fff9, 0 8px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .panel-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #a5562c;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 6px solid #e68a2e;
+            padding-left: 18px;
+        }
+
+        .ingredients-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .ingredient-card {
+            background: white;
+            border-radius: 60px;
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 0 #e2c5a3;
+            width: 100px;
+            border: 1px solid #ffe3b5;
+        }
+
+        .ingredient-card:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #e2c5a3;
+        }
+
+        .ingredient-emoji {
+            font-size: 3.4rem;
+        }
+
+        .ingredient-name {
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #5e3a1f;
+        }
+
+        /* 当前砧板 / 组合区 */
+        .combo-panel {
+            flex: 1.5;
+            min-width: 240px;
+            background: #ebd5b3;
+            border-radius: 56px;
+            padding: 20px;
+            box-shadow: inset 0 1px 4px rgba(95, 55, 20, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .bowl {
+            background: #faf0db;
+            border-radius: 60px;
+            padding: 18px 12px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #d6a15a;
+        }
+
+        .combo-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .combo-badge {
+            background: #f5e2c1;
+            border-radius: 50px;
+            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: inset 0 0 0 1px white, 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .remove-item {
+            background: #c97e4a;
+            color: white;
+            border-radius: 30px;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.1s;
+        }
+
+        .remove-item:hover {
+            background: #a55122;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 18px;
+            justify-content: center;
+        }
+
+        .cook-btn {
+            background: #ff914d;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 4px 0 #b1622a;
+        }
+
+        .cook-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b1622a;
+        }
+
+        .reset-btn {
+            background: #b98f64;
+            box-shadow: 0 4px 0 #735f44;
+        }
+
+        /* 成品区 & 点评 */
+        .result-panel {
+            flex: 2;
+            min-width: 250px;
+            background: #f9efdf;
+            border-radius: 56px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 48px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 0 #eeddbb;
+        }
+
+        .dish-emoji {
+            font-size: 5rem;
+        }
+
+        .dish-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #7b3f1a;
+        }
+
+        .review-box {
+            background: #fbe6c2;
+            border-radius: 40px;
+            padding: 18px;
+            font-style: italic;
+            color: #5c2e0e;
+            font-weight: 500;
+            border-left: 10px solid #ffa559;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .review-label {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #cc7b2c;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .empty-message {
+            opacity: 0.7;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #c28447;
+            margin-top: 25px;
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+
+        @media (max-width: 780px) {
+            .game-container {
+                padding: 16px;
+            }
+            .ingredient-card {
+                width: 80px;
+                padding: 8px 12px;
+            }
+            .ingredient-emoji {
+                font-size: 2.5rem;
+            }
+            .dish-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <h1>
+        <span>🍽️</span> 魔法厨房·乱炖大师 <span>👩‍🍳</span>
+    </h1>
+    <div style="text-align: center;">
+        <div class="sub">✨ 点击食材加入砧板 → 点击「🔥 开火烹饪」创造料理 ✨</div>
+    </div>
+
+    <div class="kitchen-layout">
+        <!-- 左侧食材库 -->
+        <div class="ingredients-panel">
+            <div class="panel-title">
+                <span>🥬 新鲜食材</span>
+            </div>
+            <div class="ingredients-grid" id="ingredientsGrid">
+                <!-- 动态js渲染食材列表 -->
+            </div>
+        </div>
+
+        <!-- 中间组合区 -->
+        <div class="combo-panel">
+            <div class="panel-title" style="border-left-color: #c4682f;">
+                🥣 砧板组合
+            </div>
+            <div class="bowl">
+                <div id="comboContainer" class="combo-list">
+                    <div class="empty-message" style="color:#aa7a4a;">➕ 点击食材添加到砧板...</div>
+                </div>
+                <div class="action-buttons">
+                    <button class="cook-btn" id="cookBtn">🔥 开火烹饪</button>
+                    <button class="cook-btn reset-btn" id="clearComboBtn">🗑️ 清空砧板</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧成品+点评 -->
+        <div class="result-panel">
+            <div class="panel-title" style="border-left-color: #f0a35e;">
+                🍲 今日成品
+            </div>
+            <div id="dishDisplay" class="dish-card">
+                <div class="dish-emoji">🍳</div>
+                <div class="dish-name">等待料理...</div>
+                <div style="font-size: 0.8rem; margin-top: 8px;">还没有烹饪任何菜肴</div>
+            </div>
+            <div class="review-box" id="reviewBox">
+                <div class="review-label">📝 食评人 · 嘴刁老饕</div>
+                <div id="reviewText">组合食材后点击「开火烹饪」，让我尝尝你的手艺！</div>
+            </div>
+        </div>
+    </div>
+    <footer>💡 小提示：不同的食材组合会创造出独一无二的菜肴！每种组合都有专属点评~ 试试隐藏配方！</footer>
+</div>
+
+<script>
+    // ---------- 食材数据库 ----------
+    const INGREDIENTS = [
+        { id: "egg", name: "鸡蛋", emoji: "🥚", base: "egg" },
+        { id: "tomato", name: "番茄", emoji: "🍅", base: "tomato" },
+        { id: "beef", name: "牛肉", emoji: "🥩", base: "beef" },
+        { id: "rice", name: "米饭", emoji: "🍚", base: "rice" },
+        { id: "cheese", name: "芝士", emoji: "🧀", base: "cheese" },
+        { id: "onion", name: "洋葱", emoji: "🧅", base: "onion" },
+        { id: "mushroom", name: "蘑菇", emoji: "🍄", base: "mushroom" },
+        { id: "noodle", name: "面条", emoji: "🍜", base: "noodle" }
+    ];
+
+    // ---------- 料理配方库 (根据食材组合匹配, 也支持模糊 + 特殊单品) ----------
+    // 每个配方包含: 条件(需要的食材集合), 成品名, 表情, 点评
+    // 注意匹配优先级: 精确匹配高优先级, 通用组合降级, 最后兜底
+    const RECIPES = [
+        {
+            name: "番茄炒蛋盖饭",
+            emoji: "🍛",
+            review: "经典国民料理！酸甜番茄配上滑嫩鸡蛋，浇在热米饭上简直绝配。你的厨艺有妈妈的味道～ 🌟🌟🌟🌟",
+            match: (items) => includesAll(items, ["tomato", "egg", "rice"])
+        },
+        {
+            name: "日式咖喱牛肉饭",
+            emoji: "🍛✨",
+            review: "浓郁咖喱香，牛肉软烂，洋葱和蘑菇的鲜味完全融入。超下饭！大厨水准！",
+            match: (items) => includesAll(items, ["beef", "onion", "rice"]) && (items.includes("mushroom") || items.includes("cheese") ? true : true) // 牛肉+洋葱+米饭为基础，有蘑菇更好，但也算
+        },
+        {
+            name: "芝士焗蘑菇牛肉",
+            emoji: "🧀🥩",
+            review: "拉丝的芝士裹着多汁牛肉和蘑菇，香气扑鼻！一口下去幸福感爆棚，适合芝士控！",
+            match: (items) => includesAll(items, ["beef", "cheese", "mushroom"])
+        },
+        {
+            name: "奶油蘑菇意面",
+            emoji: "🍝",
+            review: "白酱香浓，蘑菇鲜嫩，面条Q弹～ 非常地道的意式风情，可以开小餐馆啦！",
+            match: (items) => includesAll(items, ["mushroom", "noodle"]) && (items.includes("cheese") || items.includes("onion") ? true : true)
+        },
+        {
+            name: "黯然销魂牛肉面",
+            emoji: "🍜✨",
+            review: "大块牛肉，浓郁汤头，面条吸饱了汤汁。一口入魂，好吃到流泪！",
+            match: (items) => includesAll(items, ["beef", "noodle"]) && (items.includes("onion") || items.includes("tomato") ? true : true)
+        },
+        {
+            name: "奶酪鸡蛋吐司塔",
+            emoji: "🧀🍞",
+            review: "金黄芝士与嫩蛋的完美融合，香气四溢，早餐绝佳选择，元气满满！",
+            match: (items) => includesAll(items, ["egg", "cheese"]) && items.length <= 3
+        },
+        {
+            name: "番茄洋葱牛肉汤",
+            emoji: "🍲",
+            review: "酸甜开胃，牛肉酥软，洋葱回甘～ 暖心又暖胃，冬天喝一碗太舒服了。",
+            match: (items) => includesAll(items, ["tomato", "beef", "onion"])
+        },
+        {
+            name: "蘑菇蛋炒饭",
+            emoji: "🍚🍄",
+            review: "粒粒分明，蘑菇的鲜味和鸡蛋的香气融合，简单却不普通！好吃不腻。",
+            match: (items) => includesAll(items, ["mushroom", "egg", "rice"])
+        },
+        {
+            name: "豪华海鲜风味烩饭 (模拟版)",
+            emoji: "🍤🍚",
+            review: "虽然没有海鲜，但你的创意混搭产生了奇妙的鲜味！米饭吸饱了食材精华，很惊喜～",
+            match: (items) => items.includes("rice") && items.includes("tomato") && items.includes("onion") && items.length >= 3
+        },
+        {
+            name: "魔鬼辣炒一切",
+            emoji: "🌶️🔥",
+            review: "虽然你没放辣椒，但组合太大胆了！这股混搭风让厨师震惊，但居然有点好吃？黑暗料理潜力股！",
+            match: (items) => items.length >= 4 && !(includesAll(items, ["beef","noodle"]) || includesAll(items, ["egg","tomato"])) // 大杂烩
+        }
+    ];
+
+    // 特殊单食材料理 (如果没有组合，单独一种食材也有单独料理)
+    const SINGLE_RECIPES = {
+        "egg": { name: "太阳煎蛋", emoji: "🍳", review: "金灿灿的太阳蛋，简单纯粹，火候刚好！早餐之王。" },
+        "tomato": { name: "糖拌番茄", emoji: "🍅", review: "清爽解腻，夏日必备，撒点白糖更美味~ 简单幸福。" },
+        "beef": { name: "香煎牛排", emoji: "🥩", review: "外焦里嫩，肉汁丰盈，高级的食材只需简单烹饪！完美。" },
+        "rice": { name: "白米饭", emoji: "🍚", review: "粒粒饱满，清香软糯，虽然朴素但很踏实。配点菜更佳～" },
+        "cheese": { name: "烤芝士脆片", emoji: "🧀", review: "浓郁的奶香脆片，拉丝快乐！芝士就是力量。" },
+        "onion": { name: "焦糖洋葱", emoji: "🧅", review: "甜而不辣，香气四溢，是很多菜肴的灵魂伴侣。" },
+        "mushroom": { name: "黄油煎蘑菇", emoji: "🍄", review: "鲜美多汁，黄油香气满分，简单的极致。" },
+        "noodle": { name: "清汤阳春面", emoji: "🍜", review: "面条爽滑，汤清味鲜，回归本真的一碗。" }
+    };
+
+    // 全食材兜底 (没有任何食材匹配时)
+    const DEFAULT_DISH = {
+        name: "暗黑物质 · 不可名状",
+        emoji: "💩👻",
+        review: "这…砧板上啥也没有居然强行烹饪？厨房炸了！快加点食材再试试吧～ (´；ω；｀)"
+    };
+
+    // 辅助函数: 判断当前组合是否包含所有指定base id
+    function includesAll(itemsArray, required) {
+        for (let req of required) {
+            if (!itemsArray.includes(req)) return false;
+        }
+        return true;
+    }
+
+    // 获取当前砧板上的食材id列表
+    let currentCombo = [];   // 存储食材 base id 字符串
+
+    // DOM 元素
+    const ingredientsGrid = document.getElementById("ingredientsGrid");
+    const comboContainer = document.getElementById("comboContainer");
+    const cookBtn = document.getElementById("cookBtn");
+    const clearComboBtn = document.getElementById("clearComboBtn");
+    const dishDisplay = document.getElementById("dishDisplay");
+    const reviewTextEl = document.getElementById("reviewText");
+
+    // 渲染食材库
+    function renderIngredients() {
+        ingredientsGrid.innerHTML = "";
+        INGREDIENTS.forEach(ing => {
+            const card = document.createElement("div");
+            card.className = "ingredient-card";
+            card.setAttribute("data-id", ing.id);
+            card.innerHTML = `
+                <div class="ingredient-emoji">${ing.emoji}</div>
+                <div class="ingredient-name">${ing.name}</div>
+            `;
+            card.addEventListener("click", (e) => {
+                e.stopPropagation();
+                addToCombo(ing.id);
+            });
+            ingredientsGrid.appendChild(card);
+        });
+    }
+
+    // 添加到砧板
+    function addToCombo(ingId) {
+        currentCombo.push(ingId);
+        renderCombo();
+    }
+
+    // 从砧板移除单个食材
+    function removeFromCombo(index) {
+        currentCombo.splice(index, 1);
+        renderCombo();
+    }
+
+    // 清空砧板
+    function clearCombo() {
+        currentCombo = [];
+        renderCombo();
+        // 不清空点评区域，但为了避免混淆不清新菜，不清除成品，但可以提示砧板已空
+        if (!currentCombo.length) {
+            // 可留原成品不变，但保持界面友好
+        }
+    }
+
+    // 渲染砧板区域
+    function renderCombo() {
+        if (!comboContainer) return;
+        if (currentCombo.length === 0) {
+            comboContainer.innerHTML = `<div class="empty-message" style="color:#aa7a4a;">🍴 空空如也，点击食材添加吧~</div>`;
+            return;
+        }
+        // 统计食材数量并显示对应的name和emoji
+        const ingredientMap = new Map(); // id -> { name, emoji, count }
+        currentCombo.forEach(id => {
+            const ing = INGREDIENTS.find(i => i.id === id);
+            if (ing) {
+                if (ingredientMap.has(id)) {
+                    ingredientMap.get(id).count++;
+                } else {
+                    ingredientMap.set(id, { name: ing.name, emoji: ing.emoji, count: 1, id: id });
+                }
+            }
+        });
+        // 构建列表，带删除按钮
+        let itemsHtml = "";
+        // 需要按照顺序展示每个食材(重复的独立展示更方便删除，但为了体验，分组显示可独立删除每个实例)
+        // 更直观：展示每个实例 允许单独删除
+        const flatList = [];
+        currentCombo.forEach((id, idx) => {
+            const ing = INGREDIENTS.find(i => i.id === id);
+            if(ing) flatList.push({ id, name: ing.name, emoji: ing.emoji, originalIdx: idx });
+        });
+        itemsHtml = flatList.map((item, idx) => `
+            <div class="combo-badge">
+                <span>${item.emoji} ${item.name}</span>
+                <span class="remove-item" data-index="${idx}">✖</span>
+            </div>
+        `).join("");
+        comboContainer.innerHTML = itemsHtml;
+        // 绑定删除事件
+        document.querySelectorAll(".remove-item").forEach(el => {
+            el.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const idxAttr = el.getAttribute("data-index");
+                if (idxAttr !== null) {
+                    const idx = parseInt(idxAttr, 10);
+                    if (!isNaN(idx) && idx >= 0 && idx < flatList.length) {
+                        // 根据 flatList 的索引映射到原始 currentCombo 删除
+                        const targetId = flatList[idx].id;
+                        // 找到第一个匹配的删除 (按顺序删除对应项)
+                        const findIndex = currentCombo.findIndex((val, i) => val === targetId);
+                        if (findIndex !== -1) currentCombo.splice(findIndex, 1);
+                        renderCombo();
+                    }
+                }
+            });
+        });
+    }
+
+    // 核心烹饪逻辑: 根据 currentCombo 匹配菜肴
+    function cook() {
+        if (!currentCombo.length) {
+            // 没有食材: 暗黑物质
+            updateDishUI(DEFAULT_DISH.name, DEFAULT_DISH.emoji, DEFAULT_DISH.review);
+            return;
+        }
+
+        // 获取食材id列表 (可能有重复，配方匹配时只关心种类)
+        const uniqueIngredients = [...new Set(currentCombo)];
+        // 按优先级匹配配方
+        let matchedRecipe = null;
+        
+        // 1. 优先匹配特定组合配方 (遍历recipes)
+        for (let recipe of RECIPES) {
+            if (recipe.match(uniqueIngredients)) {
+                matchedRecipe = recipe;
+                break;
+            }
+        }
+        
+        // 2. 如果没有匹配任何配方，尝试检查是否为单食材料理 (如果组合只有一种食材)
+        if (!matchedRecipe && uniqueIngredients.length === 1) {
+            const singleId = uniqueIngredients[0];
+            if (SINGLE_RECIPES[singleId]) {
+                const single = SINGLE_RECIPES[singleId];
+                updateDishUI(single.name, single.emoji, single.review);
+                return;
+            }
+        }
+        
+        // 3. 双食材特殊可爱组合 (未在recipe覆盖的但有趣组合, 补一些)
+        if (!matchedRecipe && uniqueIngredients.length === 2) {
+            const sorted = [...uniqueIngredients].sort();
+            const key = sorted.join('+');
+            const extraCombos = {
+                "egg+noodle": { name: "鸡蛋炒面", emoji: "🍳🍜", review: "面条吸饱蛋香，镬气十足！简单快手又美味，饱腹感满分。" },
+                "tomato+cheese": { name: "番茄芝士焗", emoji: "🍅🧀", review: "酸甜的番茄和浓郁的芝士烘烤后完美融合，拉丝效果超赞！" },
+                "beef+rice": { name: "牛肉盖饭", emoji: "🥩🍚", review: "牛肉醇厚多汁配上米饭，最质朴的满足！" },
+                "onion+mushroom": { name: "洋葱炒蘑菇", emoji: "🧅🍄", review: "香气炸弹！洋葱甜脆，蘑菇鲜美，简约却不简单。非常下饭。" },
+                "rice+egg": { name: "黄金蛋炒饭", emoji: "🍳🍚", review: "金灿灿的蛋炒饭，粒粒裹着蛋香，朴实中的王者！" },
+                "tomato+noodle": { name: "番茄鸡蛋面(简约)", emoji: "🍅🍜", review: "茄汁浓郁，面条劲道，治愈系家常味道。" }
+            };
+            if (extraCombos[key]) {
+                const combo = extraCombos[key];
+                updateDishUI(combo.name, combo.emoji, combo.review);
+                return;
+            }
+        }
+        
+        // 4. 如果还没匹配，但有≥3种食材且没有匹配到已有配方，给个创意大杂烩点评
+        if (!matchedRecipe && uniqueIngredients.length >= 3) {
+            updateDishUI("主厨创意乱炖", "🍲🎨", "非常有想象力的食材组合！味道出奇地和谐，有种意外的惊喜，大胆创新值得鼓励！下次试试经典搭配~");
+            return;
+        }
+        
+        // 5. 最后兜底 (双食材未匹配或任何未处理)
+        if (!matchedRecipe) {
+            // 双食材没有特殊组合且没匹配，给个随机鼓励
+            if (uniqueIngredients.length === 2) {
+                const ing1 = INGREDIENTS.find(i=>i.id === uniqueIngredients[0]);
+                const ing2 = INGREDIENTS.find(i=>i.id === uniqueIngredients[1]);
+                updateDishUI("融合小炒", "🍳✨", `${ing1?.name || "神秘食材"}和${ing2?.name || "神秘食材"}的奇妙碰撞，虽然有点生疏但未来可期！多加练习成为大厨吧。`);
+            } else {
+                updateDishUI("乡村大锅烩", "🥘", "朴实的家常滋味，虽然卖相一般，但饱含对食物的热爱。下次可以尝试经典组合哦～");
+            }
+            return;
+        }
+        
+        // 如果有标准配方匹配
+        if (matchedRecipe) {
+            updateDishUI(matchedRecipe.name, matchedRecipe.emoji, matchedRecipe.review);
+        } else {
+            // 最终安全兜底
+            updateDishUI(DEFAULT_DISH.name, DEFAULT_DISH.emoji, DEFAULT_DISH.review);
+        }
+    }
+
+    function updateDishUI(name, emoji, review) {
+        dishDisplay.innerHTML = `
+            <div class="dish-emoji">${emoji}</div>
+            <div class="dish-name">${name}</div>
+            <div style="font-size: 0.8rem; margin-top: 8px;">✨ 美味诞生 ✨</div>
+        `;
+        reviewTextEl.innerText = review;
+    }
+
+    // 重置界面但不清空当前组合? 清空组合用按钮已经做了, 重置时也可以重置成品到等待状态
+    function resetAll() {
+        clearCombo();
+        updateDishUI("等待料理...", "🍳", "组合食材后点击「开火烹饪」，让我尝尝你的手艺！");
+    }
+
+    // 初始化事件
+    function init() {
+        renderIngredients();
+        renderCombo();
+        cookBtn.addEventListener("click", cook);
+        clearComboBtn.addEventListener("click", () => {
+            clearCombo();
+        });
+        // 可选额外重置成品 但清空砧板不清成品, 但可加额外双击标题重置，这里不做强制
+    }
+
+    init();
+</script>
+</body>
+</html>

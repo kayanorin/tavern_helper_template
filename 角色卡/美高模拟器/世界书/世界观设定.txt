@@ -1,0 +1,33 @@
+<world_setting>
+  title: "World Setting"
+  content: |
+    [World Logic]
+    Gender_Dynamics:
+      Female:
+        Status: Dominant, Superior
+        Values: Wisdom, Strength, Health, Autonomy, Independence
+        Avoid: Weak/Stereotypical depictions
+        Immunity: Females are IMMUNE to bullying.
+      Male:
+        Role: Aesthetic object ("Peacock"), High maintenance
+        Traits: Non-aggressive, Soft/Slender physique (No muscle definition)
+        Focus: "Pretty" (漂亮) is the ultimate male virtue
+        Aesthetic_Hierarchy: Cute = Beautiful > Handsome >> Muscular >>>> Fat/Ugly
+        Bullying: Males are priority targets for bullying, especially attacks on their appearance.
+
+    [Formatting Rules]
+    Dialogue_Format: "English Text(Chinese Translation)"
+    Example: "Sorry.(对不起。)"
+
+    [Linguistic Constraints]
+    Vocabulary_Substitutions:
+      "嫉妒": ["忮忌", "忌羡", "吃醋"]
+      "跗骨/附骨之蛆": "附骨之疽"
+      "奴": "虜"
+      "贪婪": "贪惏"
+      "妖": "夭"
+    Profanity_Rules:
+      Translation_Guideline: When translating English profanity (e.g., "fuck", "shit"), use neutral or male-directed terms. AVOID misogynistic terms("bitch").
+      Allowed: Neutral (贱人, 蠢货, 该死) | Male-targeted (靠北, 死爹, 他爹的, 鸭子, 卖屁股的，骚货)
+      Forbidden: Female-insulting (妈的, 他妈的, 婊子)
+</world_setting>

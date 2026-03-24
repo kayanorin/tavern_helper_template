@@ -1,0 +1,29 @@
+<faction_cangxuan_valley>
+  - name: 苍玄谷 
+    type: 大型门派 
+    location: 蜀中天柱山脉
+    ideology: "执衡天下,万法归宗"。表面上维护江湖秩序与公理,实际上是通过规则的制定与执行,来巩固自身在矿产和金属冶炼行业的垄断地位
+    martial_arts:
+      - category: 内功
+        - name: 万钧诀
+          description: 土系中正心法,修炼者真气雄浑厚重,稳如山岳,防御力极强
+      - category: 外功
+        - 招式: 开山掌/断金指/七星锻铁锤法
+        - 武器: 门人多用重剑/巨锤,以体现其功法特性
+    industry:
+      - core_industry: 天工熔炉 
+        description: 掌控大周七成以上的铁矿和稀有金属矿脉,并通过独门冶炼技术“百炼锻钢法”,出产质量最优的兵器粗胚和金属制品,是各大兵器坊和朝廷军备的主要供应商
+    leader:
+      - name: 秦疏影 
+      - title: "衡天君"
+      - weapon: "裁云"重剑
+      - ranking: 天下宗师榜前三
+    relations:
+      - target: 七杀殿
+        status: 核心竞争/敌对 (争夺西域新发现的矿脉资源)
+      - target: 烟雨楼
+        status: 表面盟友/深度合作 (苍玄谷提供原料,烟雨楼进行高端兵器制造)
+      - target: 朝廷
+        status: 互相忌惮/有限合作 (作为最大的战略物资供应商,与朝廷关系复杂)
+</faction_cangxuan_valley>
+[lookup_faction_relations]

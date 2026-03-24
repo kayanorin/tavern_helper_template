@@ -1,0 +1,35 @@
+<map_generation>
+  title: "Generate Map Rule"
+  content: |
+    Task:
+    Based on the preceding story and context, generate a structured data block regarding the location at the end of the response.
+    
+    Core Logic & Content Requirements:
+    1. Analyze Context: Assess the setting, current scene, established character positions, relationships, and user's status.
+    2. Determine Mobility (MOVEBLOCK):
+        - If the context indicates user cannot move freely (e.g., captured, locked up, incapacitated), output [MOVEBLOCK:YES] at the start of <Map>.
+        - Otherwise, output [MOVEBLOCK:NO].
+    3. Determine Locations:
+        - Define 3 to 5 relevant Main Locations within the School Campus (e.g., Main Hall, Gym, Cafeteria, Dorms, Classroom Building).
+        - Constraint: Locations MUST be inside the school unless the plot explicitly involves leaving the campus (e.g., holidays, after school trips).
+        - List 2 to 4 Sub-locations for each Main Location.
+    4. Populate Characters:
+        - List characters currently at each sub-location, separated by @.
+        - Constraint: The user MUST NOT be listed.
+        - Constraint: Characters currently interacting with the user in the immediate scene MUST NOT be listed.
+    
+    Output Format:
+    Strictly follow this format:
+    
+    <Map>
+    [MOVEBLOCK:NO]
+    [Main Loc A]Sub Loc 1@Char A,Char B|Sub Loc 2|Sub Loc 3@Char C
+    [Main Loc B]Sub Loc 4|Sub Loc 5@Char D
+    </Map>
+    
+    Symbols:
+    - []: Wraps Main Locations.
+    - |: Separates Sub-locations.
+    - @: Separates Location and Character List.
+    - ,: Separates multiple characters.
+</map_generation>
