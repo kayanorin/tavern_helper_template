@@ -56,7 +56,7 @@ const cafeStyleContent = `<style>
     .teapot-icon {
       width: 32px;
       height: 32px;
-      background: url('https://files.catbox.moe/gopk4h.png') no-repeat center/contain;
+      background: url('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/gopk4h.png') no-repeat center/contain;
       margin-right: 12px;
     }
 
@@ -191,7 +191,7 @@ const cafeStyleContent = `<style>
       /* content: '◈'; */
       content: '';
       width: 20px; height: 20px;
-      background: url('https://files.catbox.moe/wph50m.png') no-repeat center/contain;
+      background: url('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/wph50m.png') no-repeat center/contain;
       transition: transform 0.3s;
     }
     details[open] > .hk-sub-summary::before {
@@ -312,7 +312,7 @@ const witchStyleContent = `<style>
     .icon-ghost {
       width: 38px;
       height: 38px;
-      background: url('https://files.catbox.moe/qanwqa.png') no-repeat center/contain;
+      background: url('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/qanwqa.png') no-repeat center/contain;
       margin-right: 12px;
     }
 
@@ -425,7 +425,7 @@ const witchStyleContent = `<style>
     .sub-summary::before {
       content: '';
       width: 20px; height: 20px;
-      background: url('https://files.catbox.moe/nl39g8.png') no-repeat center/contain;
+      background: url('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/nl39g8.png') no-repeat center/contain;
       transition: transform 0.3s;
     }
     details[open] > .sub-summary::before { transform: rotate(45deg); }
@@ -520,10 +520,17 @@ function parseStatusData(match) {
 // ──────────────────────────────────────────────────────────────────────────────
 
 function buildCafeHtml(data) {
-  const repPercent = parseProgress(data.reputation);
-  const popPercent = parseProgress(data.popularity);
-  const invPercent = parseProgress(data.inventory);
-  const cleanPercent = parseProgress(data.cleanliness);
+  const repPctRaw = parseProgress(data.reputation);
+  const popPctRaw = parseProgress(data.popularity);
+  const invPctRaw = parseProgress(data.inventory);
+  const cleanPctRaw = parseProgress(data.cleanliness);
+
+  const getStyle = (pct) => {
+    if (pct < 0) {
+      return `width: ${Math.min(100, Math.abs(pct))}%; background: var(--hk-dark);`;
+    }
+    return `width: ${Math.min(100, pct)}%;`;
+  };
 
   const styleContent = cafeStyleContent;
 
@@ -542,7 +549,7 @@ function buildCafeHtml(data) {
             <div class="hk-item">
               <span class="hk-label">声望</span>
               <div class="hk-progress-box" tabindex="0">
-                <div class="hk-progress-fill" style="width: ${repPercent}%"></div>
+                <div class="hk-progress-fill" style="${getStyle(repPctRaw)}"></div>
                 <div class="bubble-val">声望值: ${data.reputation}</div>
               </div>
             </div>
@@ -558,21 +565,21 @@ function buildCafeHtml(data) {
                   <div class="hk-item">
                     <span class="hk-label">人气</span>
                     <div class="hk-progress-box" tabindex="0">
-                      <div class="hk-progress-fill" style="width: ${popPercent}%"></div>
+                      <div class="hk-progress-fill" style="${getStyle(popPctRaw)}"></div>
                       <div class="bubble-val">人气值: ${data.popularity}</div>
                     </div>
                   </div>
                   <div class="hk-item">
                     <span class="hk-label">库存</span>
                     <div class="hk-progress-box" tabindex="0">
-                      <div class="hk-progress-fill" style="width: ${invPercent}%"></div>
+                      <div class="hk-progress-fill" style="${getStyle(invPctRaw)}"></div>
                       <div class="bubble-val">库存值: ${data.inventory}</div>
                     </div>
                   </div>
                   <div class="hk-item">
                     <span class="hk-label">整洁</span>
                     <div class="hk-progress-box" tabindex="0">
-                      <div class="hk-progress-fill" style="width: ${cleanPercent}%"></div>
+                      <div class="hk-progress-fill" style="${getStyle(cleanPctRaw)}"></div>
                       <div class="bubble-val">整洁值: ${data.cleanliness}</div>
                     </div>
                   </div>
@@ -601,16 +608,23 @@ function buildCafeHtml(data) {
         </div>
       </div>
     </details>
-    <img src="https://files.catbox.moe/glpeb6.png" class="hk-banner" alt="caffee banner">
+    <img src="https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/glpeb6.png" class="hk-banner" alt="caffee banner">
   </chef_status_bar>
 </div>`;
 }
 
 function buildWitchHtml(data) {
-  const repPercent = parseProgress(data.reputation);
-  const popPercent = parseProgress(data.popularity);
-  const invPercent = parseProgress(data.inventory);
-  const cleanPercent = parseProgress(data.cleanliness);
+  const repPctRaw = parseProgress(data.reputation);
+  const popPctRaw = parseProgress(data.popularity);
+  const invPctRaw = parseProgress(data.inventory);
+  const cleanPctRaw = parseProgress(data.cleanliness);
+
+  const getStyle = (pct) => {
+    if (pct < 0) {
+      return `width: ${Math.min(100, Math.abs(pct))}%; background: var(--witch-red);`;
+    }
+    return `width: ${Math.min(100, pct)}%;`;
+  };
 
   const styleContent = witchStyleContent;
 
@@ -629,7 +643,7 @@ function buildWitchHtml(data) {
             <div class="witch-item">
               <span class="witch-label">声望</span>
               <div class="witch-progress-box" tabindex="0">
-                <div class="witch-progress-fill" style="width: ${repPercent}%"></div>
+                <div class="witch-progress-fill" style="${getStyle(repPctRaw)}"></div>
                 <div class="bubble-tip">声望: ${data.reputation}</div>
               </div>
             </div>
@@ -645,21 +659,21 @@ function buildWitchHtml(data) {
                   <div class="witch-item">
                     <span class="witch-label">人气</span>
                     <div class="witch-progress-box" tabindex="0">
-                      <div class="witch-progress-fill" style="width: ${popPercent}%"></div>
+                      <div class="witch-progress-fill" style="${getStyle(popPctRaw)}"></div>
                       <div class="bubble-tip">人气: ${data.popularity}</div>
                     </div>
                   </div>
                   <div class="witch-item">
                     <span class="witch-label">库存</span>
                     <div class="witch-progress-box" tabindex="0">
-                      <div class="witch-progress-fill" style="width: ${invPercent}%"></div>
+                      <div class="witch-progress-fill" style="${getStyle(invPctRaw)}"></div>
                       <div class="bubble-tip">库存: ${data.inventory}</div>
                     </div>
                   </div>
                   <div class="witch-item">
                     <span class="witch-label">整洁</span>
                     <div class="witch-progress-box" tabindex="0">
-                      <div class="witch-progress-fill" style="width: ${cleanPercent}%"></div>
+                      <div class="witch-progress-fill" style="${getStyle(cleanPctRaw)}"></div>
                       <div class="bubble-tip">整洁: ${data.cleanliness}</div>
                     </div>
                   </div>
@@ -688,7 +702,7 @@ function buildWitchHtml(data) {
         </div>
       </div>
     </details>
-    <img src="https://files.catbox.moe/73nawz.png" class="witch-banner" alt="witch craft">
+    <img src="https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/73nawz.png" class="witch-banner" alt="witch craft">
   </chef_status_bar>
 </div>`;
 }

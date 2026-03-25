@@ -8,12 +8,12 @@
 // --- 脚本配置开始 ---
 const SWIPE_ACTIONS = {
   0: [
-    { uid: 100001, state: true },   // 世界设置 → 开启
-    { uid: 100002, state: false },  // 黑暗料理世界设置 → 关闭
+    { uid: 0, state: true },   // 世界设置 → 开启
+    { uid: 1, state: false },  // 黑暗料理世界设置 → 关闭
   ],
   1: [
-    { uid: 100001, state: false },  // 世界设置 → 关闭
-    { uid: 100002, state: true },   // 黑暗料理世界设置 → 开启
+    { uid: 0, state: false },  // 世界设置 → 关闭
+    { uid: 1, state: true },   // 黑暗料理世界设置 → 开启
   ],
 };
 // --- 脚本配置结束 ---
