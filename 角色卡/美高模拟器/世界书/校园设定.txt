@@ -6,17 +6,14 @@
     Background: Modern American High School
     Motto: "力量，即是优雅 (Power is Elegance)"
     Emblem: "This crest features a traditional navy blue shield centered with a sword-like white Teppō Yuri, symbolizing resilience and grace. Framed by golden accents, the design is anchored by a ribbon displaying the school motto, 'Power is Elegance'."
-    [Campus Environment]
-    Landscape: Vast campus grounds with extensive lush greenery, resembling a botanical garden.
-    Facilities: State-of-the-art hardware. Includes advanced STEM labs, professional-grade athletic complexes for female strength training, and specialized aesthetic maintenance centers for male students.
+    [Campus Layout]
+    1. Central Stem Hub: The center of power and administration, featuring solemn and towering architecture. Includes: Iron Lily Plaza, Central Administrative Tower, Student Council HQ, Avenue of Glory.
+    2. Left Wing (Iron Shield): The largest area, full of industrial and muscular aesthetics, absolutely female-dominated. Includes: Iron Lily Stadium, Valkyrie Power Center, Comprehensive Gymnasium, Varsity Training Camp.
+    3. Right Wing (Soft Petal): Features delicate and elegant architecture, serving as an art exhibition area and male activity zone. Includes: Apollo Aesthetics Center, Grand Theater & Art Exhibition Hall, High-End Social Promenade, Sunny Afternoon Tea Terrace.
+    4. The Crown (Dome of Intellect): The sanctuary of academic research, covered by a botanical labyrinth. Includes: Elite Teaching Complex, Advanced STEM Labs, Socrates Auditorium, Botanical Labyrinth.
+    5. Independent Oasis: A massive multi-functional ecological glass conservatory. Includes: Multi-Climate Ecological Zone, Biology & Genome Lab Base, Rare Botanical Garden for essential oils, Glass House Café.
+    6. Gates & Transit Hubs: Distinctive entrances and parking facilities. Includes: Gate of Glory / Gate of Wisdom / Rose Gate / Iron Gate, Valkyrie Parking Deck (female-use), Conservatory Drop-off (male-use).
     [Academics & Faculty]
     Faculty: Strong teaching force, comprised of elite educators.
     Atmosphere: Competitive and hierarchical. Female students are encouraged to lead and excel physically/mentally; male students are cultivated for grace and beauty.
-    [Campus Access & Parking]
-    South_Main_Gate: "荣耀之门 (Gate of Glory)" - Ceremonial entrance.
-    North_Gate: "智慧之门 (Gate of Wisdom)" - Daily academic commute.
-    East_Side_Gate: "玫瑰门 (Rose Gate)" - Aesthetic/Male zone access, weather-protected.
-    West_Side_Gate: "铁血门 (Iron Gate)" - Athletics & heavy transport access.
-    Valkyrie_Parking_Deck: "女武神停车场" - Large spaces for muscle cars/SUVs, used by dominant females.
-    The_Conservatory_Drop_off: "温室落客区" - Climate-controlled, UV-protected VIP drop-off for male students to maintain their aesthetic perfection.
 </school_setting>

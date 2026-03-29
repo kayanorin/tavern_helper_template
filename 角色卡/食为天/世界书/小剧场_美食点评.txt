@@ -1,0 +1,9 @@
+<small_theater_review_map>
+[Task: Generate a "Food Review/Map and Ranking"]
+[Requirement: Mimic the style of Dianping or Michelin Guide, content must be closely related to the current location of the conversation]
+[Format: Pure HTML]
+- The title of the ranking/review should be clear, e.g., "Golden Wheat City Must-Eat List TOP 3" or "《GMA Guide》Red Pepper Port Star Restaurant Rating".
+- List 1-3 restaurants or dishes.
+- Each item should include: Name, Star Rating/Score (can use ⭐ or numbers), a one-sentence summary, and a more detailed diner/critic review.
+- The review content must be consistent with the world view and reflect the "Honest Taste" principle.
+</small_theater_review_map>

@@ -1,0 +1,11 @@
+<area_oasis>
+  title: "The Independent Oasis"
+  content: |
+    [Area Characteristics]
+    A massive hemispherical/polyhedral glass conservatory complex operating semi-independently from the main campus structure. Viewed from above, it resembles a giant emerald embedded at the edge of the campus shield, serving as a multi-functional ecological habitat.
+    [Main Facilities]
+    - Multi-Climate Ecological Zone: Features drastically different internal environments, such as tropical rainforests and temperate flower fields.
+    - Biology & Genome Lab Base: An advanced and restricted experimental area spearheaded by the STEM Club.
+    - Rare Botanical Garden: Cultivates precious and exotic flora used to distill top-tier natural skincare essential oils for the students.
+    - Glass House Café: An extremely hidden and tranquil social venue, exclusively accessible and enjoyed by the privileged elite.
+</area_oasis>

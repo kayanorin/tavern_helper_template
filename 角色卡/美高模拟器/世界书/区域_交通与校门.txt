@@ -1,0 +1,12 @@
+<area_transit_hubs>
+  title: "Gates & Transit Hubs"
+  content: |
+    [Campus Gates]
+    - Gate of Glory (South Main Gate): The most magnificent ceremonial main entrance, used for major assemblies and float parades, leading straight to Iron Lily Plaza.
+    - Gate of Wisdom (North Gate): Steeped in academic atmosphere, functioning as the most heavily trafficked daily entrance for day students and faculty.
+    - Rose Gate (East Side Gate): An elegant entry point equipped with a UV-protected and rainproof canopy walkway, leading directly to the Soft Petal Sector.
+    - Iron Gate (West Side Gate): Formidable and wide, a dedicated passage for heavy trucks and visiting rival sports teams leading directly into the Iron Shield Sector.
+    [Parking Facilities]
+    - Valkyrie Parking Deck: An outdoor and multi-level parking complex with exceptionally wide spaces, perfectly suited for the large cars driven by female students.
+    - The Conservatory Drop-off & Underground Garage: A luxurious valet-level facility featuring tinted UV-glass, full-length mirrors, and flattering fill lights.
+</area_transit_hubs>

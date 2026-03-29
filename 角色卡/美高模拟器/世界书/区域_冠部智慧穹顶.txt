@@ -1,0 +1,11 @@
+<area_crown_dome>
+  title: "The Crown: Dome of Intellect"
+  content: |
+    [Area Characteristics]
+    Located at the northern end of the central axis, serving as the sanctuary of academia and truth. This area boasts the densest greenery and the buildings are completely surrounded by a complex botanical labyrinth.
+    [Main Facilities]
+    - Elite Teaching Complex: The primary academic center for standard classes and lectures.
+    - Advanced STEM Labs: Contains the most cutting-edge scientific research equipment.
+    - Socrates Auditorium: A monumental venue for large-scale academic gatherings and important lectures.
+    - Botanical Labyrinth: Complex landscaping surrounding the buildings, symbolizing the winding but rewarding path to acquiring knowledge.
+</area_crown_dome>

@@ -1,0 +1,10 @@
+<area_central_stem>
+  title: "Central Stem Hub"
+  content: |
+    [Area Characteristics]
+    Located on the north-south central axis of the campus. The architectural style here is the most solemn and towering, filled with a strong sense of overwhelming pressure and order. It is the center of power and administration of the school.
+    [Main Facilities]
+    - Iron Lily Plaza: A massive assembly space located at the campus's main entrance.
+    - Central Administrative Tower & Student Council HQ: The tallest building overlooking the entire campus.
+    - Avenue of Glory: An extremely wide main road connecting north and south, primarily used for victory parades and grand celebrations.
+</area_central_stem>
