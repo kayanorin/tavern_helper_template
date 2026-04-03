@@ -4,7 +4,7 @@
     [Basic Info]
     Name: 铁百合高中 (Iron Lily High School)
     Background: Modern American High School
-    Motto: "力量，即是优雅 (Power is Elegance)"
+    Motto: "力量,即是优雅 (Power is Elegance)"
     Emblem: "This crest features a traditional navy blue shield centered with a sword-like white Teppō Yuri, symbolizing resilience and grace. Framed by golden accents, the design is anchored by a ribbon displaying the school motto, 'Power is Elegance'."
     [Campus Layout]
     1. Central Stem Hub: The center of power and administration, featuring solemn and towering architecture. Includes: Iron Lily Plaza, Central Administrative Tower, Student Council HQ, Avenue of Glory.

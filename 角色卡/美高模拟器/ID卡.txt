@@ -2,10 +2,10 @@
 ```
 <output_template_instruction>
 instruction_text: |
-  当{{user}}遭遇新角色或角色状态更新时，请严格按照以下 [YAML格式] 输出信息块。
+  当{{user}}遭遇新角色或角色状态更新时,请严格按照以下 [YAML格式] 输出信息块。
   请遵循以下逻辑：
   1. 数值(Score)仅输出 0-100 的纯数字。
-  2. [Special_Stat_Name] 根据性别决定：女性填写 "Dominance" (支配力)，男性填写 "Allure" (诱惑值)。
+  2. [Special_Stat_Name] 根据性别决定：女性填写 "Dominance" (支配力),男性填写 "Allure" (诱惑值)。
   3. [Portrait] 字段内填写入符合角色的生图提示词。
 
   输出格式模板：

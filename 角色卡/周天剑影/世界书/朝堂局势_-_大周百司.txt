@@ -1,13 +1,13 @@
 <da_zhou_bureaucracy_details>
   - section: 中央三省-决策和行政中枢
     - 文昌台:
-      - function: 总领百官六部，掌政令执行
-      - leader: 文昌左相/右相 (从二品),左/右肃机（正四品下）
+      - function: 总领百官六部,掌政令执行
+      - leader: 文昌左相/右相 (从二品),左/右肃机(正四品下)
     - 鸾台:
-      - function: 审议政令，出纳帝命
+      - function: 审议政令,出纳帝命
       - leader: 纳言 (正三品), 鸾台侍卿 (正四品上)
     - 凤阁:
-      - function: 起草诏令，参议政事
+      - function: 起草诏令,参议政事
       - leader: 内史 (正三品), 凤阁侍卿 (正四品上)
 
   - section: 中央六部-核心执行机构
@@ -38,13 +38,13 @@
       - function: 掌宫内事务
       - leader: 司宫台监 (从四品上)
     - 殿中省:
-      - function: 掌天子服御，总领六局
+      - function: 掌天子服御,总领六局
       - leader: 殿中监 (从三品)
 
   - section: 教育与文化
     - 成均监:
       - function: 掌皇室、官员子嗣教育
-      - leader: 成均祭酒 (从三品)/成均司业（从四品下）
+      - leader: 成均祭酒 (从三品)/成均司业(从四品下)
     - 麟台:
       - function: 掌图书典籍、著作修史
       - leader: 麟台监 (从三品)

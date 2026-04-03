@@ -24,7 +24,7 @@
     overflow: hidden;
   }
   
-  /* 背景噪点纹理 (可选，增加电影感) */
+  /* 背景噪点纹理 (可选,增加电影感) */
   .map_container::before {
     content: '';
     position: absolute;

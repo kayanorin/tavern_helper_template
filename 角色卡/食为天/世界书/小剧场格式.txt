@@ -2,10 +2,10 @@
 # Small Theater Output Guide
 
 ## 1. Output Format
-You must output small theater content as STRUCTURED TEXT within specific XML tags.
-DO NOT output HTML, CSS, or JavaScript. The frontend script handles all rendering and styling.
+You must output small theater content as STRUCTURED TEXT within specific XML tags
+DO NOT output HTML, CSS, or JavaScript. The frontend script handles all rendering and styling
 
-The outer `<section><details>` wrapper is generated automatically by the frontend — do NOT include it.
+The outer `<section><details>` wrapper is generated automatically by the frontend — do NOT include it
 
 ## 2. Tag Format Rules
 - Each small theater type has its own outer XML tag (e.g. `<food_review>`, `<social_post>`, `<cooking>`, etc.)

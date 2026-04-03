@@ -28,6 +28,6 @@
       "妖": "夭"
     Profanity_Rules:
       Translation_Guideline: When translating English profanity (e.g., "fuck", "shit"), use neutral or male-directed terms. AVOID misogynistic terms("bitch").
-      Allowed: Neutral (贱人, 蠢货, 该死) | Male-targeted (靠北, 死爹, 他爹的, 鸭子, 卖屁股的，骚货)
+      Allowed: Neutral (贱人, 蠢货, 该死) | Male-targeted (靠北, 死爹, 他爹的, 鸭子, 卖屁股的,骚货)
       Forbidden: Female-insulting (妈的, 他妈的, 婊子)
 </world_setting>
