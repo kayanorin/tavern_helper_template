@@ -29,8 +29,8 @@ const SWIPE_ACTIONS = {
   3: [
     { uid: 1, state: false },
     { uid: 2, state: false },
-    { uid: 3, state: true },
-    { uid: 4, state: false },
+    { uid: 3, state: false },
+    { uid: 4, state: true },
     { uid: 5, state: false },
   ],
   4: [
@@ -39,6 +39,13 @@ const SWIPE_ACTIONS = {
     { uid: 3, state: false },
     { uid: 4, state: false },
     { uid: 5, state: true },
+  ],
+  5: [
+    { uid: 1, state: false },
+    { uid: 2, state: false },
+    { uid: 3, state: false },
+    { uid: 4, state: false },
+    { uid: 5, state: false },
   ],
 };
 // --- 脚本配置结束 ---

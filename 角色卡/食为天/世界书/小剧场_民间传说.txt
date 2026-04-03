@@ -1,0 +1,41 @@
+<small_theater_folklore>
+[Task: Generate a "Folklore / Nursery Rhyme" consistent with the world view]
+[Type: Choose one from local legend or nursery rhyme / folk song]
+[Requirement: Content should enrich the world's cultural depth, reflecting regional customs, historical events, or folk wisdom about food and taste]
+[Format: Structured text within <folklore> tags as defined below. DO NOT output HTML/CSS/JS.]
+
+Output format：
+
+<folklore>
+类型：{{地方传说 / 童谣 / 民间歌谣}}
+地区：{{发源地，如 炽炎群岛 / 金麦城 / 霜降高原}}
+流传度：{{广为人知 / 仅在当地流传 / 近乎失传}}
+正文：{{传说或童谣的完整内容。传说3-8句叙事；童谣/歌谣要押韵、朗朗上口，4-8行}}
+注解：{{可选。对正文中隐含的世界观知识进行补充说明，1-3句}}
+</folklore>
+
+[Rules]
+- <folklore> 是唯一的内部标签，其他全部用"键：值"格式
+- 传说：应有故事弧度（起因→发展→结局或悬念），语气如老人在炉边讲故事
+- 童谣/歌谣：必须押韵，节奏感强，读起来朗朗上口，可以有暗黑或讽刺意味
+- 内容应自然融入世界特有设定（味阶、诚实之味、食材、GMA等），但不能像百科全书——是民间的、口语化的理解
+- 注解用于揭示正文暗含的世界观彩蛋（如传说中的某种食材确实存在，或童谣暗指某段历史）
+
+[Example - 地方传说]
+<folklore>
+类型：地方传说
+地区：炽炎群岛
+流传度：广为人知
+正文：老一辈说，炽炎群岛最深处的火山口里住着一条蛇，它的舌头分成五段，每一段尝过的东西都不一样——甜的苦的辣的酸的，还有一段什么味道都没有。有个年轻厨师不信邪，爬进去想偷蛇舌头做汤底。三天后他爬出来了，头发全白了，但从此做什么菜都好吃得让人流泪。村里人问他看到了什么，他只说了一句话："它让我尝了第五段舌头的味道。"后来没人知道第五种味道是什么，但每个去过炽炎群岛的厨师回来后，手艺多少都会变好一点。
+注解：炽炎群岛确实是多种高阶火系食材的产地。"第五种味道"在民间常被用来比喻超越四阶、达到法理之口的味觉境界。
+</folklore>
+
+[Example - 童谣]
+<folklore>
+类型：童谣
+地区：金麦城
+流传度：广为人知
+正文：一阶尝个咸和甜，二阶闻出锅里烟。三阶舌头会说话，四阶一口知前年。五阶嘛——五阶的事儿，小孩子别打听，吃完饭乖乖去洗碗。
+注解：这首童谣在金麦城几乎人人会念，用来教小孩认识味阶体系。最后一句"别打听"被认为暗指法理之口（五阶）的能力涉及重大秘密，民间对此讳莫如深。
+</folklore>
+</small_theater_folklore>

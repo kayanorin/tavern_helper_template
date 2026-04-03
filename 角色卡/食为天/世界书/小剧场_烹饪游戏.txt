@@ -1,23 +1,36 @@
 <small_theater_cooking_game>
 [Task: Generate an "Interactive Cooking Game"]
-[Requirement: Simple and fun, providing multiple random combinations and results]
-[Format: Pure HTML, interaction via onclick="alert('...')"]
-- Game Type: Random ingredient combination or random beverage mixing.
-- Provide 3-5 basic options (ingredients/base spirits/flavorings).
-- Players combine by clicking buttons.
-- Each generation needs to provide at least 3 different combination results, and each result should be accompanied by a brief description and review.
-- Use `onclick` events to display different combination results.
+[Requirement: Content must use world-specific ingredients and cooking methods, comply with the "Honest Taste" principle and taste-rank system]
+[Format: Structured text within <cooking> tags as defined below. DO NOT output HTML/CSS/JS.]
 
-[Example - Random Beverage Mixing]
-<div>
-  <h4>黎清时特调</h4>
-  <p>将两种不同的原料混合，看看会发生什么？</p>
-  <p>
-    <span class="fake-btn" onclick="alert('你将「冰魄凝晶」和「幻味变色兰」混合...\n\n诞生了「情绪鸡尾酒」: 味道在酸甜苦辣间随机变化，据说能尝出你今天的心情。GMA警告：有让选择困难症患者精神崩溃的风险。')">冰魄凝晶 + 幻味变色兰</span>
-    <br>
-    <span class="fake-btn" onclick="alert('你将「晨曦露」和「薄荷叶」混合...\n\n诞生了「醒神冰茶」: 经典组合，清冽提神。就像在春芽季的清晨深呼吸，能扫除一切疲惫。')">晨曦露 + 薄荷叶</span>
-    <br>
-    <span class="fake-btn" onclick="alert('你将「冰魄凝晶」和「薄荷叶」混合...\n\n诞生了「绝对零度」: 一股寒意从舌尖直冲天灵盖，你感觉自己的味阶都差点被冻结了。虽然刺激，但意外地不难喝。')">冰魄凝晶 + 薄荷叶</span>
-  </p>
-</div>
+Output format：
+
+<cooking>
+模式：{{普通 / 黑暗 / 竞技}}
+场景：{{当前烹饪场景描述，1句，如 "金麦城集市临时厨台"}}
+食材：{{逗号分隔，格式为 emoji+名称，如 🔥燃火之心，💧晨曦露，🌿霜降草}}
+烹饪方法：{{逗号分隔，如 蒸，炒，火炙，冰封，共鸣烹调}}
+菜品：{{中文分号分隔各道菜，格式为 菜名=emoji|食材1+食材2|烹饪方法|评级|点评}}
+</cooking>
+
+[Rules]
+- <cooking> 是唯一的标签，内部全部用"键：值"格式
+- 食材应使用世界特有食材（带味阶等级），但混入1-2个常见食材增加趣味
+- 烹饪方法可包含世界特有技法（如"共鸣烹调"——需三阶以上才能使用）
+- 菜品不需要穷举所有组合，只写有意义的搭配（5-8道为宜）
+- 评级用⭐表示，1-3个星，与味阶系统挂钩
+- 点评要体现世界观特色（诚实之味效果、味阶感知差异等）
+- 模式说明：
+  - 普通：常规烹饪，食材和谐搭配
+  - 黑暗：食材组合诡异，可能产生意想不到的效果（黑市食材、禁忌组合等）
+  - 竞技：限时挑战模式，评分标准更严格
+
+[Example]
+<cooking>
+模式：普通
+场景：云蒸霞蔚后厨实习体验
+食材：🔥燃火之心，💧晨曦露，🌾金麦穗，🥩草原奔牛肉，🧂岩盐花
+烹饪方法：蒸，炒，火炙，慢炖
+菜品：霞光牛柳=🥩✨|草原奔牛肉+晨曦露|蒸|⭐⭐⭐|肉质在晨曦露的蒸汽中化为金色透明，三阶以上食客能品出日出的温度；燃火铁板牛=🥩🔥|草原奔牛肉+燃火之心|火炙|⭐⭐⭐|辛辣的矿物气被大火锁进肉汁，一口下去浑身发热；金麦面包=🌾|金麦穗+岩盐花|慢炖|⭐⭐|朴实无华配以恰到好处的咸鲜，诚实之味的标准教材；晨曦盐焗牛=💧🧂|草原奔牛肉+晨曦露+岩盐花|蒸|⭐⭐|盐花与晨曦露形成清透的结晶表层，视觉满分但风味略显保守；燃火麦饼=🔥🌾|燃火之心+金麦穗|火炙|⭐⭐|麦香被辣意激活，意外地适合当下酒菜
+</cooking>
 </small_theater_cooking_game>

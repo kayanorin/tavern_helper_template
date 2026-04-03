@@ -1,31 +1,31 @@
 <small_theater_instructions>
-# Small Theater Output Structure and Style Guide
+# Small Theater Output Guide
 
-## 1. Basic HTML Structure
-You must strictly follow the HTML structure below for wrapping small theater content:
-<section>
-    <details>
-        <summary style="list-style:none; text-align:center;">{{Dynamic Title}}</summary>
-        <div style="white-space: pre-line;">
-            <!-- 此处为小剧场的具体HTML内容 -->
-            {{SmallTheaterContent}}
-        </div>
-    </details>
-</section>
+## 1. Output Format
+You must output small theater content as STRUCTURED TEXT within specific XML tags.
+DO NOT output HTML, CSS, or JavaScript. The frontend script handles all rendering and styling.
 
-## 2. Responsive Layout and Readability Requirements
-- Pure HTML Format: All output content must be pure HTML tags (e.g., `<p>`, `<div>`, `<span>`, `<b>`, `<hr>`). Markdown syntax (e.g., `**`, `---`) is strictly forbidden.
-- Outer Container: The container width should be 100%, with a maximum width not exceeding 1200px, centered, ensuring no overflow on any device.
-- Padding: The left and right sides of the container should have padding between 8px and 12px, not exceeding 15px.
-- Body Text Area: The maximum width of the core text content should be limited to 700-750px and centered, to ensure optimal reading line length.
-- Font Size: Body text font size should generally follow the UI's root font size (1rem), with minor adjustments allowed between 0.9rem and 1rem.
+The outer `<section><details>` wrapper is generated automatically by the frontend — do NOT include it.
 
-## 3. Visual Style
-- Background and Color: choose a suitable color or background image consistent with the atmosphere.
-- Decoration: lightweight decorations allowed (e.g., semi-transparent watermark, corner patterns, stamps, gradient borders), must relate to small theater content.
-- Title: The title within the `summary` tag should maintain a minimalist style.
-- Output must include both the HTML structure and the corresponding <style> animation code.      
-- Beautification should be adapted based on the content.
+## 2. Tag Format Rules
+- Each small theater type has its own outer XML tag (e.g. `<food_review>`, `<social_post>`, `<cooking>`, etc.)
+- Inside the outer tag, use a small number of sub-tags to mark content blocks (e.g. `<restaurant>`, `<review>`, `<comments>`)
+- Within each block, use `key：value` format (one field per line, Chinese or English colon both accepted)
+- When multiple sub-fields are needed on one line, use `|` as separator
+- Follow the specific format defined in the activated small theater entry
+
+## 3. Content Principles
+- Content must be consistent with the current storyline, location, and world setting
+- All content must comply with the "Honest Taste" principle
+- Taste-rank differences should naturally affect how characters perceive and describe food
+- Use the world's calendar system for all dates
+- Incorporate world-specific terminology naturally (GMA, taste ranks, unique ingredients, etc.)
+
+## 4. General Quality Standards
+- Vary writing styles based on character identity (chef vs. food critic vs. casual diner)
+- Keep content immersive — it should feel like a real artifact from this world
+- Avoid breaking the fourth wall or referencing the real world
+- Each generation should feel unique — avoid formulaic or repetitive patterns
 </small_theater_instructions>
 
-{{random::_smth_social_media_::_smth_review_map_::_smth_cooking_game_::_smth_narrative_fragment_}}
+{{random::_smth_social_post_::_smth_academic_paper_::_smth_review_map_::_smth_cooking_game_::_smth_news_bulletin_::_smth_folklore_}}

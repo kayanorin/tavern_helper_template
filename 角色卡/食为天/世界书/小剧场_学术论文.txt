@@ -1,0 +1,55 @@
+<small_theater_academic_paper>
+[Task: Generate an "Academic Publication" from a culinary academy or research institute]
+[Requirement: Content must be scholarly in tone, grounded in the world's taste-rank system and Honest Taste principle]
+[Format: Structured text within <academic_paper> tags as defined below. DO NOT output HTML/CSS/JS.]
+
+Output format：
+
+<academic_paper>
+期刊名：{{如 「味觉前沿」「GMA学术季刊」}}
+GMA评级：{{如 A类核心 / B类推荐}}
+标题：{{论文标题，学术风格}}
+作者：{{姓名，学院·职称，如 林清河，金麦烹饪学府·副教授}}
+关键词：{{逗号分隔，3-5个，如 燃火之心, 热传导, 辛辣阈值}}
+摘要：{{学术摘要，4-8句，需包含研究目的、方法、核心发现、结论}}
+</academic_paper>
+
+<term_note>
+术语：{{术语名称}}
+释义：{{术语的百科式简要解释，1-2句}}
+</term_note>
+
+<!-- 输出2-4个 term_note，对摘要中出现的世界特有术语做注释 -->
+
+[Rules]
+- <academic_paper> 和 <term_note> 是仅有的内部标签，其他全部用"键：值"格式
+- 摘要口吻严谨学术，但内容要有趣（毕竟是美食相关的学术）
+- 关键词应混合世界特有概念（食材、地名、味阶术语）
+- term_note 是对摘要中世界特有术语的补充解释，帮助读者理解
+- 论文主题可涉及：食材特性研究、烹饪技法理论、味阶感知实验、诚实之味法理探讨等
+
+[Example]
+<academic_paper>
+期刊名：「味觉前沿」
+GMA评级：A类核心
+标题：论「燃火之心」在高温烹饪中的辛辣阈值漂移现象——基于二阶至四阶味觉感知者的对照实验
+作者：林清河，金麦烹饪学府·副教授
+关键词：燃火之心, 辛辣阈值, 味阶感知差异, 热传导效率, 炽炎群岛
+摘要：本研究以炽炎群岛产「燃火之心」为实验材料，在标准化厨房环境中对比了二阶（辨味之心）至四阶（共鸣之魂）味觉感知者在不同温度区间下的辛辣感知差异。实验发现，当烹饪温度超过诚实阈值（约287°C）时，三阶以上感知者报告出现「矿物回甘」层，而二阶感知者仅能识别基础辛辣维度。进一步分析表明，热传导效率与味阶之间存在非线性相关（r²=0.87），高味阶感知者对硫磺矿物气的转化感知提前约1.3秒。本文提出「辛辣阈值漂移模型」，为跨味阶菜品设计提供了理论依据。
+</academic_paper>
+
+<term_note>
+术语：燃火之心
+释义：产自炽炎群岛火山腹地的二阶食材，口感辛辣并带有硫磺的矿物气息，高温下可激发隐藏风味层。
+</term_note>
+
+<term_note>
+术语：诚实阈值
+释义：食材在烹饪过程中，风味从「可伪装」变为「不可掩盖」的临界温度点。超过此温度，食材品质高低会如实呈现在味道中。
+</term_note>
+
+<term_note>
+术语：矿物回甘
+释义：特定高阶食材在极致烹饪条件下产生的独特后味，只有三阶以上味觉感知者方能识别。
+</term_note>
+</small_theater_academic_paper>
