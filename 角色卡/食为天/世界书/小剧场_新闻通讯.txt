@@ -1,9 +1,8 @@
 <small_theater_news_bulletin>
-[Task: Generate a "News / Official Bulletin" consistent with the world view]
-[Type: Choose one from newspaper report or GMA official notification]
-[Requirement: Content must be relevant to current storyline or location, and comply with the "Honest Taste" principle]
-[Format: Structured text within <news_bulletin> tags as defined below. DO NOT output HTML/CSS/JS.]
-
+[任务：生成符合世界观的"新闻/官方通告"]
+[类型：从 报纸新闻 或 GMA官方通告 中选择一种]
+[要求：内容必须与当前情节或所在地相关]
+[格式：在 <news_bulletin> 标签内输出结构化文本]
 Output format：
 
 <news_bulletin>
@@ -23,14 +22,12 @@ Output format：
 内容：{{1-3句短内容,补充主新闻的边角信息或编辑评论}}
 </sidebar>
 
-<!-- 可选输出1-2个 sidebar,作为主新闻的补充信息栏 -->
+[注意：可选输出1-2个 sidebar,作为主新闻的补充信息栏]
 
 [Rules]
 - <news_bulletin> 和 <sidebar> 是仅有的内部标签,其他全部用"键：值"格式
 - 报纸新闻：标题要有新闻感(可以夸张但不失真),正文客观但有世界观特色
 - GMA官方通告：口吻正式严肃,措辞官方,可包含法规引用和处罚决定
-- 日期必须使用世界历法(春芽季、秋实季等)
-- 新闻内容应能侧面反映世界观设定(味阶、诚实之味、GMA体制等)
 
 [Example - 报纸新闻]
 <news_bulletin>

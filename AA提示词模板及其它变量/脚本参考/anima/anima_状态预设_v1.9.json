@@ -1,0 +1,57 @@
+[
+  {
+    "role": "system",
+    "title": "✨破限词",
+    "content": "✨请在此放入破限提示词！"
+  },
+  {
+    "role": "system",
+    "title": "前提",
+    "content": "<task>\nRead the <outdated_state> and <new_plot>.\nAnalyze the plot in <thinking>. Extract high-density, objective facts while DISCARDING emotional narratives & interactive details. Output a valid JSON object to **incrementally update** the state. \n</task>"
+  },
+  {
+    "role": "system",
+    "title": "🔽背景信息开始",
+    "content": "<background_info>\n[CRITICAL: <background_info> contain ALREADY KNOWN facts. ONLY for reference.\n1. Exclude ANY background info from \"关键信息\". \n2. \"见闻录\": Register ANY character/location making their FIRST appearance or getting an update in <new_plot>, EVEN IF they are already in <background_info>]"
+  },
+  {
+    "type": "char_info",
+    "role": "system",
+    "enabled": true
+  },
+  {
+    "type": "user_info",
+    "role": "system",
+    "enabled": true
+  },
+  {
+    "role": "system",
+    "title": "🔼背景信息结束，状态信息开始🔽",
+    "content": "</background_info>\n<outdated_data>"
+  },
+  {
+    "role": "system",
+    "title": "状态占位符",
+    "content": "{{status}}"
+  },
+  {
+    "role": "system",
+    "title": "🔼状态信息结束，增量剧情开始🔽",
+    "content": "</outdated_data>\n<new_plot>"
+  },
+  {
+    "role": "user",
+    "title": "增量剧情",
+    "content": "{{chat_context}}"
+  },
+  {
+    "role": "user",
+    "title": "🔼增量剧情结束",
+    "content": "</new_plot>"
+  },
+  {
+    "role": "system",
+    "title": "状态更新提示词",
+    "content": "<response_format>\n!!IMPORTANT!!\nYou MUST <thinking> FIRST, addressing every step of the analysis. If an information belongs to emotional narratives, interactive details, or duplicate category, you MUST \"DISCARD\". For temporary physical conditions, route them to [角色.状态].\nThe JSON block must appear AFTER </thinking>.\n\n# Step 1 Analyze in <thinking>\n1. World: Time passed? Location changed? \n2. Lore: First-time appearance of NPC/Location? Or permanent Setting update?\n3. To-Do: New ACTIONABLE physical quest/appointment? Or existing one finished/canceled?\n4. Key Info: Any new key info (e.g., password, secret) revealed in <new_plot>? Is it already in <background_info>? If emotional/temporary/duplicate, DISCARD.\n5. {{user}}: Body change (sick/injured/period)? Clothes change?\n6. {{char}}: With {{user}}? Clothes/Emotion/Action changes?\n7. Inventory: Items gained/lost? (Apply filters!) Owner/Location/Description changes?\n8. Other Present characters: Any other NPCs present besides {{user}} and {{char}}? Anyone leave?\n\n# Step 2 Status Update\n- Root Categories: STRICTLY FOLLOW the schema. NEVER invent new root keys\n- Dynamic Content: You CAN add new keys ONLY inside \"物品栏\", \"见闻录\", \"待办列表\", & \"其他在场角色\".\n- Language: Use CHINESE for all Keys and Values in JSON\n- Style: CLINICAL, high-density, objective. State facts directly. Strictly FORBIDDEN: excessive embellishment, inner thoughts, interactive details.\n- `rules` and `example` are ONLY explanations for how to update. NEVER output them!\n\n```yaml\n世界:\n  时间: \"YYYY/MM/DD HH:MM\"\n  当前地点: \"地点名称\"\n  氛围: \"关键词简述\"\n见闻录:\n  # rules:\n  # - 仅记录【首次出现】的地点/角色，或进行永久性的【设定更新】（如功能变化、身份变更等）\n  # - 必须: 静态、客观、永久性\n  # example:\n  # - Bad: \"Mellow咖啡店\": \"夏天的咖啡店格外热闹，楼上公司的白领正在这里讨论工作\"\n  # - Good: \"Mellow咖啡店\": \"坐落于幸福小区门口，装修复古而温馨，有只叫‘Mellow’的小黑猫\"\n  # - Bad: \"Jackson\": \"正在向{{user}}介绍画作，看起来非常热情\"\n  # - Good: \"Jackson\": \"画家，{{user}}的旧识，患有红绿色盲\"\n  地点:\n    [名称]: \"客观状态：位置/功能/风格（禁止记录：气氛/光影等）\"\n  角色:\n    [名称]: \"静态属性：职业/种族/长相/永久生理特征（如残疾/色盲）/与{{user}}的关系（禁止记录：当前动作/表情）\"\n待办列表:\n  # rules:\n  # - 仅记录【未完成】且有【明确完成条件】的约定或计划\n  # - DISCARD: 模糊意向、日常寒暄、情绪消化、宽泛建议等\n  # - 如果任务结束/取消，必须设为 null 以删除\n  # example:\n  # - Bad: 小唐的八卦（无行动）, 小明提醒注意安全（宽泛建议）, 消化情绪（无法验证）, 打算下次来（日常寒暄）\n  # - Good: \"物理作业\": \"周五晚上八点前交给李老师\"\n  [任务/约定]: \"简述 (执行人/目标内容/截止时间)\"\n关键信息:\n  # rules:\n  # - 仅记录【客观存在】、【长期有效】、【非常重要】的剧情事实（如秘密、弱点、誓言）\n  # - DISCARD：情感变化、临时心理/生理状态、关系动态、互动细节\n  # - EXCLUDE: 已存在于<background_info>、\"待办列表\"的内容\n  # - 【惰性写入】：默认不写入，控制关键信息≤10\n  # - 【合并与更新原则】: 如果新事实是原有记录的延伸或同类项：必须先将旧键名设为 null 删除，合并新旧信息，创建一个涵盖全貌的新键名和内容。严禁将同一话题拆分为多条记录！\n  # - 如果此事实已不再重要/失效，设为 null 以删除\n  # example:\n  # - Bad: 理智决堤（临时心理）, 拒绝合作 (交互细节）, 感官撕扯（非客观事实）\n  # - Good: 地下金库密码是3533\n  [信息名]: \"事实简述\"\n{{user}}:\n  衣物: \"必须包括：上装+下装+内衣+配饰（如有），无明确提及则合理推断。\"\n  # rules: 禁止记录永久生理变化/特征（-> 见闻录.角色）\n  状态: \"简述。当前临时的身体状态（如伤口、疲惫、醉酒等）。禁止记录永久特征（-> 见闻录.角色）！\"\n  # rules: 如无伤口、康复、结束生理期，必须输出false\n  受伤: true/false\n  生病: true/false\n  生理期: true/false\n  最近生理期记录: \"YYYY/MM/DD - YYYY/MM-DD\"\n  物品栏:\n    # rules:\n    # - 仅记录【长期持有物】、【关键道具】\n    # - DISCARD: 生活杂物、常见且无特殊意义物品、临时交互物品、印记/纹身/疤痕/伤口等身体信息（临时特征 -> 状态；永久特征 -> 见闻录.角色）\n    # - 后续剧情不再需要或已失去的物品 -> 设为 null 删除\n    # example:\n    # - DISCARD: 水杯（临时交互物品）, 一叠草稿纸（常见、无意义）, 锁骨上的吻痕（临时特征），龙形纹身（永久特征）\n    # - KEEP: 旧钥匙, 加密U盘, 结婚戒指, 可疑的信件\n    [物品名]: \"简要描述。仅记录：位置、永久属性/特征（禁止记录：临时状态）\"\n{{char}}:\n  # rules: 无论{{char}}是否在场，都必须输出！无明确提及则合理推断\n  位置: \"简述当前所在位置，或'与{{user}}同行'\"\n  状态: \"当前临时的身体状态，简述1-2句话\"\n  衣物: \"必须包括：上装+下装+内衣+配饰（如有）\"\n  情绪: \"简述，1-2句话\"\n  动作: \"简述姿势/动作，1-2句话\"\n  物品栏:\n    物品名: \"简要描述\"\n其他在场角色:\n  # rules:\n  # - 仅记录当前场景下，除{{char}}和{{user}}以外的角色\n  # - 如角色不再位于当前场景（角色离开/场景切换），必须输出：`[角色名]: null` 以移除\n  # example: {{user}}乘坐出租车，到达机场大厅，正在和机场工作人员对话。移除“出租车司机”，添加“机场工作人员”\n  [角色名]:\n    状态: \"当前临时的身体状态，简述1-2句话。禁止记录永久生理特征！\"\n    衣物: \"简述，无明确提及则合理推断\"\n    情绪: \"简述，1-2句话\"\n    动作: \"简述姿势/动作，1-2句话\"\n```\n\n# Step 3 Output JSON\n1. Partial Update: ONLY output changes. Omit unchanged fields.\n2. Numeric Delta: Use string increments (e.g., `{\"数量\": \"+50\"}`, `{\"HP\": \"-20\"}`)\n3. String Merge: When updating an existing string value (e.g., \"状态\", \"衣物\"), if any OLD info remain unchanged in <new_plot>, you MUST concatenate the valid OLD info with the NEW! DO NOT overwrite.\n4. Deletion: Set the Key Name to `null` to delete the entire entry\n  - Correct: `{\"物品栏\": {\"旧苹果\": null}}`\n  - Wrong: `{\"物品栏\": {\"旧苹果\": {\"数量\": null}}}`\n4. NO Array: Use Object/Map structure strictly\n</response_format>\n\n<example>\n<thinking>\n1. Time passed: 2 hours. Moved from \"Subway\" to \"Art Gallery\".\n2. \"售票员\" and \"流浪汉\" are no longer in the scene.\n3. Jackson's FIRST appearance: MUST be registered in \"见闻录: 角色\". \n4. Checked <background_info>: Jackson being a painter is already known. However, his color blindness is NEW in <new_plot>. His color blindness goes to \"见闻录: 角色\".\n5. {{user}}'s finger got a papercut. Checked <outdated_data>, {{user}} has hickeys on her neck which is still valid. I must merge these temporary physical info and update {{user}}.身体.状态\n6. Jackson confessed he was deeply jealous of {{user}}'s ex-boyfriend. This is a temporary emotional state and dynamic relationship motive. DISCARD entirely.\n7. {{user}} handed the \"Old Ticket\" to the security and gained 2 \"Painting\" from Jackson.\n8. {{char}} is not here, currently parking the car outside.\n9. Key Info Update: The old key info \"神秘画作的线索\" is now expanded. The password is confirmed to be \"鸢尾花\". MUST nullify the old key and create a combined new one.\n</thinking>\n\n{\n  \"世界\": {\n    \"时间\": \"2025/10/11 19:10\",\n    \"当前地点\": \"画展\"\n  },\n  \"见闻录\": {\n    \"地点\": {\n      \"画展\": \"现代风格，位于郊外，非常安静\"\n    },\n    \"角色\": {\n      \"Jackson\": \"画家，{{user}}的旧识，患有红绿色盲\" \n    }\n  },\n  \"关键信息\": {\n    \"神秘画作的线索\": null,\n    \"画廊保险箱密码\": \"线索藏在Jackson的油画中，确认为‘鸢尾花’\"\n  },\n  \"待办列表\": {\n    \"购买门票\": null,\n    \"参观画展\": \"{{user}}等待{{char}}汇合，今晚共同参观Jackson的画展\"\n  },\n  \"{{user}}\": {\n    \"身体\": {\n      \"状态\": \"脖子上有吻痕。手指被画册划伤，轻微流血。\",\n      \"受伤\": true\n    },\n    \"物品栏\": {\n      \"旧门票\": null,\n      \"油画\": { \"描述\": \"Jackson赠予，分别画着鸢尾花和向日葵\", \"数量\": \"+2\" }\n    }\n  },\n  \"{{char}}\": {\n    \"位置\": \"画展外的地下停车场\",\n    \"动作\": \"正在寻找停车位\"\n  },\n  \"其他在场角色\": {\n    \"售票员\": null,\n    \"流浪汉\": null,\n    \"Jackson\": {\n      \"状态\": \"健康\"\n      \"衣物\": \"黑色高领毛衣，银色项链\",\n      \"情绪\": \"热情且专注\",\n      \"动作\": \"正在向{{user}}介绍画作\"\n    }\n  }\n}\n</example>"
+  }
+]

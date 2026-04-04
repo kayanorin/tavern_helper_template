@@ -1,8 +1,7 @@
 <small_theater_social_post>
-[Task: Generate a "Social Media Post" consistent with the world view]
-[Requirement: Content must reflect the author's identity and taste rank, and comply with the "Honest Taste" principle]
-[Format: Structured text within <social_post> tags as defined below. DO NOT output HTML/CSS/JS.]
-
+[任务：生成符合世界观的"社交媒体帖子"]
+[要求：内容应体现发帖人的身份和味阶特色]
+[格式：在 <social_post> 标签内输出结构化文本]
 Output format：
 
 <social_post>
@@ -23,13 +22,12 @@ Output format：
 内容：{{评论内容,1-2句,口语化}}
 </comments>
 
-<!-- 可选输出1-3条 comments,紧跟在 social_post 之后 -->
+[注意：可选输出1-3条 comments,紧跟在 social_post 之后]
 
 [Rules]
 - <social_post> 和 <comments> 是仅有的内部标签,其他全部用"键：值"格式
-- 不同类型的帖子语气差异明显：厨师分享专业自豪,食客动态轻松随意,吐槽类幽默自嘲
+- 社交动态的语气应多样化,但不要机械地将语气与职业绑定
 - 高味阶作者的表达会自然流露感知优势(如"能闻到三层风味")
-- 标签应体现世界特有概念和网络用语的混搭
 - 图片描述要有生活感,不要太完美
 
 [Example]
