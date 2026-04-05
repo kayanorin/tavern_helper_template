@@ -1,0 +1,23 @@
+初次运行
+node tavern_sync.mjs
+
+配置并提取世界书或预设
+node tavern_sync.mjs pull [任务名]
+
+同步修改结果到酒馆
+node tavern_sync.mjs push [任务名]
+
+实时修改
+node tavern_sync.mjs watch [任务名]
+
+！直接打包文件
+# 将世界书/预设推送到酒馆网页, 并从酒馆网页打包文件回本地
+node tavern_sync.mjs push --export [任务名]
+
+# 不经过酒馆网页直接打包文件, 因此你甚至不需要开启酒馆网页
+node tavern_sync.mjs bundle [任务名]
+
+获取命令帮助
+可以用 node tavern_sync.mjs -h 来获取更多帮助, 用 node tavern_sync.mjs 具体命令 -h 来获取具体命令的帮助.
+更新脚本
+node tavern_sync.mjs update

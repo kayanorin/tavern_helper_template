@@ -743,8 +743,115 @@
       不可激活其他条目: true
     文件: 世界书\变量\变量输出格式-主线2
 
+  - 名称: '[mvu_update]变量更新规则-主线3'
+    uid: 42
+    启用: false
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 指定深度
+      角色: 系统
+      深度: 0
+      顺序: 14720
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\变量\变量更新规则-主线3
+
+  - 名称: '[mvu_update]变量输出格式-主线3'
+    uid: 43
+    启用: false
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 指定深度
+      角色: 系统
+      深度: 0
+      顺序: 14720
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\变量\变量输出格式-主线3
+
+  - 名称: '[mvu_update]变量更新规则-主线4'
+    uid: 44
+    启用: false
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 指定深度
+      角色: 系统
+      深度: 0
+      顺序: 14720
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\变量\变量更新规则-主线4
+
+  - 名称: '[mvu_update]变量输出格式-主线4'
+    uid: 45
+    启用: false
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 指定深度
+      角色: 系统
+      深度: 0
+      顺序: 14720
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\变量\变量输出格式-主线4
+
 扩展字段:
   正则:
+    - 正则名称: '[不发送]去除变量更新'
+      id: 2d2018ae-c085-4916-af05-6830110a8293
+      启用: true
+      查找表达式: /<update(?:variable)?>(?:(?!.*<\/update(?:variable)?>).*$|.*<\/update(?:variable)?>)/gsi
+      内容: ''
+      来源:
+        用户输入: true
+        AI输出: true
+      作用于:
+        仅格式显示: false
+        仅格式提示词: true
+      最大深度: 3
+
+    - 正则名称: '[折叠]变量更新中'
+      id: ea96523f-a1cc-4634-b9d2-f28531adca6c
+      启用: true
+      查找表达式: /<update(?:variable)?>(?!.*<\/update(?:variable)?>)\s*(.*)\s*$/gsi
+      内容: |-
+
+        <details>
+        <summary>变量更新中{{random::.::..::...}}</summary>
+        $1
+        </details>
+      来源:
+        用户输入: true
+        AI输出: true
+      作用于:
+        仅格式显示: true
+        仅格式提示词: false
+
+    - 正则名称: '[折叠]完整变量更新'
+      id: 06dec31f-c0a9-456c-8b88-1f9176a73039
+      启用: true
+      查找表达式: /<update(?:variable)?>\s*(.*)\s*<\/update(?:variable)?>/gsi
+      内容: |-
+
+        <details>
+        <summary>变量更新情况</summary>
+        $1
+        </details>
+      来源:
+        用户输入: true
+        AI输出: true
+      作用于:
+        仅格式显示: true
+        仅格式提示词: false
+
     - 正则名称: 隐藏新闻通讯数据
       id: a1b2c3d4-e5f6-7890-abcd-1234567890ab
       启用: true
@@ -817,6 +924,44 @@
         仅格式显示: true
         仅格式提示词: true
 
+    - 正则名称: '[界面]前端界面状态栏'
+      id: b50d0bed-ff40-4a25-9ada-14feb4283324
+      启用: true
+      查找表达式: <StatusPlaceHolderImpl/>
+      内容: |-
+        ```
+        <body>
+        <script>
+        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/食为天/界面/状态栏/index.html')
+        </script>
+        </body>
+        ```
+      来源:
+        用户输入: false
+        AI输出: true
+      作用于:
+        仅格式显示: true
+        仅格式提示词: false
+
+    - 正则名称: '[界面]前端界面排名榜'
+      id: c61e1ced-ab50-4b36-9bdb-25fec5394435
+      启用: true
+      查找表达式: <LeaderboardPlaceHolderImpl/>
+      内容: |-
+        ```
+        <body>
+        <script>
+        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg/食为天/界面/排名榜/index.html')
+        </script>
+        </body>
+        ```
+      来源:
+        用户输入: false
+        AI输出: true
+      作用于:
+        仅格式显示: true
+        仅格式提示词: false
+
   酒馆助手:
     脚本库:
       - 名称: mvu
@@ -832,28 +977,12 @@
         类型: 脚本
         文件: 脚本\变量结构\index.ts
 
-      - 名称: 巡礼管理
+      - 名称: 主线管理
         id: a1b2c3d4-0001-0001-0001-000000000001
         启用: true
         类型: 脚本
-        文件: 脚本\巡礼管理\index.ts
-        介绍: 里程碑弹窗通知、NPC生命周期管理、NPC随机评分事件
-
-      - 名称: 逆袭管理
-        id: a1b2c3d4-0002-0002-0002-000000000002
-        启用: false
-        类型: 脚本
-        文件: 脚本\逆袭管理\index.ts
-        介绍: 清单进度里程碑弹窗、神秘人线索自动计数
-
-      - 名称: 随着开场白切换自动开启关闭世界书
-        id: 80ae1e03-e3bd-4bc5-8699-dc61ee9633a3
-        启用: true
-        类型: 脚本
-        文件: 脚本\随着开场白切换自动开启关闭世界书
-        介绍: |-
-          作者nancyindaeyo
-          二改唐初稚 原贴https://discord.com/channels/1291925535324110879/1369678524528726077
+        文件: 脚本\主线管理\index.ts
+        介绍: 根据开场白(swipe)索引自动切换世界书条目、挂载/卸载对应主线的脚本逻辑（里程碑通知、NPC管理、进度追踪等）
 
       - 名称: 小剧场渲染-新闻通讯
         id: d1e2f3a4-b5c6-7890-def0-abcdef123456

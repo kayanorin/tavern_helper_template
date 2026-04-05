@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* 排名榜主题 — 竞技暖金 */
+  --c-parchment: #fdf6ec;
+  --c-cream: #faf3e6;
+  --c-amber: #d4a849;
+  --c-amber-light: #f0dda0;
+  --c-terracotta: #c0603a;
+  --c-mahogany: #5c2e1e;
+  --c-brown-olive: #8a6c4f;
+  --c-sage: #a3b68e;
+  --c-charcoal: #3a3530;
+  --c-gold: #ffd700;
+  --c-silver: #c0c0c0;
+  --c-bronze: #cd7f32;
+  --c-inactive: #b8a899;
+
+  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-sans: 'Inter', 'Microsoft YaHei', sans-serif;
+}

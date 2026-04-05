@@ -1,4 +1,7 @@
-{{// 称号奖励概述条目 - 蓝灯常驻，用EJS matchChatMessages模拟绿灯，只在近期聊天提到某个称号时发送该称号的奖励描述}}
+<%_
+// 称号奖励概述条目 - 蓝灯常驻，只在近期聊天提到某个称号时发送该称号的奖励描述
+const 最近消息 = getChatMessages('-4--1').map(m => m.message).join(' ');
+_%>
 <% const 已有称号 = getvar('stat_data.巡礼.称号', { defaults: [] }); -%>
 <% if (已有称号.length > 0) { -%>
 <%
@@ -45,7 +48,7 @@ const 称号奖励 = {
   }
 };
 -%>
-<% const 提及的称号 = 已有称号.filter(t => matchChatMessages([t], { start: -4 })); -%>
+<% const 提及的称号 = 已有称号.filter(t => 最近消息.includes(t)); -%>
 <% if (提及的称号.length > 0) { -%>
 <称号奖励参考>
 <% for (const t of 提及的称号) { -%>

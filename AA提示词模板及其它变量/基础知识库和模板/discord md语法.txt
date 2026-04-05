@@ -1,0 +1,105 @@
+https://discord.com/channels/1291925535324110879/1426510405399744552
+#  一级标题
+##  二级标题
+### 三级标题
+
+1. *斜体*
+2. **粗体**
+3. ***粗斜体***
+
+- ~~删除线~~
+- __下划线__
+-#  小字
+
+> 引用
+||遮盖||
+`单行代码`
+
+```diff
+这是一个代码块
++这是新增的文本
+-这是删除的文本
+```
+
+[嵌入式超链接](https://claude.ai)
+
+## 多行引用：
+>>> 怎么
+换
+行
+都可以
+
+## 缩进：
+- 第一行
+- 第二行
+  - 第三行
+  - 第四行
+- 第五行
+
+```- 第一行
+- 第二行
+  - 第三行
+  - 第四行
+- 第五行
+```
+想缩进就多空两格，序号`1. `同理
+
+# 以及最好玩的，超链接变变变！
+
+-# [小链接](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`-# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+[芝士最普通的链接](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`[smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+### [三级标题链接](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`### [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+## [二级标题链接](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`## [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+# [一级标题链接](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+-# [***小字smaoking（粗斜体，星号写里面）***](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`-# [***smaoking***](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+***-# [小字smaoking（粗斜体，星号写外面）](https://discord.com/channels/1291925535324110879/1427639383317549198)***
+`***-# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)***`
+
+## [**标题加粗大概率无显示效果（看你用什么字体）smao**king](https://discord.com/channels/1291925535324110879/1427639383317549198)
+
+# 组合拳
+
+## 第一种写法：
+- -# [分点+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`- -# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+## 第二种写法：
+-# - [分点+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+（这样写上面的空行删不掉）
+`-# - [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+## 第三种写法（编不下去力）：
+-# • [分点+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`-# • [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+
+## 想让序号自动更新就写外面：
+1. -# [序号+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+1. -# [序号+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+- -# [序号+小字smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+```1. -# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+1. -# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+- -# [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)```
+
+## 换成大标题不行
+1. # [序号+大标题smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+- # [分点+大标题smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+井号在我这里会炸到外面去```1. # [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+- # [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)```
+## 换个顺序标题可以显示
+# 1. [大标题smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)
+# 3. [大标题smaoking（序号连接不上，要手动维护）](https://discord.com/channels/1291925535324110879/1427639383317549198)
+# - [分点+大标题smaoking（这个能用）](https://discord.com/channels/1291925535324110879/1427639383317549198)
+`# - [smaoking](https://discord.com/channels/1291925535324110879/1427639383317549198)`
+

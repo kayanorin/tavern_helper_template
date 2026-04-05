@@ -69,3 +69,5 @@
 $NPC榜单: {}
 </initvar>
 </UpdateVariable>
+<StatusPlaceHolderImpl/>
+<LeaderboardPlaceHolderImpl/>

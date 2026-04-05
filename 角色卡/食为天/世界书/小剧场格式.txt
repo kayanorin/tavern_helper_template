@@ -21,7 +21,14 @@ The outer `<section><details>` wrapper is generated automatically by the fronten
 - Use the world's calendar system for all dates
 - Incorporate world-specific terminology naturally (GMA, taste ranks, unique ingredients, etc.)
 
-## 4. General Quality Standards
+## 4. Quantity & Placement Rules
+- Each response may trigger AT MOST ONE type of small theater
+- Exception: `<food_review>` may contain multiple restaurants in a single response
+- All other types (`<social_post>`, `<news_bulletin>`, `<academic_paper>`, `<cooking>`, `<folklore>`) — only ONE instance per response
+- Small theater tags must be placed AFTER the main narrative text, never embedded within it
+- Write the full story/dialogue first, then append the small theater block at the end
+
+## 5. General Quality Standards
 - Vary writing styles based on character identity (chef vs. food critic vs. casual diner)
 - Keep content immersive — it should feel like a real artifact from this world
 - Avoid breaking the fourth wall or referencing the real world

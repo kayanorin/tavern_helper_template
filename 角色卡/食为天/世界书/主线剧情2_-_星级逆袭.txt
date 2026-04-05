@@ -1,7 +1,7 @@
 <%_ const 任务 = getvar('stat_data.逆袭.$当前任务', { defaults: 1 }); _%>
 <%_ const 清单完成数 = getvar('stat_data.逆袭._清单完成数', { defaults: 0 }); _%>
 <%_ const 经济状态 = getvar('stat_data.逆袭.经济状态', { defaults: '赤贫' }); _%>
-<%_ const 味阶 = getvar('stat_data.逆袭.当前味阶', { defaults: '启蒙之舌·初' }); _%>
+<%_ const 味阶 = getvar('stat_data.当前味阶', { defaults: '启蒙之舌·初' }); _%>
 <%_ const 任务一完成 = getvar('stat_data.逆袭._任务一完成', { defaults: 0 }); _%>
 <%_ const 任务二完成 = getvar('stat_data.逆袭._任务二完成', { defaults: 0 }); _%>
 <%_ const 任务三完成 = getvar('stat_data.逆袭._任务三完成', { defaults: 0 }); _%>

@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* 食为天主题 — 暖调厨房风 */
+  --c-parchment: #fdf6ec;       /* 底色：羊皮纸暖白 */
+  --c-cream: #faf3e6;           /* 卡片底色 */
+  --c-amber: #d4a849;           /* 高亮：琥珀金 */
+  --c-amber-light: #f0dda0;     /* 浅金：进度条底 */
+  --c-terracotta: #c0603a;      /* 重点：赤陶红 */
+  --c-mahogany: #5c2e1e;        /* 深色：文字、边框 */
+  --c-brown-olive: #8a6c4f;     /* 辅助：次要文字 */
+  --c-sage: #a3b68e;            /* 点缀：鼠尾草绿 */
+  --c-charcoal: #3a3530;        /* 超深色 */
+
+  /* 字体 */
+  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-sans: 'Inter', 'Microsoft YaHei', sans-serif;
+}
