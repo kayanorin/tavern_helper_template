@@ -10,14 +10,20 @@ const SWIPE_ACTIONS = {
     { uid: 2, state: false },
     { uid: 3, state: false },
     { uid: 4, state: false },
-    { uid: 5, state: false},
+    { uid: 5, state: false },
+    { uid: 29, state: true },   // 变量更新规则-主线1
+    { uid: 30, state: true },   // 变量输出格式-主线1
+    { uid: 31, state: true },   // 称号奖励概述-主线1
   ],
   1: [
     { uid: 1, state: false },
     { uid: 2, state: true },
     { uid: 3, state: false },
     { uid: 4, state: false },
-    { uid: 5, state: false},
+    { uid: 5, state: false },
+    { uid: 29, state: false },
+    { uid: 30, state: false },
+    { uid: 31, state: false },
   ],
   2: [
     { uid: 1, state: false },
@@ -25,6 +31,9 @@ const SWIPE_ACTIONS = {
     { uid: 3, state: true },
     { uid: 4, state: false },
     { uid: 5, state: false },
+    { uid: 29, state: false },
+    { uid: 30, state: false },
+    { uid: 31, state: false },
   ],
   3: [
     { uid: 1, state: false },
@@ -32,6 +41,9 @@ const SWIPE_ACTIONS = {
     { uid: 3, state: false },
     { uid: 4, state: true },
     { uid: 5, state: false },
+    { uid: 29, state: false },
+    { uid: 30, state: false },
+    { uid: 31, state: false },
   ],
   4: [
     { uid: 1, state: false },
@@ -39,6 +51,9 @@ const SWIPE_ACTIONS = {
     { uid: 3, state: false },
     { uid: 4, state: false },
     { uid: 5, state: true },
+    { uid: 29, state: false },
+    { uid: 30, state: false },
+    { uid: 31, state: false },
   ],
   5: [
     { uid: 1, state: false },
@@ -46,6 +61,9 @@ const SWIPE_ACTIONS = {
     { uid: 3, state: false },
     { uid: 4, state: false },
     { uid: 5, state: false },
+    { uid: 29, state: false },
+    { uid: 30, state: false },
+    { uid: 31, state: false },
   ],
 };
 // --- 脚本配置结束 ---
