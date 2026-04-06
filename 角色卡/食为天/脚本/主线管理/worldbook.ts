@@ -134,10 +134,21 @@ export async function updateWorldBookEntries(swipeIndex: number) {
 
   // 获取角色卡绑定的主要世界书
   const charWorldbooks = getCharWorldbookNames('current');
-  const lorebookName = charWorldbooks.primary;
+  // 智能推断世界书名称：首选 primary，其次 additional 的第一个，最后默认 '食为天'
+  let lorebookName = charWorldbooks.primary;
+
   if (!lorebookName) {
-    console.log('[主线管理] 当前角色卡没有绑定主要世界书，更新未执行');
-    toastr.info('当前角色卡没有绑定主要世界书，世界书条目更新未执行。');
+    if (charWorldbooks.additional && charWorldbooks.additional.length > 0) {
+      lorebookName = charWorldbooks.additional[0];
+    } else {
+      // 默认同名世界书
+      lorebookName = '地梨蛇思是好吃';
+    }
+  }
+
+  if (!lorebookName) {
+    console.log('[主线管理] 当前角色卡没有绑定任何世界书，更新未执行');
+    toastr.info('未找到绑定的世界书，条目更新未执行。');
     return;
   }
 
@@ -154,11 +165,11 @@ export async function updateWorldBookEntries(swipeIndex: number) {
 
     const entriesToModify: { uid: number; enabled: boolean }[] = [];
     for (const action of actions) {
-      const existingEntry = currentEntries.find(e => e.uid === action.uid);
+      const existingEntry = currentEntries.find(e => Number(e.uid) === Number(action.uid));
       if (existingEntry) {
         if (existingEntry.enabled !== action.state) {
           entriesToModify.push({
-            uid: existingEntry.uid,
+            uid: Number(existingEntry.uid),
             enabled: action.state,
           });
           console.log(
@@ -177,7 +188,7 @@ export async function updateWorldBookEntries(swipeIndex: number) {
       // 使用 updateWorldbookWith 批量更新条目
       await updateWorldbookWith(lorebookName, entries => {
         for (const mod of entriesToModify) {
-          const entry = entries.find(e => e.uid === mod.uid);
+          const entry = entries.find(e => Number(e.uid) === Number(mod.uid));
           if (entry) {
             entry.enabled = mod.enabled;
           }
@@ -202,7 +213,16 @@ export async function updateWorldBookEntries(swipeIndex: number) {
  */
 export async function showAllEntryUIDs() {
   const charWorldbooks = getCharWorldbookNames('current');
-  const lorebookName = charWorldbooks.primary;
+  let lorebookName = charWorldbooks.primary;
+  
+  if (!lorebookName) {
+    if (charWorldbooks.additional && charWorldbooks.additional.length > 0) {
+      lorebookName = charWorldbooks.additional[0];
+    } else {
+      lorebookName = '地梨蛇思是好吃';
+    }
+  }
+
   if (!lorebookName) {
     console.log('[主线管理] 当前角色卡没有绑定主要世界书');
     return;

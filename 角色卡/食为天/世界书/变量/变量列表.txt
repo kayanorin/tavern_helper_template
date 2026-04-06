@@ -1,4 +1,21 @@
 ---
 <status_current_variable>
-{{format_message_variable::stat_data}}
+当前味阶: {{getvar::stat_data.当前味阶}}
+
+<%_
+const 当前开场白编号 = Number(getvar('当前开场白编号', { defaults: -1 }));
+_%>
+<%_ if (当前开场白编号 === 0) { _%>
+巡礼:
+{{format_message_variable::stat_data.巡礼}}
+<%_ } else if (当前开场白编号 === 1) { _%>
+逆袭:
+{{format_message_variable::stat_data.逆袭}}
+<%_ } else if (当前开场白编号 === 2) { _%>
+传承:
+{{format_message_variable::stat_data.传承}}
+<%_ } else if (当前开场白编号 === 3) { _%>
+深渊:
+{{format_message_variable::stat_data.深渊}}
+<%_ } _%>
 </status_current_variable>

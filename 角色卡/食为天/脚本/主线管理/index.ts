@@ -70,6 +70,18 @@ let swipeMonitorInterval: ReturnType<typeof setInterval> | null = null;
 /** 初始化完成标记（抑制首次检测的重复通知） */
 let isInitialized = false;
 
+/**
+ * 将当前开场白编号同步到聊天级变量，供 EJS 世界书条目读取。
+ * 这不是 MVU 变量，不进入 stat_data，也不参与 schema 校验。
+ */
+async function syncCurrentSwipeVar(swipeIndex: number) {
+  try {
+    await execute(`/setvar key=当前开场白编号 as=number ${swipeIndex}`);
+  } catch (error) {
+    console.error('[主线管理] 同步当前开场白编号失败:', error);
+  }
+}
+
 // ═══════════════════════════════════════
 // Swipe 检测
 // ═══════════════════════════════════════
@@ -131,6 +143,9 @@ async function monitorSwipeChanges() {
 
       console.log(`[主线管理] 检测到swipe变化: ${oldIndex} → ${newSwipeIndex}`);
 
+      // 0~5 的开场白编号写入聊天级变量，供变量列表等 EJS 条目稳定读取
+      await syncCurrentSwipeVar(newSwipeIndex);
+
       if (isInitialized && oldIndex >= 0) {
         toastr.info(`开场白已切换到索引 ${newSwipeIndex}`, '自动检测');
       }
@@ -176,6 +191,8 @@ function resetState() {
   }
   // 停止监控
   stopSwipeMonitor();
+  // 清空当前开场白编号，避免切换聊天后的短暂旧值残留
+  void syncCurrentSwipeVar(-1);
   // 重置状态
   currentSwipeIndex = -1;
   isInitialized = false;

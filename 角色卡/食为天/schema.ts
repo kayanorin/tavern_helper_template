@@ -49,8 +49,9 @@ export const Schema = z.object({
           )
           .prefault({}),
       })
-      .prefault({} as any)
-  ).transform(data => {
+  )
+    .prefault({})
+    .transform(data => {
     // ═══ 自动计算区 ═══
 
     const _品鉴总数 = _.size(data.品鉴记录);
@@ -190,8 +191,9 @@ export const Schema = z.object({
         // 脚本管理：神秘人线索计数
         $神秘人线索数: z.coerce.number().prefault(0),
       })
-      .prefault({} as any)
-  ).transform(data => {
+  )
+    .prefault({})
+    .transform(data => {
     const _清单完成数 = _.size(data.清单进度);
     const _任务一完成 = _(data.清单进度)
       .values()
@@ -268,8 +270,9 @@ export const Schema = z.object({
 
         称号: z.array(z.string()).prefault([]),
       })
-      .prefault({} as any)
-  ).transform(data => {
+  )
+    .prefault({})
+    .transform(data => {
     const _碎片总数 = _.size(data.碎片记录);
     const _已融汇数 = _(data.碎片记录)
       .values()
@@ -344,8 +347,9 @@ export const Schema = z.object({
 
         称号: z.array(z.string()).prefault([]),
       })
-      .prefault({} as any)
-  ).transform(data => {
+  )
+    .prefault({})
+    .transform(data => {
     const _验证总数 = _.size(data.验证记录);
     const _复现总数 = data.复现技法.length;
 
