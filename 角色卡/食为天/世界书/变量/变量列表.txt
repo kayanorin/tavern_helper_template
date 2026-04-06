@@ -1,9 +1,20 @@
 ---
 <status_current_variable>
-当前味阶: {{getvar::stat_data.当前味阶}}
+当前味阶:  {{format_message_variable::stat_data.当前味阶}}
 
 <%_
-const 当前开场白编号 = Number(getvar('当前开场白编号', { defaults: -1 }));
+// 直接从 SillyTavern 聊天数据获取第一条消息的 swipe 索引（最可靠）
+// 回退: 脚本写入的 local 变量 → 默认 -1
+let 当前开场白编号 = -1;
+try {
+  const chat = SillyTavern.chat;
+  if (chat && chat[0] != null && chat[0].swipe_id != null) {
+    当前开场白编号 = Number(chat[0].swipe_id);
+  }
+} catch(e) {}
+if (当前开场白编号 < 0) {
+  当前开场白编号 = Number(getvar('当前开场白编号', { scope: 'local', noCache: true, defaults: -1 }));
+}
 _%>
 <%_ if (当前开场白编号 === 0) { _%>
 巡礼:

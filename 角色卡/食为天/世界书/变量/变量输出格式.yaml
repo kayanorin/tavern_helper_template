@@ -17,7 +17,6 @@
     - ${review quality assessment if applicable: ...}
     - ${determine city score 0~10 if new review: ...}
     - ${analyze in-scene NPC changes: ...}
-    - ${analyze reputation changes: ...}
     </Analysis>
     <JSONPatch>
     [

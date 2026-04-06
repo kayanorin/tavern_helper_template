@@ -21,3 +21,6 @@ node tavern_sync.mjs bundle [任务名]
 可以用 node tavern_sync.mjs -h 来获取更多帮助, 用 node tavern_sync.mjs 具体命令 -h 来获取具体命令的帮助.
 更新脚本
 node tavern_sync.mjs update
+
+# 全部打包
+pnpm build

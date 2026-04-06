@@ -158,24 +158,52 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 
 <style lang="scss" scoped>
 .leaderboard-card {
+  position: relative;
   width: 100%;
   max-width: 520px;
-  background: var(--c-cream);
-  border: 2px solid var(--c-mahogany);
-  border-radius: 10px;
+  background: var(--surface-linen);
+  border: 1px solid var(--c-panel-border);
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 6px 24px rgba(92, 46, 30, 0.15);
+  box-shadow:
+    0 20px 36px var(--c-fabric-shadow),
+    inset 0 1px 0 var(--c-panel-glow),
+    inset 0 -1px 0 rgba(122, 92, 69, 0.14);
   font-family: var(--font-sans);
   margin: 0 auto;
 }
 
+.leaderboard-card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--c-stitch);
+  border-radius: 12px;
+  opacity: 0.78;
+  pointer-events: none;
+}
+
 /* ─── 标题 ─── */
 .board-header {
-  background: linear-gradient(135deg, var(--c-mahogany), var(--c-terracotta));
-  padding: 14px 16px;
+  position: relative;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 40%),
+    linear-gradient(135deg, rgba(255, 248, 239, 0.92), rgba(225, 208, 183, 0.92)),
+    var(--surface-canvas);
+  padding: 16px 18px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px dashed rgba(148, 112, 82, 0.34);
+}
+
+.board-header::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 6px;
+  border-bottom: 1px dashed rgba(148, 112, 82, 0.3);
 }
 
 .header-left {
@@ -185,56 +213,96 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 }
 
 .trophy-icon {
-  font-size: 1.4rem;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    var(--surface-denim);
+  color: #fffef8;
+  font-size: 1rem;
+  box-shadow:
+    0 10px 18px rgba(66, 84, 58, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
 .board-title {
-  color: var(--c-amber-light);
+  color: var(--c-mahogany);
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 1rem;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
 }
 
 .contestant-count {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.75rem;
+  color: var(--c-ink-soft);
+  font-size: 0.78rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.12)),
+    var(--surface-canvas);
+  border: 1px solid rgba(184, 137, 83, 0.24);
 }
 
 /* ─── 排序栏 ─── */
 .sort-bar {
   display: flex;
-  padding: 8px 12px;
-  gap: 6px;
-  background: var(--c-parchment);
-  border-bottom: 1px solid var(--c-amber-light);
+  padding: 10px 14px 8px;
+  gap: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+    var(--surface-linen);
+  border-bottom: 1px solid rgba(184, 137, 83, 0.16);
 }
 
 .sort-btn {
-  padding: 4px 12px;
-  border: 1px solid var(--c-amber);
-  border-radius: 14px;
-  background: transparent;
-  color: var(--c-brown-olive);
+  padding: 6px 14px;
+  border: 1px dashed rgba(148, 112, 82, 0.38);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08)),
+    var(--surface-canvas);
+  color: var(--c-ink-soft);
   font-size: 0.78rem;
   font-family: var(--font-sans);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease,
+    background-position 0.22s ease;
   display: flex;
   align-items: center;
   gap: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 
   &:hover {
-    background: var(--c-amber-light);
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 8px 14px rgba(92, 46, 30, 0.08);
     color: var(--c-mahogany);
   }
 
+  &:active {
+    transform: translateY(1px);
+  }
+
   &.active {
-    background: var(--c-amber);
-    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)),
+      linear-gradient(135deg, #bb8e5f, #9a6b52);
+    color: #fffaf1;
     font-weight: 600;
-    border-color: var(--c-amber);
+    border-color: rgba(154, 107, 82, 0.62);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 10px 18px rgba(92, 46, 30, 0.12);
   }
 }
 
@@ -245,38 +313,64 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 
 /* ─── 排名列表 ─── */
 .entries-list {
-  padding: 6px 0;
+  padding: 8px 10px 6px;
 }
 
 .entry-row {
   display: flex;
   align-items: center;
-  padding: 10px 14px;
-  border-bottom: 1px solid rgba(212, 168, 73, 0.15);
-  transition: all 0.3s ease;
+  gap: 8px;
+  padding: 11px 12px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(184, 137, 83, 0.14);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.1)),
+    var(--surface-canvas);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    0 6px 14px rgba(92, 46, 30, 0.05);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease,
+    background-position 0.22s ease;
 
   &:hover {
-    background: rgba(212, 168, 73, 0.08);
+    transform: translateY(-1px);
+    filter: brightness(1.025);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.66),
+      0 14px 24px rgba(92, 46, 30, 0.09);
   }
 
   &:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
   }
 
   &.is-inactive {
-    opacity: 0.6;
+    opacity: 0.72;
   }
 
   &.rank-gold {
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, transparent 60%);
+    background:
+      linear-gradient(90deg, rgba(207, 171, 100, 0.22), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.1)),
+      var(--surface-canvas);
   }
 
   &.rank-silver {
-    background: linear-gradient(90deg, rgba(192, 192, 192, 0.08) 0%, transparent 60%);
+    background:
+      linear-gradient(90deg, rgba(185, 176, 164, 0.2), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.1)),
+      var(--surface-canvas);
   }
 
   &.rank-bronze {
-    background: linear-gradient(90deg, rgba(205, 127, 50, 0.08) 0%, transparent 60%);
+    background:
+      linear-gradient(90deg, rgba(183, 128, 94, 0.22), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.1)),
+      var(--surface-canvas);
   }
 }
 
@@ -287,12 +381,12 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 }
 
 .medal {
-  font-size: 1.3rem;
+  font-size: 1.18rem;
 }
 
 .rank-num {
   font-weight: 600;
-  color: var(--c-brown-olive);
+  color: var(--c-ink-soft);
   font-size: 0.85rem;
 }
 
@@ -308,27 +402,32 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
   font-weight: 600;
   font-family: var(--font-serif);
   color: var(--c-charcoal);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .status-badge {
-  font-size: 0.6rem;
-  padding: 1px 6px;
-  border-radius: 8px;
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 999px;
   font-weight: 600;
   flex-shrink: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.26);
 
   &.active {
-    background: var(--c-sage);
-    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0)),
+      var(--surface-denim);
+    color: #fffef8;
   }
 
   &.inactive {
-    background: var(--c-inactive);
-    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0)),
+      linear-gradient(135deg, #bca894, #a69380);
+    color: #fffaf3;
   }
 }
 
@@ -341,7 +440,7 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 
 .score-value {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--c-terracotta);
   font-variant-numeric: tabular-nums;
 }
@@ -364,24 +463,24 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
   font-variant-numeric: tabular-nums;
 
   &.up {
-    color: #4caf50;
+    color: #6f8867;
   }
 
   &.down {
-    color: #e53935;
+    color: #b26452;
   }
 
   &.neutral {
-    color: var(--c-brown-olive);
+    color: var(--c-ink-soft);
     font-weight: 400;
   }
 }
 
 /* ─── 空状态 ─── */
 .empty-state {
-  padding: 30px;
+  padding: 34px 20px;
   text-align: center;
-  color: var(--c-brown-olive);
+  color: var(--c-ink-soft);
 }
 
 .empty-icon {
@@ -393,29 +492,36 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 .empty-hint {
   font-size: 0.78rem;
   color: var(--c-inactive);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /* ─── 玩家信息 ─── */
 .player-section {
-  border-top: 2px solid var(--c-amber);
-  background: linear-gradient(135deg, var(--c-parchment), var(--c-cream));
-  padding: 10px 14px;
+  border-top: 1px dashed rgba(148, 112, 82, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08)),
+    var(--surface-canvas);
+  padding: 12px 14px 14px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 16px;
+  gap: 8px 12px;
 }
 
 .player-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 0.8rem;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: rgba(255, 252, 246, 0.36);
+  border: 1px solid rgba(184, 137, 83, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .player-label {
-  color: var(--c-brown-olive);
-  font-weight: 500;
+  color: var(--c-ink-soft);
+  font-weight: 600;
 }
 
 .player-value {
@@ -425,7 +531,7 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 
   &.highlight {
     color: var(--c-terracotta);
-    font-size: 0.95rem;
+    font-size: 0.98rem;
   }
 }
 
@@ -433,13 +539,13 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.24s ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateY(10px);
 }
 
 .list-leave-active {

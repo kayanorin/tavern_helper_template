@@ -56,7 +56,6 @@ C级管制。不许用于烹饪。
   $GMA关注度: 0
   黑市人脉: {}
   复现技法: []
-  称号: []
 </initvar>
 </UpdateVariable>
 <StatusPlaceHolderImpl/>

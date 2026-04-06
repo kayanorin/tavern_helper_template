@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -7,21 +7,75 @@
 }
 
 :root {
-  /* 排名榜主题 — 竞技暖金 */
-  --c-parchment: #fdf6ec;
-  --c-cream: #faf3e6;
-  --c-amber: #d4a849;
-  --c-amber-light: #f0dda0;
-  --c-terracotta: #c0603a;
-  --c-mahogany: #5c2e1e;
-  --c-brown-olive: #8a6c4f;
-  --c-sage: #a3b68e;
-  --c-charcoal: #3a3530;
-  --c-gold: #ffd700;
-  --c-silver: #c0c0c0;
-  --c-bronze: #cd7f32;
-  --c-inactive: #b8a899;
+  /* 亚麻 / 帆布主题 */
+  --c-parchment: #f5ede1;
+  --c-cream: #efe4d2;
+  --c-amber: #b88953;
+  --c-amber-light: #d8be97;
+  --c-terracotta: #b36f54;
+  --c-mahogany: #6a4a39;
+  --c-brown-olive: #8f7764;
+  --c-sage: #8f9d83;
+  --c-charcoal: #352c26;
+  --c-ink-soft: #5d4e44;
+  --c-gold: #cfab64;
+  --c-silver: #b9b0a4;
+  --c-bronze: #b7805e;
+  --c-inactive: #b7a491;
+  --c-thread: rgba(255, 250, 241, 0.72);
+  --c-thread-shadow: rgba(124, 91, 66, 0.2);
+  --c-stitch: rgba(148, 112, 82, 0.55);
+  --c-fabric-shadow: rgba(81, 54, 37, 0.16);
+  --c-fabric-shadow-strong: rgba(81, 54, 37, 0.24);
+  --c-panel-border: rgba(126, 90, 60, 0.45);
+  --c-panel-glow: rgba(255, 251, 245, 0.55);
+
+  --surface-linen:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0 1px,
+      rgba(0, 0, 0, 0.02) 1px 3px,
+      transparent 3px 8px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0 1px,
+      rgba(0, 0, 0, 0.025) 1px 2px,
+      transparent 2px 7px
+    ),
+    linear-gradient(135deg, #f7efe4, #ebdcc9);
+  --surface-canvas:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.045) 0 2px,
+      rgba(126, 90, 60, 0.035) 2px 4px,
+      transparent 4px 9px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03) 0 1px,
+      rgba(106, 74, 57, 0.035) 1px 3px,
+      transparent 3px 8px
+    ),
+    linear-gradient(135deg, #f1e4d2, #e5d3bc);
+  --surface-denim:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.055) 0 1px,
+      rgba(0, 0, 0, 0.025) 1px 3px,
+      transparent 3px 7px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0 1px,
+      rgba(0, 0, 0, 0.03) 1px 2px,
+      transparent 2px 6px
+    ),
+    linear-gradient(135deg, #7f9078, #6c7d67);
 
   --font-serif: 'Noto Serif SC', 'Georgia', serif;
-  --font-sans: 'Inter', 'Microsoft YaHei', sans-serif;
+  --font-sans: 'Source Sans 3', 'Microsoft YaHei', sans-serif;
 }

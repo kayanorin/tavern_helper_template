@@ -4,10 +4,10 @@ export const Schema = z.object({
   当前味阶: z.string().prefault('启蒙之舌·初'),
 
   // ═══ 主线1: 百城百味巡礼 ═══
-  巡礼: z.preprocess(
-    val => val ?? {},
-    z
-      .object({
+  巡礼: z
+    .preprocess(
+      val => val ?? {},
+      z.object({
         $当前阶段: z.coerce
           .number()
           .transform(v => _.clamp(Math.floor(v), 1, 3))
@@ -48,80 +48,76 @@ export const Schema = z.object({
             }),
           )
           .prefault({}),
-      })
-  )
+      }),
+    )
     .prefault({})
     .transform(data => {
-    // ═══ 自动计算区 ═══
+      // ═══ 自动计算区 ═══
 
-    const _品鉴总数 = _.size(data.品鉴记录);
+      const _品鉴总数 = _.size(data.品鉴记录);
 
-    // 玩家总评分 = 所有城市分之和
-    const _总评分 = _(data.品鉴记录)
-      .values()
-      .sumBy(r => r.城市分);
+      // 玩家总评分 = 所有城市分之和
+      const _总评分 = _(data.品鉴记录)
+        .values()
+        .sumBy(r => r.城市分);
 
-    // 各大区品鉴城市数
-    const _大区进度 = _(data.品鉴记录)
-      .values()
-      .groupBy('大区')
-      .mapValues(cities => cities.length)
-      .value() as Record<string, number>;
+      // 各大区品鉴城市数
+      const _大区进度 = _(data.品鉴记录)
+        .values()
+        .groupBy('大区')
+        .mapValues(cities => cities.length)
+        .value() as Record<string, number>;
 
-    // 阶段自动推进（不回退）
-    let $当前阶段 = data.$当前阶段;
-    if (_品鉴总数 >= 20 && $当前阶段 < 3) $当前阶段 = 3;
-    else if (_品鉴总数 >= 8 && $当前阶段 < 2) $当前阶段 = 2;
+      // 阶段自动推进（不回退）
+      let $当前阶段 = data.$当前阶段;
+      if (_品鉴总数 >= 20 && $当前阶段 < 3) $当前阶段 = 3;
+      else if (_品鉴总数 >= 8 && $当前阶段 < 2) $当前阶段 = 2;
 
-    // ═══ 自动称号 ═══
-    const 自动称号: string[] = [];
+      // ═══ 自动称号 ═══
+      const 自动称号: string[] = [];
 
-    // 里程碑称号
-    const 里程碑表: [number, string][] = [
-      [3, '初味行者'],
-      [6, '十城漫步'],
-      [12, '百味巡礼者'],
-      [18, '味觉探索家'],
-      [24, '百城半程'],
-      [30, '品鉴大师'],
-      [34, '味觉传奇'],
-      [36, '百城百味・完'],
-    ];
-    for (const [阈值, 称号名] of 里程碑表) {
-      if (_品鉴总数 >= 阈值) 自动称号.push(称号名);
-    }
-
-    // 大区完成称号（≥5城）
-    for (const [区名, 数量] of _.entries(_大区进度)) {
-      if (数量 >= 5) 自动称号.push(`${区名}品鉴家`);
-    }
-
-    // 专题完成称号
-    for (const [专题名, 专题] of _.entries(data.专题品鉴)) {
-      if (专题.已完成.length >= 专题.目标数) {
-        自动称号.push(`${专题名}达人`);
+      // 里程碑称号
+      const 里程碑表: [number, string][] = [
+        [3, '初味行者'],
+        [6, '风味漫步'],
+        [12, '百味巡礼者'],
+        [18, '巡礼半程'],
+        [24, '味觉探索家'],
+        [30, '品鉴大师'],
+        [34, '味觉传奇'],
+        [36, '百城百味・完'],
+      ];
+      for (const [阈值, 称号名] of 里程碑表) {
+        if (_品鉴总数 >= 阈值) 自动称号.push(称号名);
       }
-    }
 
-    // 合并：自动称号在前，手动称号在后，去重
-    const 称号 = _.uniq([
-      ...自动称号,
-      ...data.称号.filter(t => !自动称号.includes(t)),
-    ]);
+      // 大区完成称号（≥5城）
+      for (const [区名, 数量] of _.entries(_大区进度)) {
+        if (数量 >= 5) 自动称号.push(`${区名}品鉴家`);
+      }
 
-    const _阶段描述 =
-      $当前阶段 === 1 ? '初见' : $当前阶段 === 2 ? '深入' : '回响';
+      // 专题完成称号
+      for (const [专题名, 专题] of _.entries(data.专题品鉴)) {
+        if (专题.已完成.length >= 专题.目标数) {
+          自动称号.push(`${专题名}达人`);
+        }
+      }
 
-    return {
-      ...data,
-      $当前阶段,
-      称号,
-      _品鉴总数,
-      _总评分,
-      _大区进度,
-      _阶段描述,
-    };
-  }),
+      // 合并：自动称号在前，手动称号在后，去重
+      const 称号 = _.uniq([...自动称号, ...data.称号.filter(t => !自动称号.includes(t))]);
+
+      const _阶段描述 = $当前阶段 === 1 ? '初见' : $当前阶段 === 2 ? '深入' : '回响';
+
+      return {
+        ...data,
+        $当前阶段,
+        称号,
+        _品鉴总数,
+        _总评分,
+        _大区进度,
+        _阶段描述,
+      };
+    }),
 
   // $前缀 → 对AI完全隐藏，由脚本全权管理
   $NPC榜单: z
@@ -145,10 +141,10 @@ export const Schema = z.object({
     .prefault({}),
 
   // ═══ 主线2: 星级逆袭 ═══
-  逆袭: z.preprocess(
-    val => val ?? {},
-    z
-      .object({
+  逆袭: z
+    .preprocess(
+      val => val ?? {},
+      z.object({
         $当前任务: z.coerce
           .number()
           .transform(v => _.clamp(Math.floor(v), 1, 3))
@@ -170,9 +166,7 @@ export const Schema = z.object({
           .prefault({}),
 
         // 模糊经济等级
-        经济状态: z
-          .enum(['赤贫', '拮据', '温饱', '小康', '富裕'])
-          .prefault('赤贫'),
+        经济状态: z.enum(['赤贫', '拮据', '温饱', '小康', '富裕']).prefault('赤贫'),
 
         // 笔记本资源
         笔记本线索: z
@@ -190,52 +184,47 @@ export const Schema = z.object({
 
         // 脚本管理：神秘人线索计数
         $神秘人线索数: z.coerce.number().prefault(0),
-      })
-  )
+      }),
+    )
     .prefault({})
     .transform(data => {
-    const _清单完成数 = _.size(data.清单进度);
-    const _任务一完成 = _(data.清单进度)
-      .values()
-      .filter(r => r.任务段 === 1)
-      .size();
-    const _任务二完成 = _(data.清单进度)
-      .values()
-      .filter(r => r.任务段 === 2)
-      .size();
-    const _任务三完成 = _(data.清单进度)
-      .values()
-      .filter(r => r.任务段 === 3)
-      .size();
+      const _清单完成数 = _.size(data.清单进度);
+      const _任务一完成 = _(data.清单进度)
+        .values()
+        .filter(r => r.任务段 === 1)
+        .size();
+      const _任务二完成 = _(data.清单进度)
+        .values()
+        .filter(r => r.任务段 === 2)
+        .size();
+      const _任务三完成 = _(data.清单进度)
+        .values()
+        .filter(r => r.任务段 === 3)
+        .size();
 
-    // 阶段自动推进（不回退）
-    let $当前任务 = data.$当前任务;
-    if (_任务一完成 >= 7 && $当前任务 < 2) $当前任务 = 2;
-    if (_任务二完成 >= 7 && $当前任务 < 3) $当前任务 = 3;
+      // 阶段自动推进（不回退）
+      let $当前任务 = data.$当前任务;
+      if (_任务一完成 >= 7 && $当前任务 < 2) $当前任务 = 2;
+      if (_任务二完成 >= 7 && $当前任务 < 3) $当前任务 = 3;
 
-    const _任务描述 =
-      $当前任务 === 1
-        ? '经济的门槛'
-        : $当前任务 === 2
-          ? '阶级的围墙'
-          : '时间与命运的壁垒';
+      const _任务描述 = $当前任务 === 1 ? '经济的门槛' : $当前任务 === 2 ? '阶级的围墙' : '时间与命运的壁垒';
 
-    return {
-      ...data,
-      $当前任务,
-      _清单完成数,
-      _任务一完成,
-      _任务二完成,
-      _任务三完成,
-      _任务描述,
-    };
-  }),
+      return {
+        ...data,
+        $当前任务,
+        _清单完成数,
+        _任务一完成,
+        _任务二完成,
+        _任务三完成,
+        _任务描述,
+      };
+    }),
 
   // ═══ 主线3: 星辰厨房的传承 ═══
-  传承: z.preprocess(
-    val => val ?? {},
-    z
-      .object({
+  传承: z
+    .preprocess(
+      val => val ?? {},
+      z.object({
         $当前阶段: z.coerce
           .number()
           .transform(v => _.clamp(Math.floor(v), 1, 3))
@@ -267,40 +256,37 @@ export const Schema = z.object({
             }),
           )
           .prefault({}),
-
-        称号: z.array(z.string()).prefault([]),
-      })
-  )
+      }),
+    )
     .prefault({})
     .transform(data => {
-    const _碎片总数 = _.size(data.碎片记录);
-    const _已融汇数 = _(data.碎片记录)
-      .values()
-      .filter(r => r.已融汇)
-      .size();
+      const _碎片总数 = _.size(data.碎片记录);
+      const _已融汇数 = _(data.碎片记录)
+        .values()
+        .filter(r => r.已融汇)
+        .size();
 
-    // 阶段自动推进（不回退）：≥3 → 游历，≥9 → 融汇
-    let $当前阶段 = data.$当前阶段;
-    if (_碎片总数 >= 9 && $当前阶段 < 3) $当前阶段 = 3;
-    else if (_碎片总数 >= 3 && $当前阶段 < 2) $当前阶段 = 2;
+      // 阶段自动推进（不回退）：≥3 → 游历，≥9 → 融汇
+      let $当前阶段 = data.$当前阶段;
+      if (_碎片总数 >= 9 && $当前阶段 < 3) $当前阶段 = 3;
+      else if (_碎片总数 >= 3 && $当前阶段 < 2) $当前阶段 = 2;
 
-    const _阶段描述 =
-      $当前阶段 === 1 ? '学徒' : $当前阶段 === 2 ? '游历' : '融汇';
+      const _阶段描述 = $当前阶段 === 1 ? '学徒' : $当前阶段 === 2 ? '游历' : '融汇';
 
-    return {
-      ...data,
-      $当前阶段,
-      _碎片总数,
-      _已融汇数,
-      _阶段描述,
-    };
-  }),
+      return {
+        ...data,
+        $当前阶段,
+        _碎片总数,
+        _已融汇数,
+        _阶段描述,
+      };
+    }),
 
   // ═══ 主线4: 深渊厨房的低语 ═══
-  深渊: z.preprocess(
-    val => val ?? {},
-    z
-      .object({
+  深渊: z
+    .preprocess(
+      val => val ?? {},
+      z.object({
         $当前阶段: z.coerce
           .number()
           .transform(v => _.clamp(Math.floor(v), 1, 3))
@@ -344,37 +330,33 @@ export const Schema = z.object({
 
         // 复现的古代技法（阶段2核心目标）
         复现技法: z.array(z.string()).prefault([]),
-
-        称号: z.array(z.string()).prefault([]),
-      })
-  )
+      }),
+    )
     .prefault({})
     .transform(data => {
-    const _验证总数 = _.size(data.验证记录);
-    const _复现总数 = data.复现技法.length;
+      const _验证总数 = _.size(data.验证记录);
+      const _复现总数 = data.复现技法.length;
 
-    // 阶段自动推进（不回退）：≥3 → 挑战，≥7 → 抉择
-    let $当前阶段 = data.$当前阶段;
-    if (_验证总数 >= 7 && $当前阶段 < 3) $当前阶段 = 3;
-    else if (_验证总数 >= 3 && $当前阶段 < 2) $当前阶段 = 2;
+      // 阶段自动推进（不回退）：≥3 → 挑战，≥7 → 抉择
+      let $当前阶段 = data.$当前阶段;
+      if (_验证总数 >= 7 && $当前阶段 < 3) $当前阶段 = 3;
+      else if (_验证总数 >= 3 && $当前阶段 < 2) $当前阶段 = 2;
 
-    // GMA关注度→描述性等级
-    const gma = data.$GMA关注度;
-    const _GMA态度 =
-      gma < 20 ? '无视' : gma < 40 ? '留意' : gma < 60 ? '关注' : gma < 80 ? '监控' : '干预';
+      // GMA关注度→描述性等级
+      const gma = data.$GMA关注度;
+      const _GMA态度 = gma < 20 ? '无视' : gma < 40 ? '留意' : gma < 60 ? '关注' : gma < 80 ? '监控' : '干预';
 
-    const _阶段描述 =
-      $当前阶段 === 1 ? '质疑' : $当前阶段 === 2 ? '挑战' : '抉择';
+      const _阶段描述 = $当前阶段 === 1 ? '质疑' : $当前阶段 === 2 ? '挑战' : '抉择';
 
-    return {
-      ...data,
-      $当前阶段,
-      _验证总数,
-      _复现总数,
-      _GMA态度,
-      _阶段描述,
-    };
-  }),
+      return {
+        ...data,
+        $当前阶段,
+        _验证总数,
+        _复现总数,
+        _GMA态度,
+        _阶段描述,
+      };
+    }),
 });
 
 export type Schema = z.output<typeof Schema>;
