@@ -27,10 +27,10 @@ import { init as initQuest1 } from './quest1';
 import { init as initQuest2 } from './quest2';
 import { init as initQuest3 } from './quest3';
 import { init as initQuest4 } from './quest4';
-import { updateWorldBookEntries, showAllEntryUIDs } from './worldbook';
+import { showAllEntryUIDs, updateWorldBookEntries } from './worldbook';
 
 const LEADERBOARD_BUTTON_NAME = '主线一专用·排名榜';
-const LEADERBOARD_BUTTON_COMMAND = '/sys compact=true <LeaderboardPlaceHolderImpl/>';
+const LEADERBOARD_BUTTON_COMMAND = '/send <LeaderboardPlaceHolderImpl/>';
 
 // ═══════════════════════════════════════
 // 主线调度配置
@@ -41,19 +41,19 @@ const LEADERBOARD_BUTTON_COMMAND = '/sys compact=true <LeaderboardPlaceHolderImp
  * null 表示该 swipe 没有需要启动的脚本逻辑（只切换世界书）。
  */
 const SWIPE_QUEST_MAP: Record<number, string | null> = {
-  0: 'quest1',   // 百城百味巡礼
-  1: 'quest2',   // 星级逆袭
-  2: 'quest3',   // 星辰厨房的传承
-  3: 'quest4',   // 深渊厨房的低语
-  4: null,       // 主线5
-  5: null,       // 自由模式
+  0: 'quest1', // 百城百味巡礼
+  1: 'quest2', // 星级逆袭
+  2: 'quest3', // 星辰厨房的传承
+  3: 'quest4', // 深渊厨房的低语
+  4: null, // 主线5
+  5: null, // 自由模式
 };
 
 /**
  * 主线标识 → 初始化函数映射。
  * 每个 init 函数返回 cleanup 函数。
  */
-const QUEST_INITIALIZERS: Record<string, () => (() => void)> = {
+const QUEST_INITIALIZERS: Record<string, () => () => void> = {
   quest1: initQuest1,
   quest2: initQuest2,
   quest3: initQuest3,
@@ -92,9 +92,7 @@ function ensureLeaderboardButton() {
 function updateLeaderboardButtonVisibility(swipeIndex: number) {
   updateScriptButtonsWith(buttons =>
     buttons.map(button =>
-      button.name === LEADERBOARD_BUTTON_NAME
-        ? { ...button, visible: swipeIndex === 0 }
-        : button,
+      button.name === LEADERBOARD_BUTTON_NAME ? { ...button, visible: swipeIndex === 0 } : button,
     ),
   );
 }
