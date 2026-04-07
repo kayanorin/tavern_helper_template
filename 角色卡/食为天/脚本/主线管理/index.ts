@@ -29,6 +29,9 @@ import { init as initQuest3 } from './quest3';
 import { init as initQuest4 } from './quest4';
 import { updateWorldBookEntries, showAllEntryUIDs } from './worldbook';
 
+const LEADERBOARD_BUTTON_NAME = '主线一专用·排名榜';
+const LEADERBOARD_BUTTON_COMMAND = '/sys compact=true <LeaderboardPlaceHolderImpl/>';
+
 // ═══════════════════════════════════════
 // 主线调度配置
 // ═══════════════════════════════════════
@@ -76,10 +79,24 @@ let isInitialized = false;
  */
 async function syncCurrentSwipeVar(swipeIndex: number) {
   try {
-    await execute(`/setvar key=当前开场白编号 as=number ${swipeIndex}`);
+    await triggerSlash(`/setvar key=当前开场白编号 as=number ${swipeIndex}`);
   } catch (error) {
     console.error('[主线管理] 同步当前开场白编号失败:', error);
   }
+}
+
+function ensureLeaderboardButton() {
+  appendInexistentScriptButtons([{ name: LEADERBOARD_BUTTON_NAME, visible: false }]);
+}
+
+function updateLeaderboardButtonVisibility(swipeIndex: number) {
+  updateScriptButtonsWith(buttons =>
+    buttons.map(button =>
+      button.name === LEADERBOARD_BUTTON_NAME
+        ? { ...button, visible: swipeIndex === 0 }
+        : button,
+    ),
+  );
 }
 
 // ═══════════════════════════════════════
@@ -150,10 +167,13 @@ async function monitorSwipeChanges() {
         toastr.info(`开场白已切换到索引 ${newSwipeIndex}`, '自动检测');
       }
 
-      // 1) 更新世界书条目
+      // 1) 切换巡礼专属按钮
+      updateLeaderboardButtonVisibility(newSwipeIndex);
+
+      // 2) 更新世界书条目
       await updateWorldBookEntries(newSwipeIndex);
 
-      // 2) 切换主线脚本逻辑
+      // 3) 切换主线脚本逻辑
       switchQuestModule(newSwipeIndex);
     }
   } catch (error) {
@@ -191,6 +211,7 @@ function resetState() {
   }
   // 停止监控
   stopSwipeMonitor();
+  updateLeaderboardButtonVisibility(-1);
   // 清空当前开场白编号，避免切换聊天后的短暂旧值残留
   void syncCurrentSwipeVar(-1);
   // 重置状态
@@ -205,40 +226,47 @@ function resetState() {
 await waitGlobalInitialized('Mvu');
 
 $(() => {
-  console.log('[主线管理] 脚本已加载');
-  toastr.success('主线管理脚本已激活', '脚本激活');
+  void (async () => {
+    console.log('[主线管理] 脚本已加载');
+    toastr.success('主线管理脚本已激活', '脚本激活');
 
-  // 调试：输出世界书 UID 信息
-  showAllEntryUIDs();
+    ensureLeaderboardButton();
+    eventOn(getButtonEvent(LEADERBOARD_BUTTON_NAME), () => {
+      void triggerSlash(LEADERBOARD_BUTTON_COMMAND);
+    });
 
-  // 监听 MESSAGE_SWIPED 事件（即时响应用户手动切换）
-  eventOn(tavern_events.MESSAGE_SWIPED, (messageId: number) => {
-    if (messageId === 0) {
-      monitorSwipeChanges();
-    }
-  });
+    // 调试：输出世界书 UID 信息
+    showAllEntryUIDs();
 
-  // 监听 CHAT_CHANGED 事件（切换聊天窗口时重新初始化）
-  eventOn(tavern_events.CHAT_CHANGED, () => {
-    console.log('[主线管理] 检测到聊天切换，重新初始化...');
-    resetState();
-    // 延迟后重新检测（等聊天内容加载完成）
-    setTimeout(() => {
-      startSwipeMonitor();
-      monitorSwipeChanges().then(() => {
-        isInitialized = true;
-      });
+    // 监听 MESSAGE_SWIPED 事件（即时响应用户手动切换）
+    eventOn(tavern_events.MESSAGE_SWIPED, (messageId: number) => {
+      if (messageId === 0) {
+        monitorSwipeChanges();
+      }
+    });
+
+    // 监听 CHAT_CHANGED 事件（切换聊天窗口时重新初始化）
+    eventOn(tavern_events.CHAT_CHANGED, () => {
+      console.log('[主线管理] 检测到聊天切换，重新初始化...');
+      resetState();
+      // 延迟后重新检测（等聊天内容加载完成）
+      setTimeout(() => {
+        startSwipeMonitor();
+        monitorSwipeChanges().then(() => {
+          isInitialized = true;
+        });
+      }, 1000);
+    });
+
+    // 启动监控
+    startSwipeMonitor();
+
+    // 初始化检测（延迟确保聊天已加载）
+    setTimeout(async () => {
+      await monitorSwipeChanges();
+      isInitialized = true;
     }, 1000);
-  });
-
-  // 启动监控
-  startSwipeMonitor();
-
-  // 初始化检测（延迟确保聊天已加载）
-  setTimeout(async () => {
-    await monitorSwipeChanges();
-    isInitialized = true;
-  }, 1000);
+  })();
 });
 
 // 脚本卸载清理

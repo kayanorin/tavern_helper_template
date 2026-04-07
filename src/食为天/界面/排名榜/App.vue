@@ -1,5 +1,5 @@
 <template>
-  <div class="leaderboard-card">
+  <div v-if="isQuest1Active" class="leaderboard-card">
     <!-- 标题栏 -->
     <div class="board-header">
       <div class="header-left">
@@ -112,6 +112,7 @@ const sortOptions: { id: SortField; label: string }[] = [
 
 const currentSort = useLocalStorage<SortField>('swt_leaderboard:sort', 'score');
 const sortAsc = useLocalStorage<boolean>('swt_leaderboard:asc', false);
+const currentSwipeIndex = ref(-1);
 
 function toggleSort(field: SortField) {
   if (currentSort.value === field) {
@@ -127,6 +128,47 @@ interface LeaderboardEntry {
   评分: number;
   离场楼层: number;
   recentDelta: number;
+}
+
+const isQuest1Active = computed(() => currentSwipeIndex.value === 0);
+
+function readSwipeFromChat(): number {
+  try {
+    const chat = (window as any).SillyTavern?.chat;
+    const swipeId = Number(chat?.[0]?.swipe_id);
+    if (Number.isFinite(swipeId) && swipeId >= 0) {
+      return swipeId;
+    }
+  } catch (error) {
+    console.warn('[排名榜] 读取当前开场白失败:', error);
+  }
+
+  try {
+    const fallback = Number(
+      (window as any).getvar?.('当前开场白编号', {
+        scope: 'local',
+        noCache: true,
+        defaults: -1,
+      }),
+    );
+    if (Number.isFinite(fallback) && fallback >= 0) {
+      return fallback;
+    }
+  } catch (error) {
+    console.warn('[排名榜] 读取回退开场白变量失败:', error);
+  }
+
+  return -1;
+}
+
+function syncCurrentSwipe() {
+  currentSwipeIndex.value = readSwipeFromChat();
+}
+
+function syncAfterChatChange() {
+  syncCurrentSwipe();
+  window.setTimeout(syncCurrentSwipe, 120);
+  window.setTimeout(syncCurrentSwipe, 600);
 }
 
 const sortedEntries = computed<LeaderboardEntry[]>(() => {
@@ -153,6 +195,20 @@ const sortedEntries = computed<LeaderboardEntry[]>(() => {
   );
 
   return sorted;
+});
+
+onMounted(() => {
+  syncAfterChatChange();
+
+  eventOn(tavern_events.MESSAGE_SWIPED, (messageId: number) => {
+    if (messageId === 0) {
+      syncCurrentSwipe();
+    }
+  });
+
+  eventOn(tavern_events.CHAT_CHANGED, () => {
+    syncAfterChatChange();
+  });
 });
 </script>
 
