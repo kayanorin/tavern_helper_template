@@ -1,13 +1,12 @@
 <%_
 // 味阶详细条目 - 蓝灯常驻,用EJS getChatMessages模拟绿灯,按序列精确发送
-const 最近消息_味阶详细 = getChatMessages('-4--1').map(m => m.message).join(' ');
-const 通用匹配_味阶详细 = ['味阶', '阶位', '等级'].some(k => 最近消息_味阶详细.includes(k));
+const 通用匹配_味阶详细 = matchChatMessages(['味阶', '阶位', '等级'], { start: -4 });
 const 匹配_味阶详细 = {
-  启蒙: ['启蒙之舌', '第一序列'].some(k => 最近消息_味阶详细.includes(k)),
-  辨味: ['辨味之心', '第二序列'].some(k => 最近消息_味阶详细.includes(k)),
-  感知: ['感知之灵', '第三序列'].some(k => 最近消息_味阶详细.includes(k)),
-  共鸣: ['共鸣之魂', '第四序列'].some(k => 最近消息_味阶详细.includes(k)),
-  法理: ['法理之口', '第五序列'].some(k => 最近消息_味阶详细.includes(k)),
+  启蒙: matchChatMessages(['启蒙之舌', '第一序列'], { start: -4 }),
+  辨味: matchChatMessages(['辨味之心', '第二序列'], { start: -4 }),
+  感知: matchChatMessages(['感知之灵', '第三序列'], { start: -4 }),
+  共鸣: matchChatMessages(['共鸣之魂', '第四序列'], { start: -4 }),
+  法理: matchChatMessages(['法理之口', '第五序列'], { start: -4 }),
 };
 const 有具体匹配_味阶详细 = Object.values(匹配_味阶详细).some(Boolean);
 _%>

@@ -1,13 +1,12 @@
 <%_
 // 节日庆典条目 - 保持绿灯,核心原则和生成指导固定发送,各节日详情按需发送
-const 最近消息_节日庆典 = getChatMessages('-4--1').map(m => m.message).join(' ');
 const 匹配节日_节日庆典 = {
-  初味节: ['初味节', '岁味料理', '辞旧迎新'].some(k => 最近消息_节日庆典.includes(k)),
-  丰收感恩节: ['丰收感恩节', '丰收', '百家宴'].some(k => 最近消息_节日庆典.includes(k)),
-  厨师之日: ['厨师之日', '出师', '收徒'].some(k => 最近消息_节日庆典.includes(k)),
-  点评家诞辰: ['点评家诞辰', '年度档案'].some(k => 最近消息_节日庆典.includes(k)),
-  百食祭: ['百食祭', '美食节', '半价'].some(k => 最近消息_节日庆典.includes(k)),
-  潮汐之仪: ['潮汐之仪', '潮汐', '女性庆典'].some(k => 最近消息_节日庆典.includes(k)),
+  初味节: matchChatMessages(['初味节', '岁味料理', '辞旧迎新'], { start: -4 }),
+  丰收感恩节: matchChatMessages(['丰收感恩节', '丰收', '百家宴'], { start: -4 }),
+  厨师之日: matchChatMessages(['厨师之日', '出师', '收徒'], { start: -4 }),
+  点评家诞辰: matchChatMessages(['点评家诞辰', '年度档案'], { start: -4 }),
+  百食祭: matchChatMessages(['百食祭', '美食节', '半价'], { start: -4 }),
+  潮汐之仪: matchChatMessages(['潮汐之仪', '潮汐', '女性庆典'], { start: -4 }),
 };
 _%>
 <world_info_festivals>
