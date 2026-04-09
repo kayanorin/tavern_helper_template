@@ -830,6 +830,23 @@
         仅格式显示: true
         仅格式提示词: false
 
+    - 正则名称: '[折叠]完整变量更新'
+      id: 06dec31f-c0a9-456c-8b88-1f9176a73039
+      启用: true
+      查找表达式: /<update(?:variable)?>\s*(.*)\s*<\/update(?:variable)?>/gsi
+      内容: |-
+        <details>
+        <summary>变量更新情况</summary>
+        $1
+        </details>
+      来源:
+        用户输入: true
+        AI输出: true
+      作用于:
+        仅格式显示: true
+        仅格式提示词: false
+      最小深度: 5
+
     - 正则名称: '[美化]完整变量更新'
       id: 06dec31f-c0a9-456c-8b88-1f9176a73039
       启用: true
@@ -841,6 +858,7 @@
       作用于:
         仅格式显示: true
         仅格式提示词: false
+      最大深度: 5
 
     - 正则名称: 隐藏新闻通讯数据
       id: a1b2c3d4-e5f6-7890-abcd-1234567890ab

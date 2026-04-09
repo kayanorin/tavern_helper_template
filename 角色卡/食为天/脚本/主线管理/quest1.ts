@@ -14,9 +14,9 @@
 // 配置项
 // ═══════════════════════════════════════
 
-/** NPC随机评分触发概率 (0~1) */
-const NPC_SCORE_PROBABILITY = 0.3;
-/** NPC单次加分上限 */
+/** NPC随机评分触发概率 (0~1)，控制在20%以下避免离场NPC加分过快 */
+const NPC_SCORE_PROBABILITY = 0.15;
+/** NPC单次加分上限（硬性上限为10） */
 const NPC_SCORE_MAX_PER_EVENT = 8;
 /** NPC单次加分下限 */
 const NPC_SCORE_MIN_PER_EVENT = 1;
@@ -27,7 +27,9 @@ const NPC_SELECT_MAX = 3;
 const NPC_ON_REVIEW_SELECT_MIN = 2;
 const NPC_ON_REVIEW_SELECT_MAX = 4;
 const NPC_ON_REVIEW_SCORE_MIN = 3;
-const NPC_ON_REVIEW_SCORE_MAX = 12;
+const NPC_ON_REVIEW_SCORE_MAX = 8;
+/** NPC单次积分变动硬性上限，无论来源均不超过此值 */
+const NPC_SCORE_HARD_CAP = 10;
 /** NPC"活跃"判定——离场楼层与当前楼层差值在此范围内仍视为近期活跃 */
 const NPC_RECENT_FLOOR_RANGE = 10;
 
@@ -54,12 +56,14 @@ const GMA_NOTICES: Record<string, string> = {
  * 给指定NPC加分并记录历史
  */
 function applyNPCScore(variables: any, npcName: string, delta: number, floor: number) {
+  // 硬性上限：确保单次积分变动不超过 NPC_SCORE_HARD_CAP
+  const clampedDelta = Math.min(delta, NPC_SCORE_HARD_CAP);
   const basePath = `stat_data.$NPC榜单.${npcName}`;
   const currentScore: number = _.get(variables, `${basePath}.评分`) ?? 0;
-  _.set(variables, `${basePath}.评分`, currentScore + delta);
+  _.set(variables, `${basePath}.评分`, currentScore + clampedDelta);
 
   const history: any[] = _.get(variables, `${basePath}.评分历史`) ?? [];
-  history.push({ 变化: delta, 楼层: floor });
+  history.push({ 变化: clampedDelta, 楼层: floor });
   // schema 的 transform 会限制为 20 条，这里做预处理
   _.set(variables, `${basePath}.评分历史`, _.takeRight(history, 20));
 }
@@ -164,7 +168,7 @@ export function init(): () => void {
     const hasNewReview = _.size(newReviews) > _.size(oldReviews);
 
     if (hasNewReview) {
-      // 玩家发表食评 → 同期竞争加分
+      // 玩家发表食评 → 同期竞争加分（互斥：有食评加分时不再进行随机加分）
       const count = _.random(NPC_ON_REVIEW_SELECT_MIN, NPC_ON_REVIEW_SELECT_MAX);
       const selected = _.sampleSize(activeNPCs, Math.min(count, activeNPCs.length));
       for (const name of selected) {
@@ -172,7 +176,7 @@ export function init(): () => void {
         applyNPCScore(new_variables, name, delta, currentFloor);
       }
     } else if (Math.random() < NPC_SCORE_PROBABILITY) {
-      // 常规随机事件
+      // 常规随机事件（概率15%，且仅在无食评加分时触发）
       const count = _.random(NPC_SELECT_MIN, NPC_SELECT_MAX);
       const selected = _.sampleSize(activeNPCs, Math.min(count, activeNPCs.length));
       for (const name of selected) {

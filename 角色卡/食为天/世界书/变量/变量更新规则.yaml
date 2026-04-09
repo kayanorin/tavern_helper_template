@@ -32,7 +32,7 @@
       check:
         - NPC出现在当前叙事场景时 insert
         - NPC离开当前场景时 remove
-        - 仅追踪与巡礼竞争相关的NPC，不包含路人或一次性角色
+        - 仅追踪与巡礼竞争相关的NPC，不包含路人、工作人员或一次性角色
     退赛NPC:
       type: "string[]"
       check:

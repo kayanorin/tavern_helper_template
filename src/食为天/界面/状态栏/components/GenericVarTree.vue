@@ -33,12 +33,12 @@
         <div class="branch-content">
           <!-- 如果子项全为简单对象（如品鉴记录），用表格展示 -->
           <template v-if="isRecordOfObjects(value)">
-            <div v-for="(subVal, subKey) in value" :key="subKey" class="record-card">
-              <div class="record-header">{{ subKey }}</div>
+            <details v-for="(subVal, subKey) in value" :key="subKey" class="record-card">
+              <summary class="record-header">{{ subKey }}</summary>
               <div class="record-body">
                 <GenericVarTree :data="subVal" :depth="depth + 2" />
               </div>
-            </div>
+            </details>
           </template>
           <template v-else>
             <GenericVarTree :data="value" :depth="depth + 1" />
@@ -307,6 +307,10 @@ details[open] > .branch-label::before {
     box-shadow 0.22s ease,
     filter 0.22s ease;
 
+  &[open] > .record-header {
+    border-bottom: 1px dashed rgba(148, 112, 82, 0.32);
+  }
+
   &:hover {
     transform: translateY(-1px);
     filter: brightness(1.015);
@@ -323,7 +327,28 @@ details[open] > .branch-label::before {
   font-family: var(--font-serif);
   color: var(--c-terracotta);
   font-size: 0.8rem;
-  border-bottom: 1px dashed rgba(148, 112, 82, 0.32);
+  
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    content: '▸';
+    transition: transform 0.22s ease;
+    display: inline-block;
+    font-size: 0.7rem;
+  }
+}
+
+details[open] > .record-header::before {
+  transform: rotate(90deg);
 }
 
 .record-body {
