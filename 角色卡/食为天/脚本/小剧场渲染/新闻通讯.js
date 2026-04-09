@@ -97,10 +97,10 @@ const newsCSS = `<style>
   position: relative;
 }
 
-/* ── 暗色模式适配 ── */
-.mes_text .news-wrapper,
-[data-theme="dark"] .news-wrapper,
-.dark_theme .news-wrapper,
+/* ── 暗色模式适配（自动检测酒馆主题） ── */
+[data-theme="dark"] .news-wrapper:not(.light),
+.dark_theme .news-wrapper:not(.light),
+body.dark .news-wrapper:not(.light),
 .news-wrapper.dark {
   --nw-bg: #1A1A1A;
   --nw-text: #D4C5A9;
@@ -112,17 +112,17 @@ const newsCSS = `<style>
   --nw-sidebar-bg: rgba(212, 160, 90, 0.06);
   --nw-link: #D4A05A;
 }
-/* 酒馆暗色主题检测 */
-body.dark .news-wrapper {
-  --nw-bg: #1A1A1A;
-  --nw-text: #D4C5A9;
-  --nw-text-light: #A09070;
-  --nw-border: #D4C5A9;
-  --nw-border-light: #3D3020;
-  --nw-accent: #D4A05A;
+/* 手动切换到日间模式时，强制覆盖回亮色变量 */
+.news-wrapper.light {
+  --nw-bg: #FDF5E6;
+  --nw-text: #2C2C2C;
+  --nw-text-light: #666;
+  --nw-border: #2C2C2C;
+  --nw-border-light: #D4C5A9;
+  --nw-accent: #8B4513;
   --nw-header-bg: transparent;
-  --nw-sidebar-bg: rgba(212, 160, 90, 0.06);
-  --nw-link: #D4A05A;
+  --nw-sidebar-bg: rgba(139, 69, 19, 0.05);
+  --nw-link: #8B4513;
 }
 .news-theme-btn{background:none;border:1px solid var(--nw-border-light);border-radius:999px;color:var(--nw-text-light);cursor:pointer;font-size:.75rem;line-height:1;padding:2px 7px;margin-left:8px;transition:all .16s;font-family:inherit;vertical-align:middle}
 .news-theme-btn:hover{border-color:var(--nw-accent);color:var(--nw-accent)}
@@ -409,7 +409,7 @@ function buildNewsHTML(data) {
   return `<div class="${NEWS_RENDERED_CLASS} news-wrapper" data-news-id="${id}">
   ${newsCSS}
   <details open>
-    <summary>${summaryText}<button class="news-theme-btn" type="button" title="切换日夜">🌙</button></summary>
+    <summary>${summaryText}<button class="news-theme-btn" type="button" title="切换日夜">🔄</button></summary>
     <div class="news-paper ${gmaClass}">
       <div class="news-masthead">
         <div class="news-media-name">${mediaName}</div>
@@ -454,10 +454,26 @@ function renderNewsBulletin(message_id) {
 
     // 追加渲染
     $mes_text.append(html);
-    $mes_text.find(`.${NEWS_RENDERED_CLASS}`).last().on('click', '.news-theme-btn', function() {
+    $mes_text.find(`.${NEWS_RENDERED_CLASS}`).last().on('click', '.news-theme-btn', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
       const $w = $(this).closest('.news-wrapper');
-      const isDark = $w.toggleClass('dark').hasClass('dark');
-      $(this).text(isDark ? '☀️' : '🌙');
+      const hasLight = $w.hasClass('light');
+      const hasDark = $w.hasClass('dark');
+      // 三态循环: auto → light → dark → auto
+      if (!hasLight && !hasDark) {
+        // auto → light（强制日间）
+        $w.addClass('light').removeClass('dark');
+        $(this).text('☀️');
+      } else if (hasLight) {
+        // light → dark（强制夜间）
+        $w.removeClass('light').addClass('dark');
+        $(this).text('🌙');
+      } else {
+        // dark → auto（跟随主题）
+        $w.removeClass('dark').removeClass('light');
+        $(this).text('🔄');
+      }
     });
     console.info(`[新闻通讯] 楼层 ${message_id} 已渲染`);
   } catch (error) {
