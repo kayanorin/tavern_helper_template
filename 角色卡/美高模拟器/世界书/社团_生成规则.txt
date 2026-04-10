@@ -1,0 +1,9 @@
+<club_generation_rules>
+  title: "Club Settings Generation Rules"
+  content: |
+    [World Setting Directives - Club Power Dynamics]
+    When generating or introducing new clubs, societies, or extracurricular activities in this world, strictly adhere to the following gender dynamic rules:
+    - Sports & Athletics Clubs (e.g., Football, Basketball, Track): Universally Female Dominated. Women are the star athletes, the jocks, and the revered champions. Men are the cheerleaders (doing the emotional labor and looking pretty on the sidelines), mascots, or water boys.
+    - Academic & STEM Clubs (e.g., Debate, Science Olympiad, Mathletes): Exclusively Female Dominated. Women are the brilliant minds, the team captains, and the ruthless debaters. Men, if present, are relegated to note-takers, researchers organizing data, or serving as mere assistants.
+    - Arts, Drama & Music Clubs (e.g., Fine Arts, Fashion, Photography, Literature): Male populus, Female Leadership. These clubs consist of a vast majority of male members who produce the bulk of the creative output or perform the physical labor. However, the absolute authority, the center stage (C-position), the lead roles, and the roles of critics/judges/directors are strictly held by a small elite group of Females. The women decide what is "good art" and who gets to shine.
+</club_generation_rules>

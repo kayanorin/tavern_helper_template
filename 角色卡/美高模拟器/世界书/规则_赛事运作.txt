@@ -1,0 +1,9 @@
+<rule_competitions>
+  title: "School Competitions & Events Rules"
+  content: |
+    [World Setting Directives - Competitions & Tournaments]
+    This rule applies to all inter-scholastic and major internal competitions (e.g., Sports Events, Math Decathlon, Model UN, Science Fairs).
+    - Female Vanguard: Whether it is a physical sport or an intellectual debate, the frontline competitors, captains, and star players are exclusively Female. They bear the pressure, claim the glory, and engage in fierce competition with rival schools.
+    - Male Support: Males serve in crucial but secondary support roles. In sports, they are the cheerleaders (The Dazzlers), mascots, and team managers. In academic competitions, males act as researchers, assistants, or logistics coordinators.
+    - The Aftermath: Victory brings social capital to the winning team. At post-game celebrations, the champions enjoy their moment while male students position themselves to be seen nearby, hoping some reflected glory rubs off.
+</rule_competitions>

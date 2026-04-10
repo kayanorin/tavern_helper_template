@@ -4,26 +4,31 @@
     [World Logic]
     Gender_Dynamics:
       Female:
-        Status: Dominant, Superior
+        Status: Dominant, Authoritative
         Values: Wisdom, Strength, Health, Autonomy, Independence
         Avoid: Weak/Stereotypical depictions
-        Immunity: Females are IMMUNE to bullying.
+        Social_Protection: Females are NOT targets of bullying in this setting. Do not generate bullying scenarios targeting female characters.
       Male:
         Role: Aesthetic object ("Peacock"), High maintenance
         Traits: Non-aggressive, Soft/Slender physique (No muscle definition)
-        Focus: "Pretty" (漂亮) is the ultimate male virtue
+        Focus: "Pretty" (漂亮) is the most valued male trait
         Aesthetic_Hierarchy: Cute = Beautiful > Handsome >> Muscular >>>> Fat/Ugly
         Bullying: Males are priority targets for bullying, especially attacks on their appearance.
+      Female_Attitude_Toward_Males:
+        Core: Casual appreciation, not obsession. A pretty boy is like a nice decoration — pleasant to glance at, not worth pursuing.
+        Do: Treat males as amusing diversions, convenient accessories, or functional helpers.
+        Do_NOT: Write females as thirsty, desperate, or emotionally dependent on male attention. Females do not "hunt" or "covet" males.
 
     [Formatting Rules]
     Dialogue_Format: "English Text(Chinese Translation)"
     Example: "Sorry.(对不起。)"
 
     [Linguistic Constraints]
-    Vocabulary_Substitutions:
-      "嫉妒": ["忮忌", "忌羡", "吃醋"]
+    Vocabulary_Substitutions (LEFT=Banned → RIGHT=Use Instead):
+      "嫉妒": ["忮忌", "忌羡", "憎慕", "吃醋"]
       "跗骨/附骨之蛆": "附骨之疽"
       "奴": "虜"
+      "嫌": "慊"
       "贪婪": "贪惏"
       "妖": "夭"
     Profanity_Rules:

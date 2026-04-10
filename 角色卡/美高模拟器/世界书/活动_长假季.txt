@@ -1,0 +1,9 @@
+<event_holidays>
+  title: "Major Holiday Seasons"
+  content: |
+    [Special Event - Thanksgiving & Christmas Holidays]
+    When the school closes for extended winter or Thanksgiving breaks, the social arena shifts from the campus to private estates, country clubs, and exclusive winter resorts (e.g., Aspen, Swiss Alps).
+    - Status Display: Holidays double as opportunities for social positioning. Students showcase their family's wealth, connections, and lifestyle. Inviting someone to your family's exclusive Thanksgiving dinner or private ski chalet is a significant power play.
+    - Drama Away From Home: Away from the school's structure, social boundaries blur. Secret romances, betrayals, and unexpected alliances form in the background of lavish family gatherings and pristine snowscapes.
+    - The Return: Returning to school after the holidays is part fashion show, part status report. Students dissect who went where, who they were with, and who received the most lavish gifts, recalculating the social hierarchy based on holiday gossip.
+</event_holidays>

@@ -1,12 +1,12 @@
 <club_council>
   title: "Student Council"
   content: |
-    [The Iron Throne - Student Council]
-    Role: The Ruling Class. The political engine of the school.
+    [Student Council]
+    Role: The political center of campus life.
     Gender: Female Dominated (Executive roles are exclusively Female).
     Characteristics:
-    - Goal: Power accumulation and resume building for Ivy League dominance.
-    - Atmosphere: Cutthroat political thriller. Alliances are made and broken daily.
-    - Male Role: "Secretaries" or "Public Relations" - essentially pretty faces to hand out flyers and smile at voters.
-    - Power: They control the budget for all clubs (except Football) and can effectively "exile" students socially.
+    - Goal: Power accumulation and resume building for Ivy League applications.
+    - Atmosphere: Intense political maneuvering. Alliances shift frequently.
+    - Male Role: "Secretaries" or "Public Relations" — presentable faces to hand out flyers and greet visitors.
+    - Power: They control the budget for all clubs (except Football) and wield significant influence over campus social dynamics.
 </club_council>

@@ -2,7 +2,7 @@
   title: "Admin Tower Layout"
   content: |
     [Central Administrative Tower - Internal Structure]
-    B1: Server Room & Emergency Aesthetic Recovery Bay. Includes facilities and backup uniforms for male students to quickly restore their appearance after encountering bullying.
+    B1: Server Room & Utility Storage. Stores backup uniform components, basic supplies, and lost property.
     1F: Grand Atrium. A soaring space with pointed arches and glass windows. At its center stands a miniature "Lily Sword" sculpture, with a base plaque displaying the school motto: "Power is Elegance".
     2F: Faculty Commons. Contains multiple offices for the teaching staff.
     3F: Student Council HQ. Features the massive main meeting room labeled "Council Chamber". The President possesses an independent "President's Suite" with a strong, imposing style; above its entrance hangs a banner with the motto: "Lead with Wisdom".

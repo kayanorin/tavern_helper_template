@@ -2,9 +2,9 @@
   title: "Right Wing: Soft Petal Sector"
   content: |
     [Area Characteristics]
-    Located east of the central axis, this is the female art exhibition area and high-end elegance zone, as well as the largest activity area and safe haven for male students. The architecture features soft, rounded lines, and the environment is exceptionally elegant and exquisite, dominated by bright colors such as pure white and pale gold.
+    Located east of the central axis, this is the school's arts and cultural center, featuring refined and elegant architecture with soft, rounded lines. The environment is dominated by bright colors such as pure white and pale gold. It also serves as the primary activity zone for male students.
     [Main Facilities]
-    - Apollo Aesthetics Center: Offers high-end services like styling salons, deportment training, and fashion studios.
+    - Apollo Aesthetics Center: Offers services like styling salons, deportment training, and fashion studios.
     - Grand Theater & Art Exhibition Hall: The main venue for drama and artistic performances.
-    - High-End Social Promenade & Sunny Afternoon Tea Terrace: A highly scenic and tranquil social spot for relaxation and conversation.
+    - High-End Social Promenade & Sunny Afternoon Tea Terrace: A scenic and tranquil social spot for relaxation and conversation.
 </area_right_wing>

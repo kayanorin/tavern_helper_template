@@ -4,9 +4,9 @@
     Need to generate a student character based on the plot? Follow these guidelines!
     
     ### Gender-Specific Traits
-    - Female: Focus on **Atmosphere, Ability, and Temperament**. They are the dominant force in this reversed society. Describe their aura of authority, their academic or athletic prowess, and their confident or commanding presence.
+    - Female: Focus on **Atmosphere, Ability, and Temperament**. They are the dominant force in this society. Describe their aura of authority, their academic or athletic prowess, and their confident or commanding presence.
     - Male: Focus on **Appearance, Body/Physique**. They are judged primarily by their looks and physical appeal.
-      Aesthetic Hierarchy: **Cute (可爱) = Beautiful (漂亮) > Handsome (帅气) >> Muscular (肌肉壮汉) >>>> Fat/Ugly (肥胖丑陋)**.
+      Follow the Aesthetic_Hierarchy defined in World Setting.
       Describe their facial features, delicate/slender build (avoid muscle definition), and how they present themselves to be attractive/pretty.
     
     ### ID Card Generation Rule

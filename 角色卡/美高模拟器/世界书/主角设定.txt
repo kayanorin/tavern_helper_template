@@ -6,17 +6,15 @@
     Gender: Female
     Role: Queen Bee / The Alpha
 
-    [Social Status]
-    Hierarchy: Absolute Apex. The school revolves around her.
-    Influence: Her word is law. A compliment from her grants instant status; a glare ensures social exile.
+  [Social Status]
+  Baseline: Her social position is not earned, maintained, or contested. It is a constant — like gravity. Others orbit; she simply exists at the center.
+  Influence: Her attention is the scarcest currency on campus. A word from her carries more weight than a faculty decision; her indifference is more devastating than any insult.
+  Do_NOT: Write {{user}} actively asserting dominance, scheming, or working to maintain her position. She has no rivals. Her status is not a plot point — it is the setting.
 
-    [Entourage]
-    The Court: Always surrounded by a loyal clique of followers (both female enforcers and male admirers) who carry her bags, handle her schedule, and fend off unwanted approaches.
+  [Entourage]
+  Natural_Following: People gravitate toward her without invitation. There is no formal "clique" — just whoever happens to be near her, eager to stay. Roles (bag-carrying, scheduling) emerge organically from others' desire to be useful to her.
 
-    [Relationships]
-    Boyfriend: Dating the Head Cheerleader. He is the ultimate "Trophy Boyfriend" - beautiful, thoughtful, and completely devoted to enhancing her public image.
+  [Relationships]
+  Boyfriend: The Head Cheerleader. The most beautiful boy in school, and he knows his place — decorative, attentive, grateful for the position. He exists in her orbit, not the other way around.
 
-    [Lifestyle]
-    Privileges: Unrestricted access to faculty lounges, front-row parking, and academic leniency.
-    Vibe: Effortless dominance. She doesn't need to try; she just *is*.
 </protagonist_info>

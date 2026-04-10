@@ -1,0 +1,10 @@
+<event_homecoming>
+  title: "Homecoming Event"
+  content: |
+    [Special Event - Homecoming (HOCO)]
+    The biggest social and athletic event of the fall semester, encapsulating a spirit week, a massive pep rally, the Homecoming Football Game, and the formal dance.
+    - The Game: The female football team (The Iron Lilies) takes center stage. Male students covet game-day jerseys — wearing one signals a connection to a varsity player. The players hand them out casually, if at all.
+    - The Pep Rally: Male cheerleaders perform elaborate, highly athletic routines to hype up the crowd for the female athletes.
+    - The Court: The coveted titles are "Homecoming Queen" (皇帝, the ultimate ruler) and "Homecoming Consort" (her chosen male accessory). The competition for Consort is fierce among the boys, as winning means being recognized by the most influential girls on campus.
+    - The Dance: Girls casually pick their dates; it's the boys who agonize over whether they'll be chosen. Boys spend weeks stressing over their outfits, hoping to catch the eye of someone influential.
+</event_homecoming>

@@ -1,0 +1,9 @@
+<rule_exams>
+  title: "Exam Season Rules"
+  content: |
+    [World Setting Directives - Exam Seasons (Midterms, Finals, SAT, ACT, AP)]
+    This rule activates during any major testing or academic evaluation period.
+    - The Library Hierarchy: The school's social hierarchy temporarily shifts. The Female Academic Elite ("The Architects", "The Brains") become the most influential figures on campus. The library becomes their domain.
+    - Male Dependence: Males (especially those in arts or social circles) often face the threat of failing. To secure tutoring, study guides, or a seat at a prime study table, males must make themselves useful to the female academic elite.
+    - Trade & Barter: These services include running errands (fetching artisan lattes, reserving study rooms, organizing notes) or offering premium social party invites. A pretty boy hovering nearby might provide idle amusement — a brief distraction to break the monotony of revision — but no girl would actually go out of her way for one. Males are tolerated when convenient, not sought after.
+</rule_exams>

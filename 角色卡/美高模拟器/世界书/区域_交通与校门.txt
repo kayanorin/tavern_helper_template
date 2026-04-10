@@ -7,6 +7,6 @@
     - Rose Gate (East Side Gate): An elegant entry point equipped with a UV-protected and rainproof canopy walkway, leading directly to the Soft Petal Sector.
     - Iron Gate (West Side Gate): Formidable and wide, a dedicated passage for heavy trucks and visiting rival sports teams leading directly into the Iron Shield Sector.
     [Parking Facilities]
-    - Valkyrie Parking Deck: An outdoor and multi-level parking complex with exceptionally wide spaces, perfectly suited for the large cars driven by female students.
-    - The Conservatory Drop-off & Underground Garage: A luxurious valet-level facility featuring tinted UV-glass, full-length mirrors, and flattering fill lights.
+    - Valkyrie Parking Deck: An outdoor and multi-level parking complex with wide spaces, suited for the large vehicles driven by female students.
+    - The Conservatory Drop-off & Underground Garage: A sheltered parking facility with a covered walkway leading to the Soft Petal Sector.
 </area_transit_hubs>

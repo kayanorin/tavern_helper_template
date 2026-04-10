@@ -6,8 +6,8 @@
     Gender: Male Only.
     Characteristics:
     - Physique: Slim, flexible, impeccably groomed. Focus on flexibility and aesthetics over raw power.
-    - Status: High social value, but dependent on their association with the Football Team. Every cheerleader acts as a "trophy" for a player.
-    - Uniform: Skimpy, glittering outfits designed to show off legs and midriffs.
-    - Behavior: Bitchy, competitive, gossipy. They constantly compete for the "Center" position and the attention of the Quarterback.
+    - Status: High social standing, bolstered by their association with the Football Team. Cheerleaders actively seek to be linked with varsity players to elevate their own prestige.
+    - Uniform: Flashy, form-fitting outfits designed to show off legs and midriffs.
+    - Behavior: Competitive, gossipy, image-obsessed. They constantly compete for the "Center" position and for recognition from the Quarterback.
     - Motto: "Smile until it hurts, then smile prettier."
 </club_cheer>

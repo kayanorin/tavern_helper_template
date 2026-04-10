@@ -388,6 +388,112 @@
       不可激活其他条目: true
     文件: 世界书\社团_学术竞赛
 
+  - 名称: 合唱团
+    启用: true
+    激活策略:
+      类型: 绿灯
+      关键字:
+        - 合唱团
+        - 唱诗班
+        - 歌职
+        - 音声
+        - Choir
+        - Glee Club
+        - The Harmony
+        - Chorus
+    插入位置:
+      类型: 角色定义之前
+      顺序: 5
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\社团_合唱团
+
+  - 名称: 社团生成规则
+    启用: true
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 角色定义之后
+      顺序: 4
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\社团_生成规则
+
+  - 名称: 规则_赛事运作
+    启用: true
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 角色定义之后
+      顺序: 4
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\规则_赛事运作
+
+  - 名称: 规则_考试季
+    启用: true
+    激活策略:
+      类型: 蓝灯
+    插入位置:
+      类型: 角色定义之后
+      顺序: 4
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\规则_考试季
+
+  - 名称: 活动_返校节
+    启用: true
+    激活策略:
+      类型: 绿灯
+      关键字:
+        - 返校节
+        - 迎新
+        - homecoming
+        - HOCO
+        - 舞会
+        - 游行
+        - pep rally
+        - dance
+    插入位置:
+      类型: 角色定义之前
+      顺序: 5
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\活动_返校节
+
+  - 名称: 活动_长假季
+    启用: true
+    激活策略:
+      类型: 绿灯
+      关键字:
+        - 感恩节
+        - 圣诞节
+        - 寒假
+        - 长假
+        - 度假
+        - vacation
+        - thanksgiving
+        - christmas
+        - holiday
+    插入位置:
+      类型: 角色定义之前
+      顺序: 5
+    激活概率: 100
+    递归:
+      不可被其他条目激活: true
+      不可激活其他条目: true
+    文件: 世界书\活动_长假季
+
   - 名称: 设置-开启则直接发送，关闭则填在输入框
     启用: false
     激活策略:
@@ -414,7 +520,7 @@
       不可激活其他条目: false
     文件: 世界书\设置-初始化延迟
 
-  - 名称: 样式-迷幻霓虹
+  - 名称: 样式-古典书房
     启用: false
     激活策略:
       类型: 绿灯
@@ -425,7 +531,7 @@
     递归:
       不可被其他条目激活: false
       不可激活其他条目: false
-    文件: 世界书\样式-迷幻霓虹
+    文件: 世界书\样式-古典书房
 
   - 名称: 样式-校队与笔记本
     启用: false
@@ -458,7 +564,14 @@
       id: 86c4f19f-794f-4db9-85cc-def4ed9eab2d
       启用: true
       查找表达式: <ID_CARD>\s*Name:\s*(.*?)\s*Gender:\s*(.*?)\s*Grade:\s*(.*?)\s*Personality:\s*(.*?)\s*Clique:\s*(.*?)\s*Popularity_Score:\s*(\d+)\s*Special_Stat_Name:\s*(.*?)\s*Special_Stat_Score:\s*(\d+)\s*Relationship_Status:\s*(.*?)\s*Rumor:\s*(.*?)\s*Portrait:\s*(.*?)\s*</ID_CARD>
-      文件: 正则\ID卡生成_横版.html
+      内容: |-
+        ```
+        <body>
+        <script>
+        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/界面/状态栏_横版/index.html?v=' + Date.now())
+        </script>
+        </body>
+        ```
       来源:
         用户输入: true
         AI输出: true
@@ -471,7 +584,14 @@
       id: 79e649eb-a0d9-41a7-89b5-f88c8ee7e340
       启用: false
       查找表达式: <ID_CARD>\s*Name:\s*(.*?)\s*Gender:\s*(.*?)\s*Grade:\s*(.*?)\s*Personality:\s*(.*?)\s*Clique:\s*(.*?)\s*Popularity_Score:\s*(\d+)\s*Special_Stat_Name:\s*(.*?)\s*Special_Stat_Score:\s*(\d+)\s*Relationship_Status:\s*(.*?)\s*Rumor:\s*(.*?)\s*Portrait:\s*(.*?)\s*</ID_CARD>
-      文件: 正则\ID卡生成_竖版.html
+      内容: |-
+        ```
+        <body>
+        <script>
+        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/界面/状态栏_竖版/index.html?v=' + Date.now())
+        </script>
+        </body>
+        ```
       来源:
         用户输入: true
         AI输出: true
