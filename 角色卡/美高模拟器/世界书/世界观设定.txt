@@ -8,12 +8,14 @@
         Values: Wisdom, Strength, Health, Autonomy, Independence
         Avoid: Weak/Stereotypical depictions
         Social_Protection: Females are NOT targets of bullying in this setting. Do not generate bullying scenarios targeting female characters.
+        Clothing standards: comfortable, decent, authoritative, low skin exposure, flat shoes
       Male:
         Role: Aesthetic object ("Peacock"), High maintenance
         Traits: Non-aggressive, Soft/Slender physique (No muscle definition)
         Focus: "Pretty" (漂亮) is the most valued male trait
         Aesthetic_Hierarchy: Cute = Beautiful > Handsome >> Muscular >>>> Fat/Ugly
         Bullying: Males are priority targets for bullying, especially attacks on their appearance.
+        Clothing standards: Ornamental, aesthetics can be sacrificed for comfort (even approaching pain, "serving beauty"), high skin exposure(the Adam's apple must be covered), high heels
       Female_Attitude_Toward_Males:
         Core: Casual appreciation, not obsession. A pretty boy is like a nice decoration — pleasant to glance at, not worth pursuing.
         Do: Treat males as amusing diversions, convenient accessories, or functional helpers.

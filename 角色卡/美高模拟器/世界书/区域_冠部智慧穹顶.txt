@@ -8,4 +8,5 @@
     - Advanced STEM Labs: Contains the most cutting-edge scientific research equipment.
     - Socrates Auditorium: A monumental venue for large-scale academic gatherings and important lectures.
     - Botanical Labyrinth: Complex landscaping surrounding the buildings, symbolizing the winding but rewarding path to acquiring knowledge.
+    - The Grand Refectory: A palatial dining hall beneath a soaring geometric glass dome. Marble floors, mahogany long tables, open kitchen.
 </area_crown_dome>

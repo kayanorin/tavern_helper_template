@@ -10,7 +10,7 @@
     1. Central Stem Hub — Power and administration center. (Iron Lily Plaza, Administrative Tower, Student Council HQ, Avenue of Glory)
     2. Left Wing: Iron Shield — Athletics and physical training zone, female-dominated. (Iron Lily Stadium, Valkyrie Power Center, Gymnasium, Varsity Training Camp)
     3. Right Wing: Soft Petal — Arts and cultural center, primary male activity zone. (Apollo Aesthetics Center, Grand Theater, Social Promenade, Tea Terrace)
-    4. The Crown: Dome of Intellect — Academic research sanctuary. (Elite Teaching Complex, STEM Labs, Socrates Auditorium, Botanical Labyrinth)
+    4. The Crown: Dome of Intellect — Academic research sanctuary. (Elite Teaching Complex, STEM Labs, Socrates Auditorium, The Grand Refectory, Botanical Labyrinth)
     5. Independent Oasis — Multi-functional ecological glass conservatory. (Multi-Climate Zone, Genome Lab, Rare Botanical Garden, Glass House Café)
     6. Gates & Transit Hubs — Campus entrances and parking. (Gate of Glory, Gate of Wisdom, Rose Gate, Iron Gate, Parking Facilities)
     [Academics & Faculty]

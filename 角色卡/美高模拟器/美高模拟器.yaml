@@ -53,6 +53,7 @@
         - 男友
         - Boyfriend
         - 啦啦队队长
+        - 拉拉队队长
         - Head Cheerleader
     插入位置:
       类型: 角色定义之后
@@ -226,6 +227,7 @@
         - STEM实验室
         - 苏格拉底讲堂
         - 植物迷宫
+        - 大食堂
         - Dome of Intellect
     插入位置:
       类型: 角色定义之前
@@ -321,6 +323,7 @@
       类型: 绿灯
       关键字:
         - 啦啦队
+        - 拉拉队
         - Cheerleading Squad
         - The Dazzlers
     插入位置:
@@ -546,6 +549,20 @@
       不可激活其他条目: false
     文件: 世界书\样式-校队与笔记本
 
+  - 名称: 样式-美式漫画
+    启用: false
+    激活策略:
+      类型: 绿灯
+    插入位置:
+      类型: 角色定义之前
+      顺序: 100
+    激活概率: 100
+    递归:
+      不可被其他条目激活: false
+      不可激活其他条目: false
+    文件: 世界书\样式-美式漫画
+
+
 扩展字段:
   正则:
     - 正则名称: 不发送地图
@@ -564,14 +581,7 @@
       id: 86c4f19f-794f-4db9-85cc-def4ed9eab2d
       启用: true
       查找表达式: <ID_CARD>\s*Name:\s*(.*?)\s*Gender:\s*(.*?)\s*Grade:\s*(.*?)\s*Personality:\s*(.*?)\s*Clique:\s*(.*?)\s*Popularity_Score:\s*(\d+)\s*Special_Stat_Name:\s*(.*?)\s*Special_Stat_Score:\s*(\d+)\s*Relationship_Status:\s*(.*?)\s*Rumor:\s*(.*?)\s*Portrait:\s*(.*?)\s*</ID_CARD>
-      内容: |-
-        ```
-        <body>
-        <script>
-        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/界面/状态栏_横版/index.html?v=' + Date.now())
-        </script>
-        </body>
-        ```
+      文件: 正则\ID卡生成_横版.txt
       来源:
         用户输入: true
         AI输出: true
@@ -584,14 +594,7 @@
       id: 79e649eb-a0d9-41a7-89b5-f88c8ee7e340
       启用: false
       查找表达式: <ID_CARD>\s*Name:\s*(.*?)\s*Gender:\s*(.*?)\s*Grade:\s*(.*?)\s*Personality:\s*(.*?)\s*Clique:\s*(.*?)\s*Popularity_Score:\s*(\d+)\s*Special_Stat_Name:\s*(.*?)\s*Special_Stat_Score:\s*(\d+)\s*Relationship_Status:\s*(.*?)\s*Rumor:\s*(.*?)\s*Portrait:\s*(.*?)\s*</ID_CARD>
-      内容: |-
-        ```
-        <body>
-        <script>
-        $('body').load('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/界面/状态栏_竖版/index.html?v=' + Date.now())
-        </script>
-        </body>
-        ```
+      文件: 正则\ID卡生成_竖版.txt
       来源:
         用户输入: true
         AI输出: true
@@ -607,5 +610,11 @@
         启用: true
         类型: 脚本
         文件: 脚本\地图\index.js
+
+      - 名称: 互动地图
+        id: a3f7e2c1-9d84-4b56-ae12-7c8d5f3a1e09
+        启用: false
+        类型: 脚本
+        内容: import('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/脚本/互动地图/index.js');
 
     变量: {}
