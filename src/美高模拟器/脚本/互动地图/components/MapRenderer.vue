@@ -18,12 +18,52 @@ const containerRef = ref<HTMLElement | null>(null);
 const imageLoaded = ref(false);
 const imageError = ref(false);
 
+// ── 图片实际渲染尺寸（用于精确定位 pin）──────────────
+const imgNaturalW = ref(0);
+const imgNaturalH = ref(0);
+const canvasW = ref(0);
+const canvasH = ref(0);
+const canvasOffX = ref(0);
+const canvasOffY = ref(0);
+
+/** 根据容器尺寸和图片原始比例，计算 contain-fit 后的实际图片区域 */
+function recalcCanvasLayout() {
+  const el = containerRef.value;
+  if (!el || !imgNaturalW.value || !imgNaturalH.value) return;
+
+  const cw = el.clientWidth;
+  const ch = el.clientHeight;
+  const imgRatio = imgNaturalW.value / imgNaturalH.value;
+  const containerRatio = cw / ch;
+
+  if (imgRatio > containerRatio) {
+    // 图片更宽 → 宽度撑满，高度有留白
+    canvasW.value = cw;
+    canvasH.value = cw / imgRatio;
+  } else {
+    // 图片更高 → 高度撑满，宽度有留白
+    canvasH.value = ch;
+    canvasW.value = ch * imgRatio;
+  }
+  canvasOffX.value = (cw - canvasW.value) / 2;
+  canvasOffY.value = (ch - canvasH.value) / 2;
+}
+
 // ── 弹窗状态 ─────────────────────────────────────────
 const selectedPin = ref<Pin | null>(null);
 const showTravelMenu = ref(false);
 const travelDestination = ref('');
 
 const mapTransform = computed(() => `translate(${translateX.value}px, ${translateY.value}px) scale(${scale.value})`);
+
+// canvas 的样式（精确匹配图片渲染区域）
+const canvasStyle = computed(() => ({
+  transform: mapTransform.value,
+  width: canvasW.value ? canvasW.value + 'px' : '100%',
+  height: canvasH.value ? canvasH.value + 'px' : '100%',
+  left: canvasOffX.value ? canvasOffX.value + 'px' : '0',
+  top: canvasOffY.value ? canvasOffY.value + 'px' : '0',
+}));
 
 // ── 缩放 ─────────────────────────────────────────────
 function onWheel(e: WheelEvent) {
@@ -140,6 +180,8 @@ function resetView() {
   translateY.value = 0;
   imageLoaded.value = false;
   imageError.value = false;
+  imgNaturalW.value = 0;
+  imgNaturalH.value = 0;
 }
 
 // 当 currentMapId 变化时重置视图
@@ -147,7 +189,11 @@ watch(() => store.currentMapId, () => {
   resetView();
 });
 
-function onImageLoad() {
+function onImageLoad(e: Event) {
+  const img = e.target as HTMLImageElement;
+  imgNaturalW.value = img.naturalWidth;
+  imgNaturalH.value = img.naturalHeight;
+  recalcCanvasLayout();
   imageLoaded.value = true;
 }
 
@@ -155,6 +201,22 @@ function onImageError() {
   imageError.value = true;
   imageLoaded.value = true;
 }
+
+// 窗口 resize 时重新计算布局
+let resizeObserver: ResizeObserver | null = null;
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver(() => {
+    recalcCanvasLayout();
+  });
+  if (containerRef.value) {
+    resizeObserver.observe(containerRef.value);
+  }
+});
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect();
+});
 
 function pinIcon(type: string) {
   switch (type) {
@@ -183,8 +245,8 @@ function pinIcon(type: string) {
       <span class="imap-error-url">{{ store.currentImageUrl }}</span>
     </div>
 
-    <!-- 地图图片 + 点位 -->
-    <div class="imap-canvas" :style="{ transform: mapTransform }">
+    <!-- 地图图片 + 点位（canvas 精确匹配图片渲染区域） -->
+    <div class="imap-canvas" :style="canvasStyle">
       <img v-if="store.currentImageUrl" :src="store.currentImageUrl" class="imap-bg"
         :class="{ visible: imageLoaded && !imageError }" @load="onImageLoad" @error="onImageError" draggable="false" />
 
@@ -230,10 +292,6 @@ function pinIcon(type: string) {
 
 .imap-canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   transform-origin: 0 0;
   transition: none;
 }
@@ -241,7 +299,6 @@ function pinIcon(type: string) {
 .imap-bg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   display: block;
   opacity: 0;
   transition: opacity 0.3s ease;
