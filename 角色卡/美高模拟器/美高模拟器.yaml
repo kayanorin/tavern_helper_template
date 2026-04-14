@@ -615,6 +615,6 @@
         id: a3f7e2c1-9d84-4b56-ae12-7c8d5f3a1e09
         启用: false
         类型: 脚本
-        内容: import('https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/脚本/互动地图/index.js');
+        内容: import 'https://testingcf.jsdelivr.net/gh/kayanorin/SillyTavernimg@main/美高模拟器/脚本/互动地图/index.js';
 
     变量: {}

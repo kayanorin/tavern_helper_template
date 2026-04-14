@@ -3,6 +3,7 @@
 // ============================================================================
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
+import { createScriptIdIframe, teleportStyle } from '@util/script';
 import App from './components/App.vue';
 import { useMapStore } from './store';
 
