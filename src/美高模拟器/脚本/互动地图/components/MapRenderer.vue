@@ -228,10 +228,11 @@ function pinIcon(type: string) {
 </script>
 
 <template>
-  <div class="imap-renderer" ref="containerRef" @wheel.prevent="onWheel" @mousedown="onMouseDown"
-    @mousemove="onMouseMove" @mouseup="onMouseUp" @mouseleave="onMouseUp" @touchstart.passive="onTouchStart"
-    @touchmove.prevent="onTouchMove" @touchend="onTouchEnd" @dblclick="onDblClick"
-    :class="{ dragging: isDragging }">
+  <div
+ref="containerRef" class="imap-renderer" :class="{ dragging: isDragging }" @wheel.prevent="onWheel"
+    @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @mouseleave="onMouseUp"
+    @touchstart.passive="onTouchStart" @touchmove.prevent="onTouchMove" @touchend="onTouchEnd"
+    @dblclick="onDblClick">
 
     <!-- 加载提示 -->
     <div v-if="!imageLoaded && !imageError" class="imap-loading">
@@ -247,16 +248,18 @@ function pinIcon(type: string) {
 
     <!-- 地图图片 + 点位（canvas 精确匹配图片渲染区域） -->
     <div class="imap-canvas" :style="canvasStyle">
-      <img v-if="store.currentImageUrl" :src="store.currentImageUrl" class="imap-bg"
-        :class="{ visible: imageLoaded && !imageError }" @load="onImageLoad" @error="onImageError" draggable="false" />
+      <img
+v-if="store.currentImageUrl" :src="store.currentImageUrl" class="imap-bg"
+        :class="{ visible: imageLoaded && !imageError }" draggable="false" @load="onImageLoad" @error="onImageError" />
 
       <!-- 点位层 -->
       <template v-if="imageLoaded && !imageError">
-        <div v-for="pin in store.currentPins" :key="pin.id" class="imap-pin" :style="{
+        <div
+v-for="pin in store.currentPins" :key="pin.id" class="imap-pin" :style="{
           left: pin.x + '%',
           top: pin.y + '%',
           '--pin-color': pin.color,
-        }" @click="onPinClick(pin, $event)" @touchend.stop="onPinClick(pin, $event)" :title="pin.name">
+        }" :title="pin.name" @click="onPinClick(pin, $event)" @touchend.stop="onPinClick(pin, $event)">
           <span class="imap-pin-icon">{{ pinIcon(pin.type) }}</span>
           <span class="imap-pin-label">{{ pin.name }}</span>
           <span class="imap-pin-pulse" />

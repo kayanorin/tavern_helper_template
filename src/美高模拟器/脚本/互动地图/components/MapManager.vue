@@ -7,6 +7,7 @@ const importMode = ref<'none' | 'url' | 'file'>('none');
 const urlInput = ref('');
 const isLoading = ref(false);
 const errorMsg = ref('');
+const showGuide = ref(false);
 
 /** 从 URL 导入（支持普通 JSON URL 或 GitHub 仓库路径） */
 async function importFromUrl() {
@@ -58,11 +59,50 @@ function onFileUpload(e: Event) {
 
 <template>
   <div class="imap-manager">
-    <h3 class="imap-manager-title">📦 地图包管理</h3>
+    <div class="imap-manager-head">
+      <h3 class="imap-manager-title">📦 地图包管理</h3>
+      <button class="imap-btn imap-btn-sm imap-btn-ghost" @click="showGuide = !showGuide">
+        {{ showGuide ? '收起说明' : '❓ 导入说明' }}
+      </button>
+    </div>
+
+    <!-- 使用说明 -->
+    <div v-if="showGuide" class="imap-guide">
+      <h4>📘 两种导入方式怎么选？</h4>
+      <ul class="imap-guide-list">
+        <li>
+          <strong>🔗 URL 导入</strong>：从远程链接（如 jsDelivr CDN）拉取地图包 JSON。
+          <br />
+          <span class="imap-guide-note">适合跟作者更新同步 —— 作者改了，你这边刷新就能用最新版本。</span>
+          <br />
+          支持三种格式：
+          <ul>
+            <li>完整 JSON URL：<code>https://.../mappack.json</code></li>
+            <li>GitHub 仓库路径（自动走 CDN）：<code>用户/仓库/路径</code></li>
+            <li>jsDelivr 等 CDN 链接</li>
+          </ul>
+        </li>
+        <li>
+          <strong>📁 文件上传</strong>：本地选择 <code>.json</code> 文件。
+          <br />
+          <span class="imap-guide-note">适合自己做的私人地图、离线使用，或者想改了就自己存的场景。</span>
+        </li>
+      </ul>
+      <h4>🧩 地图包 JSON 结构</h4>
+      <p class="imap-guide-para">
+        每个地图包必须包含：<code>name</code>、<code>baseUrl</code>（图片基础 URL）、<code>defaultMapId</code>（默认地图 ID）、<code>maps</code>（地图层级字典）。
+        具体字段参考内置地图包 <code>defaultPack.ts</code>。
+      </p>
+      <p class="imap-guide-tip">
+        💡 提示：如果 URL 导入报错但链接看起来没问题，可能是 jsDelivr 缓存了旧版本，
+        在链接后面加个 <code>?v=时间戳</code>（任意值）强制刷新即可。
+      </p>
+    </div>
 
     <!-- 已安装列表 -->
     <div class="imap-pack-list">
-      <div v-for="(pack, i) in store.installedPacks" :key="i" class="imap-pack-item"
+      <div
+v-for="(pack, i) in store.installedPacks" :key="i" class="imap-pack-item"
         :class="{ active: i === store.activePackIndex }">
         <div class="imap-pack-info">
           <span class="imap-pack-name">{{ pack.name }}</span>
@@ -73,7 +113,8 @@ function onFileUpload(e: Event) {
             使用
           </button>
           <span v-else class="imap-pack-badge">当前</span>
-          <button v-if="store.installedPacks.length > 1" class="imap-btn imap-btn-sm imap-btn-danger"
+          <button
+v-if="store.installedPacks.length > 1" class="imap-btn imap-btn-sm imap-btn-danger"
             @click="store.removePack(i)">
             删除
           </button>
@@ -94,9 +135,10 @@ function onFileUpload(e: Event) {
           支持：JSON URL、GitHub 仓库路径（如 <code>user/repo/path</code>）
         </p>
         <div class="imap-import-row">
-          <input v-model="urlInput" class="imap-input" placeholder="粘贴 URL 或仓库路径"
+          <input
+v-model="urlInput" class="imap-input" placeholder="粘贴 URL 或仓库路径"
             @keyup.enter="importFromUrl" />
-          <button class="imap-btn imap-btn-primary" @click="importFromUrl" :disabled="isLoading || !urlInput.trim()">
+          <button class="imap-btn imap-btn-primary" :disabled="isLoading || !urlInput.trim()" @click="importFromUrl">
             {{ isLoading ? '加载中...' : '导入' }}
           </button>
         </div>
@@ -125,11 +167,80 @@ function onFileUpload(e: Event) {
   gap: 16px;
 }
 
+.imap-manager-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .imap-manager-title {
   margin: 0;
   font-size: 16px;
   color: #fff;
   font-weight: 600;
+}
+
+.imap-guide {
+  background: rgba(179, 139, 89, 0.05);
+  border: 1px solid rgba(179, 139, 89, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+
+  h4 {
+    margin: 4px 0 6px;
+    font-size: 13px;
+    color: #c9a96a;
+    font-weight: 600;
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: 'Consolas', monospace;
+    color: #e0c69a;
+  }
+}
+
+.imap-guide-list {
+  margin: 0 0 6px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  ul {
+    margin: 4px 0;
+    padding-left: 18px;
+
+    li {
+      margin: 2px 0;
+    }
+  }
+}
+
+.imap-guide-note {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+}
+
+.imap-guide-para {
+  margin: 0 0 6px;
+}
+
+.imap-guide-tip {
+  margin: 6px 0 0;
+  padding: 6px 8px;
+  background: rgba(243, 156, 18, 0.08);
+  border-left: 2px solid rgba(243, 156, 18, 0.4);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
 }
 
 .imap-pack-list {
@@ -299,8 +410,9 @@ function onFileUpload(e: Event) {
   border: none;
   color: rgba(255, 255, 255, 0.4);
 
-  &:hover {
+  &:hover:not(:disabled) {
     color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
   }
 }
 </style>

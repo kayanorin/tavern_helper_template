@@ -2,9 +2,43 @@
 // 互动地图 —— Pinia Store (状态管理 + 持久化)
 // ============================================================================
 import { defaultMapPack } from './defaultPack';
-import { type InstalledPack, type MapLayer, type Pin, MapPackSchema, StoreStateSchema } from './types';
+import { type CSSPreset, type InstalledPack, type MapLayer, type Pin, MapPackSchema, StoreStateSchema } from './types';
 
 const LOREBOOK_NAME = '美高模拟器';
+
+/** 示例 CSS —— 首次打开样式设置时展示 */
+export const SAMPLE_CSS = `/* ─── 互动地图自定义样式（示例）──────────────────
+ * 这里的 CSS 只作用于地图面板 iframe，不会影响酒馆主界面
+ * 由于组件内置样式带有 Vue scoped 权重，自定义时建议加 !important
+ * 或使用更高特异性选择器（如 .imap-panel .imap-btn）
+ * ─────────────────────────────────────────────── */
+
+/* 面板背景 —— 改为偏冷的深蓝灰 */
+.imap-panel {
+  background: #141820 !important;
+  border-color: rgba(120, 150, 200, 0.45) !important;
+}
+
+/* 标题栏半透明化 */
+.imap-header {
+  background: rgba(120, 150, 200, 0.06) !important;
+}
+
+/* 主按钮换成冷色调 */
+.imap-btn {
+  background: rgba(120, 150, 200, 0.15) !important;
+  border-color: rgba(120, 150, 200, 0.35) !important;
+  color: #8fb3d9 !important;
+}
+.imap-btn:hover:not(:disabled) {
+  background: rgba(120, 150, 200, 0.25) !important;
+}
+
+/* Pin 标签字体加大 */
+.imap-pin-label {
+  font-size: 12px !important;
+}
+`;
 
 export const useMapStore = defineStore('interactiveMap', () => {
   // ── 状态 ────────────────────────────────────────────
@@ -16,6 +50,11 @@ export const useMapStore = defineStore('interactiveMap', () => {
 
   // 出行设置（来自世界书条目）
   const shouldSendDirectly = ref(true);
+
+  // 自定义样式
+  const customCSS = ref('');
+  const cssPresets = ref<CSSPreset[]>([]);
+  const activePresetIndex = ref(-1);
 
   // ── Getters ─────────────────────────────────────────
   const activePack = computed(() => installedPacks.value[activePackIndex.value] ?? null);
@@ -74,6 +113,9 @@ export const useMapStore = defineStore('interactiveMap', () => {
     activePackIndex.value = parsed.active_pack_index;
     currentMapId.value = parsed.current_map_id || activePack.value?.data.defaultMapId || '';
     mapHistory.value = parsed.map_history;
+    customCSS.value = parsed.custom_css;
+    cssPresets.value = parsed.css_presets;
+    activePresetIndex.value = parsed.active_preset_index;
   }
 
   /** 持久化到脚本变量 */
@@ -84,6 +126,9 @@ export const useMapStore = defineStore('interactiveMap', () => {
         active_pack_index: activePackIndex.value,
         current_map_id: currentMapId.value,
         map_history: mapHistory.value,
+        custom_css: customCSS.value,
+        css_presets: cssPresets.value,
+        active_preset_index: activePresetIndex.value,
       }),
       { type: 'script' },
     );
@@ -199,6 +244,63 @@ export const useMapStore = defineStore('interactiveMap', () => {
     panelVisible.value = false;
   }
 
+  // ── 自定义样式 ───────────────────────────────────────
+
+  /** 更新当前 CSS（不立即持久化，由调用方决定） */
+  function setCustomCSS(css: string) {
+    customCSS.value = css;
+    activePresetIndex.value = -1; // 手动编辑后脱离任何预设
+    persist();
+  }
+
+  /** 保存当前 CSS 为新预设 */
+  function savePreset(name: string) {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    cssPresets.value.push({ name: trimmed, content: customCSS.value });
+    activePresetIndex.value = cssPresets.value.length - 1;
+    persist();
+  }
+
+  /** 应用预设 */
+  function applyPreset(index: number) {
+    const preset = cssPresets.value[index];
+    if (!preset) return;
+    customCSS.value = preset.content;
+    activePresetIndex.value = index;
+    persist();
+  }
+
+  /** 删除预设 */
+  function removePreset(index: number) {
+    if (!cssPresets.value[index]) return;
+    cssPresets.value.splice(index, 1);
+    if (activePresetIndex.value === index) {
+      activePresetIndex.value = -1;
+    } else if (activePresetIndex.value > index) {
+      activePresetIndex.value -= 1;
+    }
+    persist();
+  }
+
+  /** 覆盖已有预设的内容（用当前 CSS） */
+  function overwritePreset(index: number) {
+    const preset = cssPresets.value[index];
+    if (!preset) return;
+    preset.content = customCSS.value;
+    activePresetIndex.value = index;
+    persist();
+  }
+
+  /** 重命名预设 */
+  function renamePreset(index: number, newName: string) {
+    const preset = cssPresets.value[index];
+    const trimmed = newName.trim();
+    if (!preset || !trimmed) return;
+    preset.name = trimmed;
+    persist();
+  }
+
   return {
     // state
     installedPacks,
@@ -207,6 +309,9 @@ export const useMapStore = defineStore('interactiveMap', () => {
     mapHistory,
     panelVisible,
     shouldSendDirectly,
+    customCSS,
+    cssPresets,
+    activePresetIndex,
     // getters
     activePack,
     currentMap,
@@ -227,5 +332,11 @@ export const useMapStore = defineStore('interactiveMap', () => {
     loadWorldbookSettings,
     disableTextMapRule,
     sendTravelCommand,
+    setCustomCSS,
+    savePreset,
+    applyPreset,
+    removePreset,
+    overwritePreset,
+    renamePreset,
   };
 });

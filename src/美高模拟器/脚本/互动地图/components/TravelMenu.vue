@@ -6,6 +6,9 @@ const emit = defineEmits<{ close: [] }>();
 
 const store = useMapStore();
 
+/** 自由探索模式：入口没有预设目的地 */
+const isFreeExplore = computed(() => !props.destination.trim());
+
 // ── 出行流程步骤 ─────────────────────────────────────
 type Step = 'confirm' | 'companion' | 'activity';
 const step = ref<Step>('confirm');
@@ -20,13 +23,21 @@ const customDestination = ref(props.destination || '');
 const activities = ['闲逛', '吃饭', '喝酒', '约会', '睡觉', '做爱'];
 const customActivity = ref('');
 
+/** 最终使用的目的地（已 trim） */
+const finalDestination = computed(() => (customDestination.value || props.destination).trim());
+
+/** 目的地是否已填写（用于禁用按钮） */
+const hasDestination = computed(() => finalDestination.value.length > 0);
+
 // ── 流程控制 ─────────────────────────────────────────
 function goAlone() {
+  if (!hasDestination.value) return;
   isAlone.value = true;
   step.value = 'activity';
 }
 
 function goWithCompanion() {
+  if (!hasDestination.value) return;
   isAlone.value = false;
   step.value = 'companion';
 }
@@ -37,9 +48,9 @@ function confirmCompanion() {
 }
 
 function finalizeTravel(activity: string) {
-  if (!activity.trim()) return;
+  if (!activity.trim() || !hasDestination.value) return;
 
-  const dest = customDestination.value || props.destination;
+  const dest = finalDestination.value;
   const userPlaceholder = '{{user}}';
 
   let text = '';
@@ -65,20 +76,28 @@ function finalizeTravel(activity: string) {
   <div class="imap-overlay" @click="emit('close')">
     <div class="imap-travel" @click.stop>
       <div class="imap-travel-header">
-        <h3>🚀 出行</h3>
+        <h3>{{ isFreeExplore ? '✨ 自由探索' : '🚀 出行' }}</h3>
         <button class="imap-travel-close" @click="emit('close')">✕</button>
       </div>
 
       <div class="imap-travel-body">
         <!-- Step 1: 确认目的地 + NPC 遭遇 -->
         <template v-if="step === 'confirm'">
-          <div class="imap-travel-dest">
+          <!-- 有预设目的地时显示 -->
+          <div v-if="!isFreeExplore" class="imap-travel-dest">
             目的地：<strong>{{ customDestination || destination }}</strong>
+          </div>
+          <!-- 自由探索模式提示 -->
+          <div v-else class="imap-travel-hint">
+            预设地图里没有想去的地方？直接输入你想去的目的地。
           </div>
 
           <!-- 自定义目的地 -->
           <div class="imap-travel-field">
-            <input v-model="customDestination" class="imap-input" placeholder="修改目的地（可选）" />
+            <input
+v-model="customDestination" class="imap-input"
+              :placeholder="isFreeExplore ? '输入目的地（必填）' : '修改目的地（可选）'"
+              :class="{ 'imap-input-required': isFreeExplore && !hasDestination }" autofocus />
           </div>
 
           <!-- NPC 遭遇 -->
@@ -87,25 +106,32 @@ function finalizeTravel(activity: string) {
               <input v-model="meetNPC" type="checkbox" />
               <span>是否要遇见 NPC?</span>
             </label>
-            <input v-if="meetNPC" v-model="npcName" class="imap-input" placeholder="输入 NPC 名字"
+            <input
+v-if="meetNPC" v-model="npcName" class="imap-input" placeholder="输入 NPC 名字"
               style="margin-top: 6px" />
           </div>
 
           <div class="imap-travel-actions">
-            <button class="imap-btn imap-btn-primary" @click="goAlone">👤 独自前往</button>
-            <button class="imap-btn imap-btn-secondary" @click="goWithCompanion">👥 邀请某人一起</button>
+            <button class="imap-btn imap-btn-primary" :disabled="!hasDestination" @click="goAlone">
+              👤 独自前往
+            </button>
+            <button class="imap-btn imap-btn-secondary" :disabled="!hasDestination" @click="goWithCompanion">
+              👥 邀请某人一起
+            </button>
           </div>
+          <p v-if="!hasDestination" class="imap-travel-warning">请先填写目的地</p>
         </template>
 
         <!-- Step 2: 同伴输入 -->
         <template v-if="step === 'companion'">
           <p class="imap-travel-label">和谁一起去？</p>
           <div class="imap-travel-field">
-            <input v-model="companionName" class="imap-input" placeholder="输入角色姓名"
+            <input
+v-model="companionName" class="imap-input" placeholder="输入角色姓名"
               @keyup.enter="confirmCompanion" />
           </div>
           <div class="imap-travel-actions">
-            <button class="imap-btn imap-btn-primary" @click="confirmCompanion" :disabled="!companionName.trim()">
+            <button class="imap-btn imap-btn-primary" :disabled="!companionName.trim()" @click="confirmCompanion">
               下一步
             </button>
             <button class="imap-btn imap-btn-ghost" @click="step = 'confirm'">返回</button>
@@ -121,10 +147,12 @@ function finalizeTravel(activity: string) {
             </button>
           </div>
           <div class="imap-travel-custom">
-            <input v-model="customActivity" class="imap-input" placeholder="自定义活动（如：看电影）"
+            <input
+v-model="customActivity" class="imap-input" placeholder="自定义活动（如：看电影）"
               @keyup.enter="finalizeTravel(customActivity)" />
-            <button class="imap-btn imap-btn-primary" @click="finalizeTravel(customActivity)"
-              :disabled="!customActivity.trim()">
+            <button
+class="imap-btn imap-btn-primary" :disabled="!customActivity.trim()"
+              @click="finalizeTravel(customActivity)">
               确定
             </button>
           </div>
@@ -219,6 +247,24 @@ function finalizeTravel(activity: string) {
   }
 }
 
+.imap-travel-hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  background: rgba(179, 139, 89, 0.08);
+  border-left: 2px solid rgba(179, 139, 89, 0.5);
+  border-radius: 4px;
+}
+
+.imap-travel-warning {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #f39c12;
+  text-align: center;
+}
+
 .imap-travel-label {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
@@ -247,6 +293,15 @@ function finalizeTravel(activity: string) {
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.imap-input-required {
+  border-color: rgba(243, 156, 18, 0.4);
+  background: rgba(243, 156, 18, 0.06);
+
+  &:focus {
+    border-color: rgba(243, 156, 18, 0.7);
   }
 }
 

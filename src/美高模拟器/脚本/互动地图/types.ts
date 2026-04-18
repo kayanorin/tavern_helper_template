@@ -47,6 +47,12 @@ export interface InstalledPack {
   data: MapPack;
 }
 
+export const CSSPresetSchema = z.object({
+  name: z.string(),
+  content: z.string().default(''),
+});
+export type CSSPreset = z.infer<typeof CSSPresetSchema>;
+
 /** 脚本变量持久化结构 */
 export const StoreStateSchema = z
   .object({
@@ -63,6 +69,9 @@ export const StoreStateSchema = z
     active_pack_index: z.number().default(0),
     current_map_id: z.string().default(''),
     map_history: z.array(z.string()).default([]),
+    custom_css: z.string().default(''),
+    css_presets: z.array(CSSPresetSchema).default([]),
+    active_preset_index: z.number().default(-1),
   })
   .prefault({});
 
