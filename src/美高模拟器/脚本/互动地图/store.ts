@@ -86,8 +86,11 @@ export const useMapStore = defineStore('interactiveMap', () => {
   /** 当前地图背景图完整 URL */
   const currentImageUrl = computed(() => {
     if (!activePack.value || !currentMap.value) return '';
+    const img = currentMap.value.image;
+    // 已是完整外链（图床等）直接使用，不拼 baseUrl
+    if (/^https?:\/\//i.test(img)) return img;
     const base = activePack.value.data.baseUrl.replace(/\/$/, '');
-    return `${base}/${encodeURIComponent(currentMap.value.image)}`;
+    return `${base}/${encodeURIComponent(img)}`;
   });
 
   // ── Actions ─────────────────────────────────────────
