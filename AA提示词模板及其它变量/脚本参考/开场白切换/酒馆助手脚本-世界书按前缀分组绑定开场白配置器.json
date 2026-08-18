@@ -1,0 +1,20 @@
+{
+  "type": "script",
+  "enabled": true,
+  "name": "世界书按前缀分组绑定开场白配置器",
+  "id": "cc53c0dc-d784-4e5e-bda5-ee0c1948ba5b",
+  "content": "import 'https://cdn.jsdelivr.net/gh/Nancyindaeyo/-@main/index.js'\n",
+  "info": "",
+  "button": {
+    "enabled": true,
+    "buttons": []
+  },
+  "data": {
+    "groupNames": {},
+    "global": {},
+    "swipes": {},
+    "collapsed": {},
+    "groupingEnabled": false,
+    "bindingEnabled": false
+  }
+}

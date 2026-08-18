@@ -1,0 +1,49 @@
+:root {
+  --rcs-ink: #302d2b;
+  --rcs-ink-soft: #635b54;
+  --rcs-pencil: rgba(48, 45, 43, 0.45);
+  --rcs-paper: #fdfaf2;
+  --rcs-paper-deep: #f5eedc;
+  --rcs-paper-pink: #fceeef;
+  --rcs-paper-blue: #e8eff3;
+  --rcs-paper-green: #eef5e6;
+  --rcs-paper-mint: #e8f4f0;
+  --rcs-paper-yellow: #fdf5d7;
+  --rcs-paper-lilac: #f1ecf7;
+  --rcs-coral: #d46c75;
+  --rcs-coral-deep: #b14e5b;
+  --rcs-blue: #5b87a8;
+  --rcs-sage: #759364;
+  --rcs-gold: #cfa03c;
+  --rcs-line: rgba(48, 45, 43, 0.22);
+  --rcs-line-strong: rgba(48, 45, 43, 0.45);
+  --rcs-shadow: rgba(77, 65, 52, 0.2);
+  --rcs-shadow-soft: rgba(77, 65, 52, 0.12);
+  --rcs-shadow-rgb: 77, 65, 52;
+  --rcs-desk: #ece6d8;
+  --rcs-font: 'Noto Sans SC', 'Source Sans 3', 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+  --rcs-font-title: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+  --rcs-font-mono: 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Microsoft YaHei', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--rcs-ink);
+  font-family: var(--rcs-font);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}

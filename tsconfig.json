@@ -11,8 +11,8 @@
     ],
     "target": "ESNext",
     "module": "ESNext",
-    "rootDir": ".",
     "outDir": "dist",
+    "baseUrl": ".",
     "paths": {
       "@util/*": [
         "./util/*"
@@ -44,7 +44,7 @@
     "示例",
     "src",
     "util",
-    "*.d.ts",
+    "*.d.ts", "角色卡",
   ],
   "exclude": [
     "**/dist/**",

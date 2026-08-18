@@ -26,25 +26,14 @@ declare namespace SillyTavern {
   };
 
   type SendingMessage = {
-    role: 'user' | 'assistant' | 'system' | 'tool';
-
-    content?:
+    role: 'user' | 'assistant' | 'system';
+    content:
       | string
       | Array<
           | { type: 'text'; text: string }
           | { type: 'image_url'; image_url: { url: string; detail: 'auto' | 'low' | 'high' } }
           | { type: 'video_url'; video_url: { url: string } }
         >;
-
-    tool_call_id?: string;
-    tool_calls?: Array<{
-      id: string;
-      type: 'function';
-      function: {
-        name: string;
-        arguments: string;
-      };
-    }>;
   };
 
   type FlattenedWorldInfoEntry = {

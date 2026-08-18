@@ -1,0 +1,56 @@
+[
+    {
+        "role": "system",
+        "content": "✨请在这里放置破限提示词，如果还是破限失败，请手动添加条目在提示词结尾，并放入防截断提示词",
+        "title": "✨破限词"
+    },
+    {
+        "role": "system",
+        "content": "# Resource\n## Context (Read-Only)\n- <basic_info>: Static background info.\n- <previous_summary>: Immediate past context.\n<basic_info>",
+        "title": "引入基本信息"
+    },
+    {
+        "type": "char_info",
+        "role": "system",
+        "enabled": false
+    },
+    {
+        "type": "user_info",
+        "role": "system",
+        "enabled": false
+    },
+    {
+        "role": "system",
+        "content": "</basic_info>\n<previous_summary>",
+        "title": "🔽 前文总结"
+    },
+    {
+        "type": "prev_summaries",
+        "role": "system",
+        "count": 1
+    },
+    {
+        "role": "system",
+        "content": "</previous_summary>",
+        "title": "🔼 前文总结"
+    },
+    {
+        "role": "user",
+        "content": "## Summary Target\nScan the entire provided text within <text_to_summarize>. Every line matters to the Chronicle.\n<text_to_summarize>",
+        "title": "🔽 待总结内容"
+    },
+    {
+        "role": "user",
+        "content": "{{context}}"
+    },
+    {
+        "role": "user",
+        "content": "</text_to_summarize>",
+        "title": "🔼 待总结内容"
+    },
+    {
+        "role": "system",
+        "content": "# Summarization Guidelines\nTarget: Create a high-density NARRATIVE CHRONICLE of the Macro Plot. Consolidate interactions into coherent storylines while explicitly preserving specific entities as memory anchors.\n\n## MACRO Plot Progression\n- Reference <basic_info> & <previous_summary> for context.\n- Comprehensively scan <new_text_to_summarize>. Identify the core narrative arcs (Who/What/Where/Result).\n\n## Segmentation Strategy\n0. Aggressive Merging: Prioritize continuity. Group continuous interactions into ONE segment unless a hard trigger is met.\n1. Minimum Density: A segment MUST contain a full plot loop (Action -> Reaction -> Result). NEVER split for brief reactions.\n2. Split Triggers ONLY when:\n- Sustained Vibe Shift: Split ONLY if the atmosphere flips AND STAYS changed for the rest of the scene. Ignore transient spikes.\n  - Merge: a joke during a serious meeting\n  - Split: [Daily] -> Explosion -> [Action]\n- Narrative Break: Significant change in Location/Time. Ignore natural time passing during continuous dialogue (e.g., Midnight -> Dawn without a \"fade to black\" break)\n\n## Writing Logic\nStructure: [Time Prefix]: [Content]\n1. Time Prefix: Combine Date (if found) with General Time Block (e.g., \"2025/12/11 深夜\", \"永和九年 子时\", \"初夏某日 下午\"). DO NOT split minute-by-minute.\n2. Anchors\n- Preserve specific appointment times/locations (e.g., \"晚上9点见\", NOT \"晚上见\")\n- Unique & Interactive Proper Nouns (e.g., \"在Mellow甜品店吃柠檬巴菲\", NOT \"吃甜品\" )\n3. Dialogue:\n  - Key: Quote directly (Max 1-2 line). Triggered by plot-critical reveals, confessions, threats, promises, or declarations.\n  - Casual: Summarize intent (e.g., Sam抱怨了冬天的寒冷)\n\n## Style\n- Perspective: Third-person.\n- Objectivity: State facts directly. DO NOT evade/censor sensitive/NSFW content, record what exactly happens.\n- Show, Don't Tell: Record the evidence. NO abstract conclusion.\n  - Bad: 他们的关系更亲密了\n  - Good: Sam第一次主动握住了Sofia的手\n\n# Tagging Rules (PER Segment)\n\n### Vibe Tag (Select ONE dominant)\n- [Daily] (Routine, relax, casual)\n- [Wholesome] (Comfort, sweet, peace)\n- [Comedy] (Funny, absurd)\n- [Conflict] (Arguments, hostility, misunderstandings, jealousy, cold wars. NOT playful teasing.)\n- [Action] (Combat, adventure, danger)\n- [Angst] (Pain, tragedy, trauma)\n- [Suspense] (Fear, mystery, tension)\n- [Romantic] (Heart-focused, intimacy, flirting, love)\n- [Sexual] (Body-focused, lust)\n- [Serious] (Work, deep logic, lore-dump)\n\n### Special Tags (OPTIONAL Array)\nONLY include if the segment occurs during the event OR contains related content (conversations/items/symptoms)\n- Events: [Halloween], [Christmas], [Birthday], [Anniversary], [NewYear], [Valentine], [Travel]\n- Health:\n  - [Period] (Explicit mentions OR implied cues like cramps, hot water bottles)\n  - [Sick] (Physical illness, weakness or injury)\n- If none apply, output an empty list [].\n\n## Important Tag (Boolean)\nDefault `false`. Narrative Logic > Emotional Intensity. Set `true` ONLY for **IRREVERSIBLE World State Changes**:\n1. Status: Death, Breakup/Marriage, Firsts (kiss/date/confession), Permanent Separation, etc.\n2. Lore: Major Secret Revealed (New info), Key Item/Location unlocked.\nIMPORTANT: Set `false` for everything else, including:\n- Emotional outbursts/threats/arguments without permanent consequence\n- Repeating known info\n- Revertable Status\n\n# Format\n- Type: RAW JSON Array `[...]`. Start immediately with `[`.\n- Language: Summary in Chinese. JSON keys/Tags in English.\n- Length: ~600-800 tokens in total\n- Example:\n[\n  {\n    \"summary\": \"2025/10/15 深夜: 在废弃地铁站的安全屋中，Ellina和Krist正在整理补给品。Ellina一边处理手上的擦伤，一边调侃罐头食品的口味，试图缓解紧张的气氛。Krist配合着她的玩笑，默默地将稀缺的抗生素递给她。这段时间的宁静与温情让二人暂时忘记了外面的追兵。\",\n    \"tags\": {\n      \"vibe\": \"Wholesome\",\n      \"special\": [],\n      \"important\": false\n    }\n  },\n  {\n    \"summary\": \"2025/10/15 深夜: 警报声突然刺破了宁静，打破了之前的温馨氛围。安全屋监控显示‘猎犬’部队已突破。Krist的态度瞬间转变，他迅速推灭篝火，将Elina护在身后，语气冰冷地命令她进入隐蔽点。他首次拔出了背后的高频震动刃，并向Elina揭露了残酷的真相：敌人不是来抓捕的，而是来执行清除指令的。\",\n    \"tags\": {\n      \"vibe\": a\"Suspense\",\n      \"special\": [],\n      \"important\": true\n    }\n  }\n]\n\n# Critical Review\nPrevent Over-Segmentation. Default to merge!",
+        "title": "总结提示词"
+    }
+]
