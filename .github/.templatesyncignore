@@ -2,3 +2,8 @@
 @types
 dist
 README.md
+
+# 本仓库的个人化配置，不接受模板覆盖
+tsconfig.json
+.vscode/settings.json
+.mcp.json
