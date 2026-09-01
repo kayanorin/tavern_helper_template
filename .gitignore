@@ -11,6 +11,7 @@ pnpm-debug.log*
 
 auto-imports.d.ts
 components.d.ts
+<<<<<<< HEAD
 .tmp-webpack-verify/
 
 # 自定义忽略目录
@@ -18,3 +19,5 @@ components.d.ts
 其它/
 文风/
 角色卡/
+=======
+>>>>>>> 874db47f3fb8ed8544a74e33a59f780f2c95aa38
